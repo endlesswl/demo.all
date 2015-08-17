@@ -1,0 +1,970 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.lingcaibao.repository.UserDao">
+
+	<resultMap id="resultMap" type="com.lingcaibao.entity.User">
+		<result property="id" column="id" />
+		<result property="username" column="username" />
+		<result property="username2" column="username2" />
+		<result property="pwd" column="pwd" />
+		<result property="pwdSalt" column="pwdSalt" />
+		<result property="payPwd" column="payPwd" />
+		<result property="payPwdSalt" column="payPwdSalt" />
+		<result property="realName" column="realName" />
+		<result property="cardType" column="cardType" />
+		<result property="cardNo" column="cardNo" />
+		<result property="email" column="email" />
+		<result property="mobile" column="mobile" />
+		<result property="mobileArea" column="mobileArea" />
+		<result property="gender" column="gender" />
+		<result property="qq" column="qq" />
+		<result property="phone" column="phone" />
+		<result property="address" column="address" />
+		<result property="zipcode" column="zipcode" />
+		<result property="avatar" column="avatar" />
+		<result property="regip" column="regip" />
+		<result property="company" column="company" />
+		<result property="licenseScan" column="licenseScan" />
+		<result property="userType" column="userType" />
+		<result property="amount" column="amount" />
+		<result property="lastAmountTime" column="lastAmountTime" />
+		<result property="balance" column="balance" />
+		<result property="salt" column="salt" />
+		<result property="lastTime" column="lastTime" />
+		<result property="prize" column="prize" />
+		<result property="lastPrizeTime" column="lastPrizeTime" />
+		<result property="flag" column="flag" />
+		<result property="source" column="source" />
+		<result property="logintimes" column="logintimes" />
+		<result property="remark" column="remark" />
+		<result property="createTime" column="createTime" />
+		<result property="modifyTime" column="modifyTime" />
+		<result property="openid" column="openid" />
+		<result property="warnBalance" column="warnBalance" />
+		<result property="warnFlag" column="warnFlag" />
+		<result property="cid" column="cid" />
+		<result property="versionCode" column="versionCode" />
+		<result property="grade" column="grade" />
+		<result property="pwdgrade" column="pwdgrade" />
+		<result property="paypwdgrade" column="paypwdgrade" />
+		<result property="fax" column="fax" />
+		<result property="birthday" column="birthday" />
+		<result property="liveness" column="liveness" />
+		<result property="bindflags" column="bindflags" />
+		<result property="idcardimg" column="idcardimg" />
+		<result property="authflags" column="authflags" />
+		<result property="authmsg" column="authmsg" />
+		<result property="country" column="country" />
+		<result property="province" column="province" />
+		<result property="city" column="city" />
+		<result property="area" column="area" />
+		<result property="nickname" column="nickname" />
+		<result property="bindWxNum" column="bindWxNum" />
+		<result property="channel" column="channel" />
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+		id,username,username2,pwd,pwdSalt,payPwd,payPwdSalt,realName,cardType,cardNo,email,mobile,mobileArea,gender,qq,phone,address,zipcode,avatar,regip,company,licenseScan,userType,amount,lastAmountTime,balance,salt,lastTime,prize,lastPrizeTime,flag,source,logintimes,remark,createTime,modifyTime,openid,warnBalance,warnFlag,cid,versionCode,grade,pwdgrade,paypwdgrade,fax,birthday,liveness,bindflags,idcardimg,authflags,authmsg,country,province,city,area,nickname,bindWxNum,channel
+	</sql>
+
+	<!-- 按用户名查找用户 -->
+	<select id="findByUserName" parameterType="String" resultType="User">
+		SELECT
+		<include refid="columns" />
+		FROM tab_user
+		WHERE username=#{username}
+	</select>
+
+	<!-- 按昵称查找用户 -->
+	<select id="findByNickName" parameterType="String" resultType="User">
+		SELECT
+		<include refid="columns" />
+		FROM tab_user
+		WHERE nickname=#{nickname}
+	</select>
+
+	<!-- 按手机号查找绑定用户 -->
+	<select id="findUserByBindMobile" parameterType="String"
+		resultType="User">
+		SELECT
+		<include refid="columns" />
+		FROM tab_user
+		<![CDATA[
+		WHERE mobile=#{mobile} AND bindflags&1=1
+		]]>
+
+	</select>
+
+	<!-- 按邮箱查找绑定用户 -->
+	<select id="findUserByBindEmail" parameterType="String"
+		resultType="User">
+		SELECT
+		<include refid="columns" />
+		FROM tab_user
+		<![CDATA[
+		WHERE email=#{email} AND bindflags&2=2
+		]]>
+	</select>
+
+	<!-- 按用户名模糊查找用户 -->
+	<select id="getUserListByUserName" parameterType="String"
+		resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM tab_user
+		WHERE username like '%${username}%'
+	</select>
+	<!-- 根据用户名 + 登录模式获取用户 -->
+	<select id="findUserByUserType" resultType="User">
+		SELECT *
+		FROM tab_user
+		WHERE username=#{username} AND (userType=#{userType} or userType=3)
+	</select>
+
+	<!-- 获取用户: 输出直接映射到对象 -->
+	<select id="get" parameterType="Long" resultType="User">
+		SELECT
+		<include refid="columns" />
+		FROM tab_user
+		WHERE id=#{id}
+	</select>
+
+	<!-- 查询用户, 不分页 -->
+	<select id="search" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM tab_user
+		<where>
+			<if test="username != null and username != ''">
+				AND username = #{username}
+			</if>
+			<if test="username2 != null and username2 != ''">
+				AND username2 = #{username2}
+			</if>
+			<if test="pwd != null and pwd != ''">
+				AND pwd = #{pwd}
+			</if>
+			<if test="pwdSalt != null and pwdSalt != ''">
+				AND pwdSalt = #{pwdSalt}
+			</if>
+			<if test="payPwd != null and payPwd != ''">
+				AND payPwd = #{payPwd}
+			</if>
+			<if test="payPwdSalt != null and payPwdSalt != ''">
+				AND payPwdSalt = #{payPwdSalt}
+			</if>
+			<if test="realName != null and realName != ''">
+				AND realName = #{realName}
+			</if>
+			<if test="cardType != null and cardType != ''">
+				AND cardType = #{cardType}
+			</if>
+			<if test="cardNo != null and cardNo != ''">
+				AND cardNo = #{cardNo}
+			</if>
+			<if test="email != null and email != ''">
+				AND email = #{email}
+			</if>
+			<if test="mobile != null and mobile != ''">
+				AND mobile = #{mobile}
+			</if>
+			<if test="mobileArea != null and mobileArea != ''">
+				AND mobileArea = #{mobileArea}
+			</if>
+			<if test="gender != null and gender != ''">
+				AND gender = #{gender}
+			</if>
+			<if test="qq != null and qq != ''">
+				AND qq = #{qq}
+			</if>
+			<if test="phone != null and phone != ''">
+				AND phone = #{phone}
+			</if>
+			<if test="address != null and address != ''">
+				AND address = #{address}
+			</if>
+			<if test="zipcode != null and zipcode != ''">
+				AND zipcode = #{zipcode}
+			</if>
+			<if test="avatar != null and avatar != ''">
+				AND avatar = #{avatar}
+			</if>
+			<if test="regip != null and regip != ''">
+				AND regip = #{regip}
+			</if>
+			<if test="company != null and company != ''">
+				AND company = #{company}
+			</if>
+			<if test="licenseScan != null and licenseScan != ''">
+				AND licenseScan = #{licenseScan}
+			</if>
+			<if test="userType != null and userType != ''">
+				AND userType = #{userType}
+			</if>
+			<if test="amount != null and amount != ''">
+				AND amount = #{amount}
+			</if>
+			<if test="lastAmountTime != null and lastAmountTime != ''">
+				AND lastAmountTime = #{lastAmountTime}
+			</if>
+			<if test="balance != null and balance != ''">
+				AND balance = #{balance}
+			</if>
+			<if test="salt != null and salt != ''">
+				AND salt = #{salt}
+			</if>
+			<if test="lastTime != null and lastTime != ''">
+				AND lastTime = #{lastTime}
+			</if>
+			<if test="prize != null and prize != ''">
+				AND prize = #{prize}
+			</if>
+			<if test="lastPrizeTime != null and lastPrizeTime != ''">
+				AND lastPrizeTime = #{lastPrizeTime}
+			</if>
+			<if test="flag != null and flag != ''">
+				AND flag = #{flag}
+			</if>
+			<if test="source != null and source != ''">
+				AND source = #{source}
+			</if>
+			<if test="logintimes != null and logintimes != ''">
+				AND logintimes = #{logintimes}
+			</if>
+			<if test="remark != null and remark != ''">
+				AND remark = #{remark}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND createTime = #{createTime}
+			</if>
+			<if test="modifyTime != null and modifyTime != ''">
+				AND modifyTime = #{modifyTime}
+			</if>
+			<if test="openid != null and openid != ''">
+				AND openid = #{openid}
+			</if>
+			<if test="warnBalance != null and warnBalance != ''">
+				AND warnBalance = #{warnBalance}
+			</if>
+			<if test="warnFlag != null and warnFlag != ''">
+				AND warnFlag = #{warnFlag}
+			</if>
+			<if test="cid != null and cid != ''">
+				AND cid = #{cid}
+			</if>
+			<if test="versionCode != null and versionCode != ''">
+				AND versionCode = #{versionCode}
+			</if>
+			<if test="grade != null and grade != ''">
+				AND grade = #{grade}
+			</if>
+			<if test="pwdgrade != null and pwdgrade != ''">
+				AND pwdgrade = #{pwdgrade}
+			</if>
+			<if test="paypwdgrade != null and paypwdgrade != ''">
+				AND paypwdgrade = #{paypwdgrade}
+			</if>
+			<if test="fax != null and fax != ''">
+				AND fax = #{fax}
+			</if>
+			<if test="birthday != null and birthday != ''">
+				AND birthday = #{birthday}
+			</if>
+			<if test="liveness != null and liveness != ''">
+				AND liveness = #{liveness}
+			</if>
+			<if test="authflags != null and authflags != ''">
+				AND authflags = #{authflags}
+			</if>
+			<if test="country != null and country != ''">
+				AND country = #{country}
+			</if>
+			<if test="province != null and province != ''">
+				AND province = #{province}
+			</if>
+			<if test="city != null and city != ''">
+				AND city = #{city}
+			</if>
+			<if test="area != null and area != ''">
+				AND area = #{area}
+			</if>
+			<if test="nickname != null and nickname != ''">
+				AND nickname = #{nickname}
+			</if>
+			<if test="channel != null and channel != ''">
+				AND channel = #{channel}
+			</if>
+		</where>
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="searchPage" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM tab_user
+		<where>
+			<if test="searchFields.username != null and searchFields.username != ''">
+				AND username = #{searchFields.username}
+			</if>
+			<if test="searchFields.username2 != null and searchFields.username2 != ''">
+				AND username2 = #{searchFields.username2}
+			</if>
+			<if test="searchFields.pwd != null and searchFields.pwd != ''">
+				AND pwd = #{searchFields.pwd}
+			</if>
+			<if test="searchFields.pwdSalt != null and searchFields.pwdSalt != ''">
+				AND pwdSalt = #{searchFields.pwdSalt}
+			</if>
+			<if test="searchFields.payPwd != null and searchFields.payPwd != ''">
+				AND payPwd = #{searchFields.payPwd}
+			</if>
+			<if
+				test="searchFields.payPwdSalt != null and searchFields.payPwdSalt != ''">
+				AND payPwdSalt = #{searchFields.payPwdSalt}
+			</if>
+			<if test="searchFields.realName != null and searchFields.realName != ''">
+				AND realName = #{searchFields.realName}
+			</if>
+			<if test="searchFields.cardType != null and searchFields.cardType != ''">
+				AND cardType = #{searchFields.cardType}
+			</if>
+			<if test="searchFields.cardNo != null and searchFields.cardNo != ''">
+				AND cardNo = #{searchFields.cardNo}
+			</if>
+			<if test="searchFields.email != null and searchFields.email != ''">
+				AND email = #{searchFields.email}
+			</if>
+			<if test="searchFields.mobile != null and searchFields.mobile != ''">
+				AND mobile = #{searchFields.mobile}
+			</if>
+			<if
+				test="searchFields.mobileArea != null and searchFields.mobileArea != ''">
+				AND mobileArea = #{searchFields.mobileArea}
+			</if>
+			<if test="searchFields.gender != null and searchFields.gender != ''">
+				AND gender = #{searchFields.gender}
+			</if>
+			<if test="searchFields.qq != null and searchFields.qq != ''">
+				AND qq = #{searchFields.qq}
+			</if>
+			<if test="searchFields.phone != null and searchFields.phone != ''">
+				AND phone = #{searchFields.phone}
+			</if>
+			<if test="searchFields.address != null and searchFields.address != ''">
+				AND address = #{searchFields.address}
+			</if>
+			<if test="searchFields.zipcode != null and searchFields.zipcode != ''">
+				AND zipcode = #{searchFields.zipcode}
+			</if>
+			<if test="searchFields.avatar != null and searchFields.avatar != ''">
+				AND avatar = #{searchFields.avatar}
+			</if>
+			<if test="searchFields.regip != null and searchFields.regip != ''">
+				AND regip = #{searchFields.regip}
+			</if>
+			<if test="searchFields.company != null and searchFields.company != ''">
+				AND company = #{searchFields.company}
+			</if>
+			<if
+				test="searchFields.licenseScan != null and searchFields.licenseScan != ''">
+				AND licenseScan = #{searchFields.licenseScan}
+			</if>
+			<if test="searchFields.userType != null and searchFields.userType != ''">
+				AND userType = #{searchFields.userType}
+			</if>
+			<if test="searchFields.amount != null and searchFields.amount != ''">
+				AND amount = #{searchFields.amount}
+			</if>
+			<if
+				test="searchFields.lastAmountTime != null and searchFields.lastAmountTime != ''">
+				AND lastAmountTime = #{searchFields.lastAmountTime}
+			</if>
+			<if test="searchFields.balance != null and searchFields.balance != ''">
+				AND balance = #{searchFields.balance}
+			</if>
+			<if test="searchFields.salt != null and searchFields.salt != ''">
+				AND salt = #{searchFields.salt}
+			</if>
+			<if test="searchFields.lastTime != null and searchFields.lastTime != ''">
+				AND lastTime = #{searchFields.lastTime}
+			</if>
+			<if test="searchFields.prize != null and searchFields.prize != ''">
+				AND prize = #{searchFields.prize}
+			</if>
+			<if
+				test="searchFields.lastPrizeTime != null and searchFields.lastPrizeTime != ''">
+				AND lastPrizeTime = #{searchFields.lastPrizeTime}
+			</if>
+			<if test="searchFields.flag != null and searchFields.flag != ''">
+				AND flag = #{searchFields.flag}
+			</if>
+			<if test="searchFields.source != null and searchFields.source != ''">
+				AND source = #{searchFields.source}
+			</if>
+			<if
+				test="searchFields.logintimes != null and searchFields.logintimes != ''">
+				AND logintimes = #{searchFields.logintimes}
+			</if>
+			<if test="searchFields.remark != null and searchFields.remark != ''">
+				AND remark = #{searchFields.remark}
+			</if>
+			<if
+				test="searchFields.createTime != null and searchFields.createTime != ''">
+				AND createTime = #{searchFields.createTime}
+			</if>
+			<if
+				test="searchFields.modifyTime != null and searchFields.modifyTime != ''">
+				AND modifyTime = #{searchFields.modifyTime}
+			</if>
+			<if test="searchFields.openid != null and searchFields.openid != ''">
+				AND openid = #{searchFields.openid}
+			</if>
+			<if
+				test="searchFields.warnBalance != null and searchFields.warnBalance != ''">
+				AND warnBalance = #{searchFields.warnBalance}
+			</if>
+			<if test="searchFields.warnFlag != null and searchFields.warnFlag != ''">
+				AND warnFlag = #{searchFields.warnFlag}
+			</if>
+			<if test="searchFields.cid != null and searchFields.cid != ''">
+				AND cid = #{searchFields.cid}
+			</if>
+			<if
+				test="searchFields.versionCode != null and searchFields.versionCode != ''">
+				AND versionCode = #{searchFields.versionCode}
+			</if>
+			<if test="searchFields.grade != null and searchFields.grade != ''">
+				AND grade = #{searchFields.grade}
+			</if>
+			<if test="searchFields.pwdgrade != null and searchFields.pwdgrade != ''">
+				AND pwdgrade = #{searchFields.pwdgrade}
+			</if>
+			<if
+				test="searchFields.paypwdgrade != null and searchFields.paypwdgrade != ''">
+				AND paypwdgrade = #{searchFields.paypwdgrade}
+			</if>
+			<if test="searchFields.fax != null and searchFields.fax != ''">
+				AND fax = #{searchFields.fax}
+			</if>
+			<if test="searchFields.birthday != null and searchFields.birthday != ''">
+				AND birthday = #{searchFields.birthday}
+			</if>
+			<if test="searchFields.liveness != null and searchFields.liveness != ''">
+				AND liveness = #{searchFields.liveness}
+			</if>
+			<if test="searchFields.authflags != null and searchFields.authflags != ''">
+				AND authflags = #{searchFields.authflags}
+			</if>
+			<if test="searchFields.country != null and searchFields.country != ''">
+				AND country = #{searchFields.country}
+			</if>
+			<if test="searchFields.province != null and searchFields.province != ''">
+				AND province = #{searchFields.province}
+			</if>
+			<if test="searchFields.city != null and searchFields.city != ''">
+				AND city = #{searchFields.city}
+			</if>
+			<if test="searchFields.area != null and searchFields.area != ''">
+				AND area = #{searchFields.area}
+			</if>
+			<if test="searchFields.nickname != null and searchFields.nickname != ''">
+				AND nickname = #{searchFields.nickname}
+			</if>
+			<if test="searchFields.channel != null and searchFields.channel != ''">
+				AND channel = #{searchFields.channel}
+			</if>
+		</where>
+	</select>
+
+	<!-- 新增 -->
+	<insert id="insert" parameterType="User" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO tab_user (
+		username,
+		username2,
+		pwd,
+		pwdSalt,
+		payPwd,
+		payPwdSalt,
+		realName,
+		cardType,
+		cardNo,
+		email,
+		mobile,
+		mobileArea,
+		gender,
+		qq,
+		phone,
+		address,
+		zipcode,
+		avatar,
+		regip,
+		company,
+		licenseScan,
+		userType,
+		amount,
+		lastAmountTime,
+		balance,
+		salt,
+		lastTime,
+		prize,
+		lastPrizeTime,
+		flag,
+		source,
+		logintimes,
+		remark,
+		createTime,
+		modifyTime,
+		openid,
+		warnBalance,
+		warnFlag,
+		cid,
+		versionCode,
+		grade,
+		pwdgrade,
+		paypwdgrade,
+		fax,
+		birthday,
+		liveness,
+		bindflags,
+		idcardimg,
+		authflags,
+		authmsg,
+		country,
+		province,
+		city,
+		area,
+		nickname,
+		channel
+		) VALUES (
+		#{username},
+		#{username2},
+		#{pwd},
+		#{pwdSalt},
+		#{payPwd},
+		#{payPwdSalt},
+		#{realName},
+		#{cardType},
+		#{cardNo},
+		#{email},
+		#{mobile},
+		#{mobileArea},
+		#{gender},
+		#{qq},
+		#{phone},
+		#{address},
+		#{zipcode},
+		#{avatar},
+		#{regip},
+		#{company},
+		#{licenseScan},
+		#{userType},
+		#{amount},
+		#{lastAmountTime},
+		#{balance},
+		#{salt},
+		#{lastTime},
+		#{prize},
+		#{lastPrizeTime},
+		#{flag},
+		#{source},
+		#{logintimes},
+		#{remark},
+		#{createTime},
+		#{modifyTime},
+		#{openid},
+		#{warnBalance},
+		#{warnFlag},
+		#{cid},
+		#{versionCode},
+		#{grade},
+		#{pwdgrade},
+		#{paypwdgrade},
+		#{fax},
+		#{birthday},
+		#{liveness},
+		#{bindflags},
+		#{idcardimg},
+		#{authflags},
+		#{authmsg},
+		#{country},
+		#{province},
+		#{city},
+		#{area},
+		#{nickname},
+		#{channel}
+		)
+	</insert>
+
+	<!-- 用户付款,更新用户余额 -->
+	<update id="doPay">
+		UPDATE tab_user
+		<set>
+			<if test="balance != null and balance != ''">
+				balance = balance - #{balance},
+			</if>
+			<if test="prize != null and prize != ''">
+				prize = prize - #{prize},
+			</if>
+			amount = balance + prize
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+
+	<!-- 更新 -->
+	<update id="update">
+		UPDATE tab_user
+		<set>
+			<if test="username != null and username != ''">
+				username = #{username},
+			</if>
+			<if test="username2 != null and username2 != ''">
+				username2 = #{username2},
+			</if>
+			<if test="pwd != null and pwd != ''">
+				pwd = #{pwd},
+			</if>
+			<if test="pwdSalt != null and pwdSalt != ''">
+				pwdSalt = #{pwdSalt},
+			</if>
+			<if test="payPwd != null and payPwd != ''">
+				payPwd = #{payPwd},
+			</if>
+			<if test="payPwdSalt != null and payPwdSalt != ''">
+				payPwdSalt = #{payPwdSalt},
+			</if>
+			<if test="realName != null and realName != ''">
+				realName = #{realName},
+			</if>
+			<if test="cardType != null and cardType != ''">
+				cardType = #{cardType},
+			</if>
+			<if test="cardNo != null and cardNo != ''">
+				cardNo = #{cardNo},
+			</if>
+			<if test="email != null and email != ''">
+				email = #{email},
+			</if>
+			<if test="mobile != null and mobile != ''">
+				mobile = #{mobile},
+			</if>
+			<if test="mobileArea != null and mobileArea != ''">
+				mobileArea = #{mobileArea},
+			</if>
+			<if test="gender != null and gender != ''">
+				gender = #{gender},
+			</if>
+			<if test="qq != null and qq != ''">
+				qq = #{qq},
+			</if>
+			<if test="phone != null and phone != ''">
+				phone = #{phone},
+			</if>
+			<if test="address != null and address != ''">
+				address = #{address},
+			</if>
+			<if test="zipcode != null and zipcode != ''">
+				zipcode = #{zipcode},
+			</if>
+			<if test="avatar != null and avatar != ''">
+				avatar = #{avatar},
+			</if>
+			<if test="regip != null and regip != ''">
+				regip = #{regip},
+			</if>
+			<if test="company != null and company != ''">
+				company = #{company},
+			</if>
+			<if test="licenseScan != null and licenseScan != ''">
+				licenseScan = #{licenseScan},
+			</if>
+			<if test="userType != null and userType != ''">
+				userType = #{userType},
+			</if>
+			<if test="amount != null and amount != ''">
+				amount = #{amount},
+			</if>
+			<if test="lastAmountTime != null and lastAmountTime != ''">
+				lastAmountTime = #{lastAmountTime},
+			</if>
+			<if test="balance != null and balance != ''">
+				balance = #{balance},
+			</if>
+			<if test="salt != null and salt != ''">
+				salt = #{salt},
+			</if>
+			<if test="lastTime != null and lastTime != ''">
+				lastTime = #{lastTime},
+			</if>
+			<if test="prize != null and prize != ''">
+				prize = #{prize},
+			</if>
+			<if test="lastPrizeTime != null and lastPrizeTime != ''">
+				lastPrizeTime = #{lastPrizeTime},
+			</if>
+			<if test="flag != null and flag != ''">
+				flag = #{flag},
+			</if>
+			<if test="source != null and source != ''">
+				source = #{source},
+			</if>
+			<if test="logintimes != null and logintimes != ''">
+				logintimes = #{logintimes},
+			</if>
+			<if test="remark != null and remark != ''">
+				remark = #{remark},
+			</if>
+			<if test="createTime != null and createTime != ''">
+				createTime = #{createTime},
+			</if>
+			<if test="modifyTime != null and modifyTime != ''">
+				modifyTime = #{modifyTime},
+			</if>
+			<if test="openid != null and openid != ''">
+				openid = #{openid},
+			</if>
+			<if test="warnBalance != null and warnBalance != ''">
+				warnBalance = #{warnBalance},
+			</if>
+			<if test="warnFlag != null and warnFlag != ''">
+				warnFlag = #{warnFlag},
+			</if>
+			<if test="cid != null and cid != ''">
+				cid = #{cid},
+			</if>
+			<if test="versionCode != null and versionCode != ''">
+				versionCode = #{versionCode},
+			</if>
+			<if test="grade != null and grade != ''">
+				grade = #{grade},
+			</if>
+			<if test="pwdgrade != null and pwdgrade != ''">
+				pwdgrade = #{pwdgrade},
+			</if>
+			<if test="paypwdgrade != null and paypwdgrade != ''">
+				paypwdgrade = #{paypwdgrade},
+			</if>
+			<if test="fax != null and fax != ''">
+				fax = #{fax},
+			</if>
+			<if test="birthday != null and birthday != ''">
+				birthday = #{birthday},
+			</if>
+			<if test="liveness != null and liveness != ''">
+				liveness = #{liveness},
+			</if>
+			<if test="bindflags != null and bindflags != ''">
+				bindflags = #{bindflags},
+			</if>
+			<if test="idcardimg != null and idcardimg != ''">
+				idcardimg = #{idcardimg},
+			</if>
+			<if test="authflags != null and authflags != ''">
+				authflags = #{authflags},
+			</if>
+			<if test="authmsg != null and authmsg != ''">
+				authmsg = #{authmsg},
+			</if>
+			<if test="country != null and country != ''">
+				country = #{country},
+			</if>
+			<if test="province != null and province != ''">
+				province = #{province},
+			</if>
+			<if test="city != null and city != ''">
+				city = #{city},
+			</if>
+			<if test="area != null and area != ''">
+				area = #{area},
+			</if>
+			<if test="nickname != null and nickname != ''">
+				nickname = #{nickname},
+			</if>
+			<if test="channel != null and channel != ''">
+				channel = #{channel}
+			</if>
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+
+	<!-- 增加绑定标识位 -->
+	<update id="addBindFlags">
+		UPDATE tab_user
+		<set>
+			bindflags = bindflags|#{bindflags},
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+
+	<!-- 减少绑定标识位 -->
+	<update id="subBindFlags">
+		UPDATE tab_user
+		<set>
+			bindflags = bindflags^#{bindflags},
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+
+	<!-- 更新支付密码 -->
+	<update id="updatePayPwd">
+		UPDATE tab_user
+		<set>
+			payPwd = #{payPwd},
+			paypwdgrade = #{paypwdgrade}
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+
+	<!-- 更新用户登录次数 -->
+	<update id="updateLogintimes">
+		UPDATE tab_user
+		<set>
+			logintimes = logintimes+1
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+
+	<!-- 更新登录密码 -->
+	<update id="updateScrit">
+		UPDATE tab_user
+		<set>
+			pwd = #{pwd},
+			pwdgrade = #{pwdgrade}
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+	
+	
+	<!-- 更新登录密码 -->
+	<update id="initPwd">
+		UPDATE tab_user
+		<set>
+			pwd = #{pwd},
+			pwdgrade = #{pwdgrade},
+			flag = 0
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+
+	<!-- 设置支付密码 -->
+	<update id="updatePayPwdScrit">
+		UPDATE tab_user
+		<set>
+			<if test="payPwdSalt != null and payPwdSalt != ''">
+				payPwdSalt = #{payPwdSalt},
+			</if>
+			payPwd = #{payPwd},
+			paypwdgrade = #{paypwdgrade}
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+
+	<!-- 更新用户余额 -->
+	<update id="updateBalance">
+		UPDATE tab_user
+		<set>
+			<if test="balance != null">
+				balance = balance+#{balance},
+			</if>
+			amount = balance + prize
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+
+	<!-- 更新中奖金额 -->
+	<update id="updatePrize">
+		UPDATE tab_user
+		<set>
+			<if test="prize != null">
+				prize = prize+#{prize},
+			</if>
+			amount = balance + prize
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+
+	<!-- 更新用户余额，不累加 -->
+	<update id="updateBalanceNoPlus">
+		UPDATE tab_user
+		<set>
+			<if test="balance != null">
+				balance = #{balance}
+			</if>
+			amount = balance + prize
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+
+	<!-- 更新用户授权微信个数 -->
+	<update id="updateBindWxNum">
+		UPDATE tab_user
+		<set>
+			<if test="bindWxNum != null">
+				bindWxNum = #{bindWxNum}
+			</if>
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+
+	<!-- 删除用户 -->
+	<delete id="delete" parameterType="Long">
+		DELETE FROM tab_user WHERE
+		id=#{id}
+	</delete>
+
+	<!-- 商家后台 账户明细 返回用户姓名和账户余额 -->
+	<select id="getUserNameAndAmount" parameterType="Long"
+		resultType="Map">
+		SELECT username,amount,avatar,nickname
+		FROM tab_user
+		WHERE
+		id=#{id}
+	</select>
+
+	<!-- 获取用户零彩卷余额 -->
+	<select id="getUserCoupon" parameterType="Long" resultType="BigDecimal">
+		select sum(tc.balance) from tab_coupon tc where tc.balance>0 and
+		tc.status = 0 and <![CDATA[date(now())<date(tc.expiretime)]]>
+		and tc.userid = #{id} and tc.usednumbers>0
+	</select>
+	<!-- 获取用户总资产 -->
+	<select id="getUserTotalAssets" parameterType="Long" resultType="map">
+		select ta.assetcode as code,max(ta.assetname) as
+		name,cast(sum(ta.money) as
+		decimal(18, 2)) as assetstotal
+		from tab_user_assets ta where userid =
+		#{id} GROUP BY ta.assetcode
+	</select>
+	<!-- 获取用户当月累计资产 -->
+	<select id="getUserAssetsByMonth" parameterType="Long"
+		resultType="BigDecimal">
+		select sum(ta.money) as assetstotalmonth
+		from
+		tab_user_assets ta where userid = #{id} and Month(ta.createtime) =
+		Month(now()) and YEAR(ta.createtime) =year(now())
+	</select>
+
+	<!-- 获取用户角色关联数据 -->
+	<select id="findRoleLinks" parameterType="Long" resultType="Role">
+		SELECT b.id,b.name,b.description,b.rule
+		FROM tab_user_role a, tab_role
+		b
+		WHERE a.userid=#{userId} and a.roleid = b.id
+	</select>
+</mapper> 

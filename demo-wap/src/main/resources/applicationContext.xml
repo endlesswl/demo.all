@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:c="http://www.springframework.org/schema/c" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd"
+       default-lazy-init="true">
+
+    <description>Spring公共配置</description>
+    
+    
+    <!-- 导入ehcache缓存配置 -->
+	<import resource="ehcache/applicationContext-ehcache.xml" /> 
+	<context:property-placeholder location="classpath:application.properties" />
+    <!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.lingcaibao.service"/>
+
+    <!-- Memcached客户端 -->
+	<bean id="memcachedClient"
+		class="com.lingcaibao.cache.memcached.MarketMemcachedClient">
+		<property name="memcachedClient">
+			<bean class="net.spy.memcached.spring.MemcachedClientFactoryBean">
+				<property name="servers" value="${memcached.url}" />
+				<!-- 默认是TEXT -->
+				<property name="protocol" value="TEXT" />
+				<!-- 默认是ARRAY_MOD -->
+				<property name="locatorType" value="CONSISTENT" />
+				<!-- 默认是2500毫秒 -->
+				<property name="opTimeout" value="1000" />
+			</bean>
+		</property>
+		<property name="updateTimeout" value="1000" />
+		<property name="shutdownTimeout" value="1000" />
+	</bean>
+    
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${redis.pool.maxActive}"/>
+        <property name="maxIdle" value="${redis.pool.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.pool.maxWait}"/>
+        <property name="testOnBorrow" value="${redis.pool.testOnBorrow}"/>
+        <property name="testOnReturn" value="${redis.pool.testOnReturn}"/>
+    </bean>
+
+    <bean id="jedisConnectionFactory"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:usePool="true">
+        <property name="hostName" value="${redis.ip}"/>
+        <property name="port" value="${redis.port}"/>
+        <property name="timeout" value="${redis.timeout}"/>
+        <property name="poolConfig" ref="jedisPoolConfig"/>
+    </bean>
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+          p:connectionFactory-ref="jedisConnectionFactory"/>
+
+    <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate"
+          p:connectionFactory-ref="jedisConnectionFactory"/>
+
+    <!-- 启用缓存支持 -->
+    <!-- declare Redis Cache Manager -->
+    <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager"
+          c:template-ref="redisTemplate"/>
+
+    <!--轮询出票队列，在www.lingcaibao.com的单机执行，WAP端不要配置此属性 开始-->
+<!--     <bean id="jedisQueueListener" class="com.palm.lingcai.service.task.TicketQueueListener"> -->
+<!--         <property name="key" value="failticket:queue"></property> -->
+<!--     </bean> -->
+<!--     <bean id="jedisQueue" class="com.palm.lingcai.service.task.RedisTicketQueue" destroy-method="destroy" -->
+<!--           lazy-init="false"> -->
+<!--         <property name="key" value="ticket:queue"></property> -->
+<!--         <property name="isClosed" value="false"></property> -->
+<!--         <property name="idleTime" value="5"></property> -->
+<!--         <property name="listener" ref="jedisQueueListener"></property> -->
+<!--     </bean> -->
+    <!--轮询出票队列，在www.lingcaibao.com的单机执行，WAP端不要配置此属性 结束-->
+
+
+	<!-- ftp文件上传 -->
+    <bean id="imageFtpApi" class="com.palm.lingcai.api.Image" >
+    	<property name="host" value="${ftp.host}" />        
+        <property name="port" value="${ftp.port}" />      
+        <property name="username" value="${ftp.username}" />      
+        <property name="password" value="${ftp.password}" /> 
+		<!--         项目服务器上默认上传目录  -->
+        <property name="imgProjectBasePath" value="${fileUpload.imgProjectBasePath}"/>
+		<!--         FTP服务器上图片path目录 -->
+        <property name="imgServerBasePath" value="${ftp.imgServerBasePath}"/>
+        <!--         FTP服务器上文件根目录  -->
+        <property name="containerRoot" value="${ftp.containerRoot}"/>
+        <property name="domain" value="${ftp.domain}"/>
+    </bean>
+    
+    <!-- 文件上传工具 -->
+    <bean id="fileUploadUtil" class="com.palm.commom.uitl.FileuploadUtil" >
+   		<!--    windows本地上传文件根目录  -->
+    	<property name="temp" value="${fileUpload.imgProjectBasePath}" />  
+    	<!--    linux文件上传文件根目录  -->
+    	<property name="realPath" value="${fileUpload.imgProjectBasePath}" />  
+    </bean>
+
+	
+
+    <!-- 项目的相关属性配置文件 -->
+    <bean id="propertyConfigurer"
+          class="com.lingcaibao.util.ApplicationPropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath*:/application.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="pagePlugin"
+          class="com.lingcaibao.plugin.page.PageHelper">
+        <property name="properties">
+			<props>
+				<prop key="dialect">mysql</prop>
+				<prop key="pageSizeZero">true</prop>
+			</props>
+		</property>
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
+        <property name="typeAliasesPackage" value="com.lingcaibao.entity"/>
+        <!-- 分页插件装载 -->
+        <property name="plugins">
+            <array>
+                <ref bean="pagePlugin"/>
+            </array>
+        </property>
+        <!-- 显式指定Mapper文件位置 -->
+        <property name="mapperLocations" value="classpath:/mybatis/*Mapper.xml"/>
+    </bean>
+     <!-- 扫描basePackage下所有以@Repository标识的 接口 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.lingcaibao" />
+        <property name="annotationClass" value="org.springframework.stereotype.Repository" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    </bean>
+
+    <!-- Spring 事务配置 -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 使用annotation定义事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager"
+                          proxy-target-class="true"/>
+
+    <!-- 数据源配置, 使用Tomcat JDBC连接池 -->
+    <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+              destroy-method="close">
+            <!-- Connection Info -->
+            <property name="driverClassName" value="${jdbc.driver}"/>
+            <property name="url" value="${jdbc.url}"/>
+            <property name="username" value="${jdbc.username}"/>
+            <property name="password" value="${jdbc.password}"/>
+
+            <!-- Connection Pooling Info -->
+            <property name="maxActive" value="${jdbc.pool.maxActive}"/>
+            <property name="maxIdle" value="${jdbc.pool.maxIdle}"/>
+            <property name="defaultAutoCommit" value="false"/>
+            <!-- 连接Idle一个小时后超时 -->
+             <property name="validationQuery" value="select now()"></property> 
+<!--             <property name="validationInterval" value="600000"></property>  -->
+            <property name="testOnBorrow" value="true"></property>
+            <property name="testOnReturn" value="true"></property>
+            <property name="testWhileIdle" value="true"></property>
+    </bean>
+    
+    <!-- 定义aspectj -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!-- JSR303 Validator定义 -->
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+           
+</beans>

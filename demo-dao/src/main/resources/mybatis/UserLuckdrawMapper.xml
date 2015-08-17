@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.lingcaibao.repository.UserLuckdrawDao">
+
+	<resultMap id="resultMap" type="com.lingcaibao.entity.UserLuckdraw">
+		<result property="id" column="id" />
+		<result property="userid" column="userid" />
+		<result property="marketid" column="marketid" />
+		<result property="prizeid" column="prizeid" />
+		<result property="createtime" column="createtime" />
+		<result property="remark" column="remark" />
+		<result property="ip" column="ip" />
+		<result property="intype" column="intype" />
+		<result property="shorturl" column="shorturl" />
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+		id,userid,marketid,prizeid,createtime,remark,ip,intype,shorturl
+	</sql>
+
+	<!-- 获取用户: 输出直接映射到对象 -->
+	<select id="get" parameterType="Long" resultType="UserLuckdraw">
+		SELECT
+		<include refid="columns" />
+		FROM tab_user_luckdraw
+		WHERE id=#{id}
+	</select>
+
+
+	<!-- 查询用户, 不分页 -->
+	<select id="search" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM tab_user_luckdraw
+		<where>
+			<if test="userid != null and userid != ''">
+				AND userid = #{userid}
+			</if>
+			<if test="marketid != null and marketid != ''">
+				AND marketid = #{marketid}
+			</if>
+			<if test="prizeid != null and prizeid != ''">
+				AND prizeid = #{prizeid}
+			</if>
+			<if test="createtime != null and createtime != ''">
+				AND createtime = #{createtime}
+			</if>
+			<if test="remark != null and remark != ''">
+				AND remark = #{remark}
+			</if>
+			<if test="ip != null and ip != ''">
+				AND ip = #{ip}
+			</if>
+			<if test="intype != null and intype != ''">
+				AND intype = #{intype}
+			</if>
+			<if test="shorturl != null and shorturl != ''">
+				AND shorturl = #{shorturl}
+			</if>
+		</where>
+	</select>
+
+	<select id="searchMiUser" resultType="Map">
+		SELECT tul.id 
+		from tab_user_luckdraw tul 
+		LEFT JOIN tab_market_prize tmp on tmp.id = tul.prizeid 
+		where tul.marketid = #{param1} and tul.userid = #{param2} and tmp.prizelevel = #{param3}
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="searchPage" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM tab_user_luckdraw
+		<where>
+			<if test="searchFields.userid != null and searchFields.userid != ''">
+				AND userid = #{searchFields.userid}
+			</if>
+			<if test="searchFields.marketid != null and searchFields.marketid != ''">
+				AND marketid = #{searchFields.marketid}
+			</if>
+			<if test="searchFields.prizeid != null and searchFields.prizeid != ''">
+				AND prizeid = #{searchFields.prizeid}
+			</if>
+			<if
+				test="searchFields.createtime != null and searchFields.createtime != ''">
+				AND createtime = #{searchFields.createtime}
+			</if>
+			<if test="searchFields.remark != null and searchFields.remark != ''">
+				AND remark = #{searchFields.remark}
+			</if>
+			<if test="searchFields.ip != null and searchFields.ip != ''">
+				AND ip = #{searchFields.ip}
+			</if>
+			<if test="searchFields.intype != null and searchFields.intype != ''">
+				AND intype = #{searchFields.intype}
+			</if>
+			<if test="searchFields.shorturl != null and searchFields.shorturl != ''">
+				AND shorturl = #{searchFields.shorturl}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="searchPageByMarketType" resultType="Map">
+		select tm.marketName as marketName, tul.createtime as createtime, tmp.prizecode as prizecode, tul.marketid as marketid, tul.id as drawid
+		from tab_user_luckdraw tul
+		LEFT JOIN tab_marketplan tm on tul.marketid = tm.id 
+		LEFT JOIN tab_market_prize tmp on tmp.id = tul.prizeid
+		where tul.userid = #{searchFields.userid} 
+		and tmp.prizelevel > 0
+		and tm.marketType= #{searchFields.marketType}
+		ORDER BY tul.createtime desc
+		limit #{searchFields.pageNo} , #{searchFields.pageSize} 
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="searchPageByMarketId" resultType="Map">
+		select tul.createtime as createtime, tmp.prizecode as prizecode, tul.marketid as marketid, tul.id as drawid, tu.username
+		from tab_user_luckdraw tul
+		LEFT JOIN tab_market_prize tmp on tmp.id = tul.prizeid
+		LEFT JOIN tab_user tu on tul.userid = tu.id
+		where tul.marketid = #{searchFields.marketid} 
+		ORDER BY tul.createtime desc
+		limit #{searchFields.pageNo} , #{searchFields.pageSize} 
+	</select>
+
+	<!-- 新增 -->
+	<insert id="insert" parameterType="UserLuckdraw"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tab_user_luckdraw (
+		userid,
+		marketid,
+		prizeid,
+		createtime,
+		remark,
+		ip,
+		intype,
+		shorturl
+		) VALUES (
+		#{userid},
+		#{marketid},
+		#{prizeid},
+		#{createtime},
+		#{remark},
+		#{ip},
+		#{intype},
+		#{shorturl}
+		)
+	</insert>
+
+	<!-- 更新 -->
+	<update id="update">
+		UPDATE tab_user_luckdraw
+		<set>
+			<if test="userid != null and userid != ''">
+				userid = #{userid},
+			</if>
+			<if test="marketid != null and marketid != ''">
+				marketid = #{marketid},
+			</if>
+			<if test="prizeid != null and prizeid != ''">
+				prizeid = #{prizeid},
+			</if>
+			<if test="createtime != null and createtime != ''">
+				createtime = #{createtime},
+			</if>
+			<if test="remark != null and remark != ''">
+				remark = #{remark}
+			</if>
+			<if test="ip != null and ip != ''">
+				ip = #{ip}
+			</if>
+			<if test="intype != null and intype != ''">
+				intype = #{intype}
+			</if>
+			<if test="shorturl != null and shorturl != ''">
+				intype = #{shorturl}
+			</if>
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+
+	<!-- 删除用户 -->
+	<delete id="delete" parameterType="Long">
+		DELETE FROM tab_user_luckdraw WHERE id=#{id}
+	</delete>
+
+	<!--用户管理 客户维护提醒 -->
+	<select id="searchCustomer" resultType="Map">
+		SELECT
+		tu.id,
+		td.name,
+		tu.liveness,
+		tu.city,
+		tu.remark,
+		tu.username
+		FROM
+		tab_user_luckdraw tul
+		LEFT JOIN tab_user tu ON tul.userid = tu.id
+		LEFT JOIN tab_dictionary td ON tu.city = td. CODE AND td.level=3 AND td.dictno='D0001'
+		<where>
+			<if test="searchFields.marketIdList!=null and searchFields.marketIdList!=''">
+				tul.marketid in
+				<foreach item="item" index="index" collection="searchFields.marketIdList"
+					open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>			
+		</where>
+		group by tul.userid
+		<if test="searchFields.searchTime != null and searchFields.searchTime != ''">
+			HAVING DATEDIFF(now(), MAX(tul.createtime)) >#{searchFields.days}
+		</if>
+		order by tul.createtime desc
+	</select>
+	<!--热门活动 -->
+	<select id="getHotActivities" resultType="Map">
+		SELECT
+			tm.id as marketid,
+			count(DISTINCT tul.userid) AS peoplecount
+		FROM
+			tab_user_luckdraw tul
+		RIGHT JOIN tab_marketplan tm ON tul.marketid = tm.id
+		WHERE
+			tm.pubFlags = 1
+		AND tm. STATUS = 5
+		GROUP BY
+			tul.marketid
+		ORDER BY
+			peoplecount DESC
+		<if test="top != null and top != ''">
+			LIMIT #{top}
+		</if>
+	</select>
+
+	<select id="getUserVisitNum" resultType="int">
+		select count(*) from tab_user_luckdraw where userid = #{userid} and marketid
+		= #{marketid}
+	</select>
+
+	<select id="getUserVisitNumByTime" resultType="int">
+		select count(*) from tab_user_luckdraw
+		<where>
+			userid = #{userid}
+			AND marketid = #{marketid}
+			<if test="stime != null and stime != ''">
+	       		<![CDATA[
+				AND createtime >= #{stime}
+				]]>
+			</if>
+			<if test="etime != null and etime != ''">
+	       		<![CDATA[
+				AND createtime <= #{etime}
+				]]>
+			</if>
+		</where>
+	</select>
+	
+	<!-- 根据计划id或用户id 统计参与互动的总次数 -->
+	<select id="getCountUserLuckdraw" resultType="int">
+		select count(*) from tab_user_luckdraw
+		<where>
+			<if test="marketid != null and marketid != ''">
+				and marketid = #{marketid}
+			</if>
+			<if test="userid != null and userid != ''">
+				and userid = #{userid}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 根据计划id或用户id 统计参与互动的总次数 -->
+	<select id="getCountUserLuckdrawByTime" resultType="int">
+		select count(*) from tab_user_luckdraw
+		<where>
+			<if test="marketid != null and marketid != ''">
+				and marketid = #{marketid}
+			</if>
+			<if test="userid != null and userid != ''">
+				and userid = #{userid}
+			</if>
+			<if test="time != null">
+				and DATE_FORMAT(createtime, '%Y-%m-%d') = DATE_FORMAT(#{time}, '%Y-%m-%d')
+			</if>
+		</where>
+	</select>
+
+	<!-- 活动互动的总人数 -->
+	<select id="getInteractionPersonCount" resultType="int">
+		select count(distinct userid) from tab_user_luckdraw
+		<where>
+			marketid = #{marketid}
+			<if test="stime != null and stime != ''">
+	       		<![CDATA[
+				AND createtime >= #{stime}
+				]]>
+			</if>
+			<if test="etime != null and etime != ''">
+	       		<![CDATA[
+				AND createtime <= #{etime}
+				]]>
+			</if>
+		</where>
+	</select>
+	
+	<!-- 查询个人福利列表 -->
+	 <select id="searchMarketPrizePage"  parameterType="Long" resultType="Map">
+	    SELECT
+	    	tl.id as drawid, 
+	    	tp.id as id,
+			tm.marketName as name,
+			tm.startTime as stime,
+			tm.endTime as etime,
+			tm.posterPath as posterPath,
+			tp.prizename as prize,
+			tl.prizeid  as prizeid,
+			tp.prizecode as code
+		FROM
+			tab_user_luckdraw tl
+		LEFT JOIN tab_marketplan tm ON tl.marketid = tm.id
+		LEFT JOIN tab_market_prize tp ON tp.id = tl.prizeid
+		<where>
+			<if test="searchFields.userId != null and searchFields.userId != ''">
+				AND tl.userid = #{searchFields.userId}
+			</if>
+			<if test="searchFields.marketName != null and searchFields.marketName != ''">
+				AND tm.marketName like '%${searchFields.marketName}%'
+			</if>
+			<if test="searchFields.startTime != null and searchFields.startTime != ''">
+	                <![CDATA[
+						AND tl.createtime >=#{searchFields.startTime}
+					]]>
+			</if>
+			<if test="searchFields.endTime != null and searchFields.endTime != ''">
+	        		<![CDATA[
+						AND tl.createtime <= #{searchFields.endTime}
+					]]>
+			</if>
+			<![CDATA[
+				AND tp.prizelevel > 0
+				]]>
+		</where>
+		<if test="searchFields.sortColumns != null and searchFields.sortColumns != ''">
+           	ORDER BY tl.${searchFields.sortColumns}
+       	</if>
+	</select> 
+	
+	<!-- 查询个人福利列表 -->
+	<select id="searchH5MarketPrizePage"  parameterType="Long" resultType="Map">
+	 	SELECT
+	    	tul.id as `drawid`, 
+	    	tul.prizeid  as `prizeid`,
+			tul.marketid as `marketid`,
+			tm.marketName as `marketName`,
+			tm.startTime as `startTime`,
+			tm.endTime as `endTime`,
+			tm.posterPath as `posterPath`,
+			tmp.prizename as `prizename`,
+			tmp.prizecode as `prizecode`,
+			tmp.quota as `money`
+		FROM
+			tab_user_luckdraw tul 
+		INNER JOIN tab_market_prize tmp ON tul.prizeid = tmp.id and tmp.prizelevel > 0
+		LEFT JOIN tab_marketplan tm ON tm.id = tmp.marketid 
+		<where> 
+			<if test="searchFields.userId != null and searchFields.userId != ''">
+				AND tul.userid = #{searchFields.userId}
+			</if>
+			<if test="searchFields.marketName != null and searchFields.marketName != ''">
+				AND tm.marketName like '%${searchFields.marketName}%'
+			</if>
+			<if test="searchFields.startTime != null and searchFields.startTime != ''">
+                <![CDATA[
+					AND tul.createtime >=#{searchFields.startTime}
+				]]>
+			</if>
+			<if test="searchFields.endTime != null and searchFields.endTime != ''">
+        		<![CDATA[
+					AND tul.createtime <= #{searchFields.endTime}
+				]]>
+			</if>
+		</where>
+		ORDER BY tul.id desc
+	</select> 
+	
+	<!-- 查询个人福利详情 -->
+	 <select id="searchMarketPrizeDetial"  parameterType="Long" resultType="Map">
+	    SELECT
+			cast(
+			ta.unitprice * ta.quantity AS DECIMAL (18, 2)
+			) AS money,
+			ta.assetname as name,
+			ta.excode as code,
+			ta.createtime as ctime
+		FROM
+			tab_market_prize ap
+		INNER JOIN tab_user_assets ta ON ap.id = ta.prizeid
+		<where>
+			<if test="prizeid != null and prizeid != ''">
+				AND ta.prizeid = #{prizeid}
+			</if>
+			<if test="userid != null and userid != ''">
+				AND ta.userid = #{userid}
+			</if>
+		</where>
+	</select>  
+	 <!-- 用户列表 -->
+    <select id="searchJoinActivityUser" resultType="Map">
+		SELECT
+			tl.userid,
+			tu.nickname,
+			tu.liveness,
+			max(tl.createtime) as times,
+			tu.mobile,
+			tu.city,
+			tm.id
+		FROM tab_marketplan tm			 
+		INNER JOIN tab_user_luckdraw tl ON tl.marketid = tm.id
+		INNER JOIN tab_user tu ON tu.id = tl.userid
+		<if test="searchFields.clustno != null and searchFields.clustno != ''">
+			INNER JOIN tab_user_cluster tc ON tc.userid = tl.userid	
+		</if> 			
+		<where>	
+	        <if test="searchFields.marketName != null and searchFields.marketName != ''">
+	                AND tm.marketName like  '%${searchFields.marketName}%'
+	        </if>
+	        <if test="searchFields.nickname != null and searchFields.nickname != ''">
+	        		AND tu.nickname like '%${searchFields.nickname}%'
+	        </if>
+	       AND tm.userId = #{searchFields.id}	
+	       <if test="searchFields.clustno != null and searchFields.clustno != ''">
+	        		AND  tc.clustno =  #{searchFields.clustno}  
+	       </if> 	           	        
+		</where>		
+		GROUP BY
+			tl.userid
+		<if test="searchFields.time != null and searchFields.time != ''">
+			HAVING DATEDIFF(now(), times) >#{searchFields.days}
+		</if>
+		ORDER BY tl.createtime  desc		
+    </select>
+    
+    <!-- 活动  用户互动 前5条 信息 -->    
+    <select id="getUserListCount" resultType="Map">
+	    select  l.id as drawid, l.createtime as time, tu.nickname as nickname, l.userid as userid, concat(l.intype) as intype, p.prizename as prizename, p.quota as quota, p.prizecode as prizecode
+		from tab_user_luckdraw l 
+		LEFT JOIN tab_market_prize p on l.prizeid = p.id 
+		LEFT JOIN tab_user tu on l.userid = tu.id
+		where l.marketid = #{param1} 
+		order by l.id desc
+		limit 5
+    </select>
+    
+    <!-- 活动 每天用户量统计 -->
+    <select id="getUserCountByDay" resultType="Map">
+    	SELECT DATE_FORMAT(tul.createtime, '%Y-%m-%d') as time , count(*) as count from tab_user_luckdraw tul 
+    	<where>
+    		<if test="searchFields.marketId != null and searchFields.marketId != ''">
+		    	and tul.marketid = ${searchFields.marketId}
+    		</if>
+    		<if test="searchFields.stime != null and searchFields.stime != ''">
+    			and tul.createtime > ${searchFields.stime}
+    		</if>
+    		<if test="searchFields.etime != null and searchFields.etime != ''">
+    		 	<![CDATA[
+    			and tul.createtime < ${searchFields.etime}
+    			]]>
+    		</if>
+    	</where>
+    	GROUP BY DATE_FORMAT(tul.createtime, '%Y-%m-%d')
+    </select>
+    
+    <!-- 获取活动开始时间的周数 -->
+    <select id="getMarketStimeWeed" resultType="int">
+    	select WEEK(#{param1})
+    </select>
+    
+    <!-- 活动 每周用户量统计 -->
+    <select id="getUserCountByWeek" resultType="Map">
+    	select WEEK(tul.createtime) - ${searchFields.marketStime} + 1 as time , count(*) as count, tul.createtime from tab_user_luckdraw tul  
+    	<where>
+    		<if test="searchFields.marketId != null and searchFields.marketId != ''">
+		    	and tul.marketid = ${searchFields.marketId}
+    		</if>
+    		<if test="searchFields.stime != null and searchFields.stime != ''">
+    			and tul.createtime > ${searchFields.stime}
+    		</if>
+    		<if test="searchFields.etime != null and searchFields.etime != ''">
+    		 	<![CDATA[
+    			and tul.createtime < ${searchFields.etime}
+    			]]>
+    		</if>
+    	</where>
+    	group by WEEK(tul.createtime) 
+    </select>
+    
+    <!-- 活动 每月用户量统计 -->
+    <select id="getUserCountByMonth" resultType="Map">
+    	SELECT DATE_FORMAT(tul.createtime, '%Y-%m') as time , count(*) as count from tab_user_luckdraw tul 
+    	<where>
+    		<if test="searchFields.marketId != null and searchFields.marketId != ''">
+		    	and tul.marketid = ${searchFields.marketId}
+    		</if>
+    		<if test="searchFields.stime != null and searchFields.stime != ''">
+    			and tul.createtime > ${searchFields.stime}
+    		</if>
+    		<if test="searchFields.etime != null and searchFields.etime != ''">
+    		 	<![CDATA[
+    			and tul.createtime < ${searchFields.etime}
+    			]]>
+    		</if>
+    	</where>
+    	GROUP BY DATE_FORMAT(tul.createtime, '%Y-%m')
+    </select>
+    
+    <!-- 获取活动每天 奖品数量 奖品金额 列表  -->
+    <select id="getAllPrizeMoneyByDay" resultType="Map">
+	    SELECT DATE_FORMAT(tul.createtime, '%Y-%m-%d') as time , count(*) as count , COALESCE(SUM(tmp.quota), 0) as money
+		from tab_user_luckdraw tul 
+		left join tab_market_prize tmp on tul.prizeid = tmp.id
+		and tmp.prizecode in (${param2}) 
+		<where>
+	   		<if test="searchFields.marketId != null and searchFields.marketId != ''">
+		    	and tul.marketid = ${searchFields.marketId}
+	   		</if>
+	   		<if test="searchFields.stime != null and searchFields.stime != ''">
+	   			and tul.createtime > ${searchFields.stime}
+	   		</if>
+	   		<if test="searchFields.etime != null and searchFields.etime != ''">
+	   		 	<![CDATA[
+	   			and tul.createtime < ${searchFields.etime}
+	   			]]>
+	   		</if>
+	   	</where>
+		GROUP BY DATE_FORMAT(tul.createtime, '%Y-%m-%d') 
+		ORDER BY tul.createtime ASC
+    </select>
+    
+    <!-- 获取活动每周  奖品数量 奖品金额 列表  -->
+    <select id="getAllPrizeMoneyByWeek" resultType="Map">
+		select WEEK(tul.createtime) - ${searchFields.marketStime} + 1 as time, count(*) as count, COALESCE(SUM(tmp.quota), 0) as money, tul.createtime 
+		from tab_user_luckdraw tul
+		left join tab_market_prize tmp on tul.prizeid = tmp.id
+		and tmp.prizecode in (${param2}) 
+    	<where>
+    		<if test="searchFields.marketId != null and searchFields.marketId != ''">
+		    	and tul.marketid = ${searchFields.marketId}
+    		</if>
+    		<if test="searchFields.stime != null and searchFields.stime != ''">
+    			and tul.createtime > ${searchFields.stime}
+    		</if>
+    		<if test="searchFields.etime != null and searchFields.etime != ''">
+    		 	<![CDATA[
+    			and tul.createtime < ${searchFields.etime}
+    			]]>
+    		</if>
+    	</where>
+    	group by WEEK(tul.createtime)
+    	ORDER BY tul.createtime ASC
+    </select>
+    
+    <!-- 获取活动每月 奖品数量 奖品金额 列表  -->
+    <select id="getAllPrizeMoneyByMonth" resultType="Map">
+	    SELECT DATE_FORMAT(tul.createtime, '%Y-%m') as time , count(*) as count , COALESCE(SUM(tmp.quota), 0) as money
+		from tab_user_luckdraw tul 
+		left join tab_market_prize tmp on tul.prizeid = tmp.id
+		and tmp.prizecode in (${param2}) 
+		<where>
+	   		<if test="searchFields.marketId != null and searchFields.marketId != ''">
+		    	and tul.marketid = ${searchFields.marketId}
+	   		</if>
+	   		<if test="searchFields.stime != null and searchFields.stime != ''">
+	   			and tul.createtime > ${searchFields.stime}
+	   		</if>
+	   		<if test="searchFields.etime != null and searchFields.etime != ''">
+	   		 	<![CDATA[
+	   			and tul.createtime < ${searchFields.etime}
+	   			]]>
+	   		</if>
+	   	</where>
+		GROUP BY DATE_FORMAT(tul.createtime, '%Y-%m') 
+		ORDER BY tul.createtime ASC
+    </select>
+
+	<!-- 根据活动ID获取接入类型的数量 -->
+	<select id="getIntypeCount" resultType="Map">
+		SELECT COALESCE(intype, 0) as intype, count(*) as count from tab_user_luckdraw
+		where marketid = #{param1}
+		GROUP BY COALESCE(intype, 0)
+	</select>
+	
+		
+	<select id="getCountByMarketid" resultType="int">
+		select count(*) from tab_user_luckdraw where marketid = #{param1}
+	</select>
+	
+	<!-- 获取用户分享的信息   -->
+	<select id="getUserShareInfo" resultType="Map">
+		select tl.ball as ball, tu.nickname as nickname, tm.marketName as marketName
+		from tab_user_lottery tul
+		LEFT JOIN tab_lottery tl on tul.lotteryid = tl.id
+		LEFT JOIN tab_user tu on tul.userid = tu.id
+		LEFT JOIN tab_user_luckdraw tuld on tuld.id = #{param1}
+		LEFT JOIN tab_marketplan tm on tm.id = tuld.marketid
+		WHERE drawid = #{param1}
+		limit 1
+	</select>
+	
+	<!-- 根据活动ID获取 活动用户手机号 -->
+	<select id="getUserMobileCount" resultType="Map">
+		SELECT tul.id as id, tul.userid as userid, COALESCE(tu.mobile, '') as mobile, count(*) as count from tab_user_luckdraw tul 
+		LEFT JOIN tab_user tu on tul.userid = tu.id
+		where tul.marketid = #{param1} 
+		GROUP BY tul.userid 
+		order by count(*) 
+	</select>
+	
+	
+	<select id="countUserMarketByTime" resultType="int">
+		select count(1) from tab_user_luckdraw tul 
+		<where>
+			<if test="userid != null and userid != ''">
+				AND tul.userid = #{userid}
+			</if>
+			<if test="marketId != null and marketId != ''">
+				AND tul.marketid = #{marketId}
+			</if>
+			<if test="tType != null and tType == 'd'.toString()">
+				AND date(tul.createtime) = date( CURDATE());
+			</if>
+			<if test="tType != null and tType == 'm'.toString()">
+				AND DATE_FORMAT(tul.createtime, '%Y%m' ) = DATE_FORMAT(CURDATE() , '%Y%m')
+			</if>
+			<if test="tType != null and tType == 'y'.toString()">
+				AND year(tul.createtime) = year(CURDATE())
+			</if>
+			<if test="tType != null and tType == 'w'.toString()">
+				AND week(tul.createtime) = week(curdate()) and year(tul.createtime) = year(curdate())
+			</if>
+		</where>
+	</select>
+	
+</mapper> 

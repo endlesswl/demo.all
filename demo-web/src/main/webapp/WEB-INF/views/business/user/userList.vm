@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+##set( $lzzUrl = "http://localhost" )
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>零彩宝商家后台-用户列表</title>
+<link href='${lzzUrl}/prd/style/model#ver("/ver/style/model.css.ver").css' rel="stylesheet" type="text/css" />
+<link href='${lzzUrl}/prd/style/index#ver("/ver/style/index.css.ver").css' rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"/>
+<link href='${lzzUrl}/prd/style/plugin/artDialog/black#ver("/ver/style/plugin/artDialog/black.css.ver").css' rel="stylesheet" type="text/css" />
+<script	src='${lzzUrl}/prd/script/jquery-2.0.2.min#ver("/ver/script/jquery-2.0.2.min.js.ver").js'></script>
+<script src='${lzzUrl}/prd/script/json2#ver("/ver/script/json2.js.ver").js'></script>
+<script src='${lzzUrl}/prd/script/plugin/util/util#ver("/ver/script/plugin/util/util.js.ver").js'></script>
+<script src='${lzzUrl}/prd/script/plugin/lingcaitable/PageLc#ver("/ver/script/plugin/lingcaitable/PageLc.js.ver").js'></script>
+<script src='/plugin/artDialog/jquery.artDialog.min.js'></script>
+<!-- my JS -->
+<script src='${lzzUrl}/prd/script/business/user/UserList#ver("/ver/script/business/user/UserList.js.ver").js'></script>
+
+<script type="text/javascript">
+	$(function() {
+		UserList.init('${ctx}/home/user/userList','${ctx}/home/user/addUserToGroup','${ctx}/home/user/userGroup','${ctx}/home/sms/sendMobileMessage');
+		//按钮效果
+		$(".ui-button").click(function() {
+			$($(this).parent().parent()).children("li").each(function() {
+				$(this).children().attr("class", "ui-button");
+			});
+			$(this).attr("class", "ui-button ui-button-on");
+		});
+		$(document).on('click', $('.aui_content').find('#chooseWrap').find('li'), function() {
+			UserList.checkBoxClick();
+		});
+	});
+</script>
+<style>
+	#chooseWrap{width:500px;}
+	#chooseWrap li{width:105px;height:30px;float:left;margin-right:20px;}
+</style>
+</head>
+<body>
+<div class="container">
+<!-- 公共顶导 -->
+	#parse("/include/header.vm")
+	<div class="content clearfix">
+<!-- 左边导航 -->
+    	#parse("/include/left.vm")
+<!-- 右边导航 -->
+       <div class="merchants-main "> 
+       		<div class="title">用户列表</div>          
+            <div class="white-box-a">
+            <div class="pt20 pb20  clearfix">
+            <div class="phone-item">
+            	<label class="f16 pl20">用户：</label><input type="text" id="userName" placeholder="名称" class="sr-text">
+            </div> 
+            <div class="phone-item">
+            	<label class="f16 pl20">活动：</label> <input type="text" id="marketName" placeholder="名称" class="sr-text">
+            </div> 
+            <div class="phone-item">
+            	<label class="pl20 tr">用户群组：</label>
+            	<select class="select-button"style="width: 155px" id="usergroup" onchange="UserList.query()">
+					<option value="" selected>所有分组</option>
+				</select>
+				<span class="ui-search"  style="margin-top:0px;display:inline;  padding: 6px 15px 6px 36px;" onclick="UserList.query()">查询</span>
+			</div>
+            <ul class="button-box clearfix" style="padding-left:100px;">
+      			<li><a class="ui-button" value="1" onclick="UserList.query(1)">1个月未联的用户</a></li>
+      			<li><a class="ui-button" value="2" onclick="UserList.query(2)">2个月未联的用户</a></li>
+      			<li><a class="ui-button" value="3" onclick="UserList.query(3)">3个月未联的用户</a></li>      			
+      		</ul>       		   
+            </div>
+            <div class="fl  mt20 mb10 pl20 f14"><input name="ckboxAll" id="ckboxAll" type="checkbox">&nbsp;&nbsp;全选</div>
+            <div class="group"><a href="#" class="mr20 mt20 fr" style="display:block;margin-right:24px;" onclick="UserList.addToGroup();">添加到分组</a></div>
+            <div class="clear"></div>
+            <table id="dataList" width="760" border="0" cellspacing="0" cellpadding="0" class="tab6 mt20">
+				<tr>    
+					<th class="coleft" width="50"></th>
+ 					<th width="70">序号</th>
+                    <th>用户名称</th>  
+                    <th>电话</th>                   
+                    <th>区域</th>                 
+                    <th>活跃度</th>                   
+                </tr>
+             </table>
+             <!-- 分页 -->
+            <div class="lc_pagination" id="pageDiv">
+            </div>
+             <!-- <div class="more"><a href="#">查看更多记录  >></a></div> -->
+            </div>
+           <!--  <div class="group">					
+					<ul class="user-group">
+						<li>全部用户（0）</li>
+						 <li>未分组（0）</li>
+					</ul>
+				</div> -->
+        </div>
+    </div>
+</div>
+<div id="userGroupDiv" style="display:none;">
+</div>
+
+ <!-- 底部文件 -->
+	#parse("/include/footer.vm")
+</body>
+</html>
+

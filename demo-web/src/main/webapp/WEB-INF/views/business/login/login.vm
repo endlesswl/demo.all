@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	##set( $lzzUrl = "http://localhost" )
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>零彩宝商家后台-注册登录</title>
+    <link href='${ctx}/style/model.css' rel="stylesheet" type="text/css"/>
+    <link href='${ctx}/style/index.css' rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"></link>
+    <!-- <script src='${ctx}/script/jquery-2.0.2.min.js'></script> -->
+    <script src='${ctx}/script/jquery-1.11.1.min.js'></script>
+    <script src='${ctx}/script/json2.js'></script>
+	<script src='${ctx}/script/plugin/util/util.js'></script>
+	<script src='${ctx}/script/plugin/util/map.js'></script>
+	<!-- 表单验证插件 -->
+	<script src="${ctx}/plugin/jquery.validate.js"></script>
+	<script src="${ctx}/plugin/validate_expand.js"></script>
+	<!-- my js -->
+    <script src='${ctx}/script/business/login/login.js'></script>
+	<script type="text/javascript">
+		$(function(){
+			Login.init();
+
+			if("$!{userType}"=="2"){
+				$("#li_sj").click();
+			}else if("$!{userType}"=="4"){
+				$("#li_dls").click();
+			} else{
+				$("#li_gr").click();
+			}
+		});
+
+		//回车提交
+		document.onkeydown=function(event){ 
+			e = event ? event :(window.event ? window.event : null); 
+			if(e.keyCode==13){ 
+				//执行的方法 
+				$(".gr_login_box").each(function(){
+					if($(this).css("display")!="none"){
+						$(this).find(".login_btn").children().click();
+					}
+				});
+			} 
+		} 
+	</script>
+	<style type="text/css">
+		.tipinfo{color: red}
+	</style>
+</head>
+<body>
+<div class="login_header_box"><div class="container" style="padding-bottom:0px"><div class="header-content clearfix">
+    	<div class="header-logo"><img src="${ctx}/images/logo.png"/><i>|</i><span>全球首家营销激励平台</span></div>
+        
+    </div></div></div>
+
+	<div>
+	<div class="login_fra_box clearfix">
+    	<div class="gr_left" id="leftImgWrap" style="width:470px;height:382px;"><img src="${ctx}/images/g1.jpg"/><img style="display:none;" src="${ctx}/images/g5.jpg"/><img style="display:none;margin-left:3px;" src="${ctx}/images/g4.png"/></div>
+        <div class="gr_right">
+        	<ul class="gr_nav clearfix">
+        		<li id="li_gr" class="current" value="1"><a>个人登录</a></li>
+        		<!-- <li id="li_sj" value="2"><a>商家登录</a></li>
+        		<li id="li_dls" value="4"><a>代理商登录</a></li> -->
+        	</ul>
+            <div id="loginBoxWrap">
+	            <div class="gr_login_box" style="display:block;">
+	            	<form action="${ctx}/login" method="post" name="personalLogin" id="personalLogin">
+	   				<input id="userType" name="userType" value="1" type="hidden"/>
+		            <ul >
+		            	<li class="clearfix"><label><img src="${ctx}/images/g2.jpg"/></label><input type="text" id="username" name="username" placeholder="请输入用户名" onblur="Login.onblurFun(this);"><div class="tipinfo tipinfo-position"></div></li>
+		                <li class="clearfix"><label><img src="${ctx}/images/g3.jpg"/></label><input type="password" id="password" name="password" placeholder="请输入密码" onblur="Login.onblurFun(this);"><div class="tipinfo tipinfo-position"></div></li>
+		            </ul>
+		            #if($!errstr)
+		            <div class="tipinfo tipinfo-position">$!errstr</div>
+					#end
+		            <div class="clearfix">
+		            </div>
+		            <div class="login_btn"><input type="button" value="立刻登录" onclick="Login.perLoginFun(this)"/></div>
+		            </form>
+	            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="borline"></div>
+<!-- 底部文件 -->
+#parse("/include/footer.vm")
+</body>
+</html>
+

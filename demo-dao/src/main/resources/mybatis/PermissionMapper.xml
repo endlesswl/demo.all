@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.lingcaibao.repository.PermissionDao">
+
+	<resultMap id="resultMap" type="com.lingcaibao.entity.Permission">
+        <result property="id" column="id"/>
+        <result property="resource" column="resource"/>
+        <result property="acl" column="acl"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+		id,resource,acl,name,description
+	</sql>
+	
+	<!-- 获取用户: 输出直接映射到对象 -->
+	<select id="get" parameterType="Long" resultType="Permission">
+		SELECT <include refid="columns" />
+		FROM tab_permission
+		WHERE id=#{id}
+	</select>
+	
+
+	<!-- 查询用户, 不分页 -->
+	<select id="search" parameterType="map" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		FROM tab_permission
+		<where>
+	       <if test="resource != null and resource != ''">
+				AND resource = #{resource}
+		   </if>
+	       <if test="acl != null and acl != ''">
+				AND acl = #{acl}
+		   </if>
+	       <if test="name != null and name != ''">
+				AND name = #{name}
+		   </if>
+	       <if test="description != null and description != ''">
+				AND description = #{description}
+		   </if>
+		</where>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="searchPage" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		FROM tab_permission
+		<where>
+	       <if test="searchFields.resource != null and searchFields.resource != ''">
+				AND resource = #{searchFields.resource}
+			</if>
+	       <if test="searchFields.acl != null and searchFields.acl != ''">
+				AND acl = #{searchFields.acl}
+			</if>
+	       <if test="searchFields.name != null and searchFields.name != ''">
+				AND name = #{searchFields.name}
+			</if>
+	       <if test="searchFields.description != null and searchFields.description != ''">
+				AND description = #{searchFields.description}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="Permission" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tab_permission (
+        	resource,
+        	acl,
+        	name,
+        	description
+		) VALUES (
+        	#{resource},
+        	#{acl},
+        	#{name},
+        	#{description}
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" >
+        UPDATE tab_permission
+		<set>
+	        	<if test="resource != null and resource != ''">
+				resource = #{resource},
+		</if>
+	        	<if test="acl != null and acl != ''">
+				acl = #{acl},
+		</if>
+	        	<if test="name != null and name != ''">
+				name = #{name},
+		</if>
+	        	<if test="description != null and description != ''">
+				description = #{description}
+		</if>
+		</set>
+        WHERE 
+	        id = #{id}
+	</update>
+	
+	<!-- 删除用户 -->
+	<delete id="delete" parameterType="Long">
+	     DELETE FROM tab_permission WHERE id=#{id}
+	</delete>
+</mapper> 

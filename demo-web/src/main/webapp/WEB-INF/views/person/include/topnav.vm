@@ -1,0 +1,33 @@
+﻿<div class="header-content clearfix">
+	<div class="container">
+		<div class="header-logo">
+			<img src="${ctx}/images/logo.png"><i>|</i><span>个人管理平台</span>
+		</div>
+			#set($avatar=$user.avatar)
+			#if(!$avatar)
+				#set($avatar="${ctx}/images/test4.jpg")
+			#end
+		<div class="header-right">
+			<div class="user-head-img">
+       			 <a href='${ctx}/home/user/info2'>
+           			<img src="$avatar">
+        		</a>
+            </div>
+			<span class="user-name">
+       			 <a href='${ctx}/home/user/info2'>
+                 $!user.username
+    			</a>，欢迎使用零彩宝平台！
+            </span>
+			<!-- 
+			<a onclick="window.location.href='${ctx}/location/business?path=business/account/message'">
+	        <div class="messages-icon">
+	        	#if($user.emails >0)
+	            <div class="messages-number">$user.emails</div>
+	            #end
+	        </div>
+        	</a> 
+			 -->
+			<span class="user-quit"><a class="blue" href="${ctx}/login/logout">退出</a></span>
+		</div>
+	</div>
+</div>

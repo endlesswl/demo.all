@@ -1,0 +1,256 @@
+.dialog-delorder {
+	box-shadow: 0 2px 11px #ccc;
+	height: 142px;
+	left: 50%;
+	margin-left: auto;
+	position: absolute;
+	top: 0;
+	width: 276px;
+	z-index: 1001;
+}
+.dialog-delorder .dialog-bar {
+	background: #f3f3f3;
+	color: #666;
+	font-size: 12px;
+	font-family: simsun;
+	font-weight: 700;
+	height: 31px;
+	line-height: 31px;
+	overflow: hidden;
+	text-indent: 10px;
+}
+.dialog-delorder .dialog-close {
+	background: url(../images/allBtn.png) -357px -1875px no-repeat;
+	float: right;
+	height: 21px;
+	margin-right: 6px;
+	margin-top: 5px;
+	width: 21px;
+}
+.dialog-delorder .dialog-content {
+	background: #fff;
+	color: #666;
+	font-size: 14px;
+	line-height: 24px;
+}
+.dialog-delorder .dialog-console {
+	background: #fff;
+	overflow: hidden;
+	padding: 8px 0 10px;
+	text-align: center;
+ *zoom: 1;
+}
+.dialog-delorder .dialog-content p {
+	font-size: 14px;
+	padding: 20px 0 16px;
+	text-align: center;
+}
+.dialog-delorder .dialog-console a, .dialog-delorder .dialog-console a:link, .dialog-delorder .dialog-console a:hover {
+	background: #8ecd1c;
+	border: 1px #7ebb48 solid;
+	display: inline-block;
+	font-size: 16px;
+	height: 34px;
+	line-height: 34px;
+	margin-right: 12px;
+	text-align: center;
+	text-decoration: none;
+	width: 118px;
+}
+.dialog-delorder .dialog-console a.console-btn-confirm {
+	color: #fff;
+}
+.dialog-delorder .dialog-console a.console-btn-cancel, .dialog-delorder .dialog-console a.console-btn-cancel:link, .dialog-delorder .dialog-console a.console-btn-cancel:hover {
+	background: #fefefe;
+	border-color: #d9d9d9;
+	color: #999;
+	margin: 0;
+}
+.dialog-addtocart {
+	box-shadow: 0 2px 11px #ccc;
+	height: 200px;
+	left: 50%;
+	position: absolute;
+	top: 300px;
+	width: 368px;
+	z-index: 1001;
+}
+.dialog-addtocart .dialog-bar {
+	background: url(../images/dialog_solid.png) repeat-x top;
+	color: #fff;
+	font-size: 12px;
+	font-family: simsun;
+	font-weight: 700;
+	height: 27px;
+	line-height: 28px;
+	overflow: hidden;
+	text-indent: 10px;
+}
+.dialog-addtocart .dialog-close {
+	background: url(../images/alertBtn.png) no-repeat 0 0;
+	float: right;
+	height: 22px;
+	margin-right: 10px;
+	width: 45px;
+}
+.dialog-addtocart .dialog-content {
+	background: #fff;
+	border: 1px #93c803 solid;
+	color: #666;
+	font-size: 14px;
+	height: 171px;
+	line-height: 24px;
+}
+.dialog-addtocart .dialog-console {
+	background: #fff;
+	overflow: hidden;
+	padding: 8px 0 10px;
+	text-align: center;
+ *zoom: 1;
+}
+.dialog-addtocart .dialog-bar i {
+	background: url(../images/t01be95dd74b6de9636.png) no-repeat 0 0;
+	float: left;
+	height: 16px;
+	margin: 5px;
+	width: 16px;
+}
+.dialog-addtocart .dialog-content p {
+	color: #27292b;
+	font-size: 16px;
+	height: 48px;
+	line-height: 60px;
+	margin: 20px 0 26px;
+	text-align: left;
+	text-indent: 108px;
+}
+.dialog-addtocart .dialog-console a, .dialog-addtocart .dialog-console a:link, .dialog-addtocart .dialog-console a:hover {
+	background: #8ecd1c;
+	border: 1px #7ebb48 solid;
+	display: inline-block;
+	font-size: 16px;
+	height: 34px;
+	line-height: 34px;
+	margin-right: 12px;
+	text-align: center;
+	text-decoration: none;
+	width: 118px;
+}
+.dialog-addtocart .dialog-console a.console-btn-continue {
+	background: #ededed;
+	border: 1px #dbdbdb solid;
+	border-radius: 3px;
+	color: #999;
+	font-size: 16px;
+	height: 34px;
+	line-height: 34px;
+	width: 118px;
+}
+.dialog-addtocart .dialog-console a.console-btn-gocart, .dialog-addtocart .dialog-console a.console-btn-gocart:link, .dialog-addtocart .dialog-console a.console-btn-gocart:hover {
+	background: #fb8124;
+	border: 0;
+	border-radius: 3px;
+	color: #fff;
+	height: 36px;
+	margin: 0;
+	text-align: right;
+	width: 157px;
+}
+.dialog-addtocart .dialog-console a.console-btn-gocart span, .dialog-addtocart .dialog-console a.console-btn-gocart:link span, .dialog-addtocart .dialog-console a.console-btn-gocart:hover span {
+	background: url(../images/allBtn.png) -398px -1875px no-repeat;
+	float: right;
+ *float: none;
+	height: 22px;
+	margin: 7px 10px 0 8px;
+	width: 22px;
+}
+.dialog-war {
+	box-shadow: 0 2px 11px #ccc;
+	height: 200px;
+	left: 50%;
+	overflow: hidden;
+	position: absolute;
+	top: 300px;
+	width: 368px;
+	z-index: 1024;
+ *zoom: 1;
+}
+.dialog-war .dialog-bar {
+	background: url(../images/dialog_solid.png) repeat-x top;
+	color: #fff;
+	font-size: 12px;
+	font-family: simsun;
+	font-weight: 700;
+	height: 27px;
+	line-height: 26px;
+	text-indent: 10px;
+}
+.dialog-war .dialog-close {
+	background: url(../images/alertBtn.png) no-repeat 0 0;
+	float: right;
+	height: 22px;
+	margin-right: 10px;
+	width: 45px;
+}
+.dialog-war .dialog-content {
+	background: #fff;
+	border: 1px #93c803 solid;
+	color: #666;
+	font-size: 14px;
+	height: 171px;
+	line-height: 24px;
+	overflow: hidden;
+ *zoom: 1;
+}
+.dialog-war .dialog-console {
+	background: #fff;
+	overflow: hidden;
+	padding: 0 0 10px;
+	text-align: center;
+ *zoom: 1;
+}
+.dialog-war .dialog-bar i {
+	background: url(../images/t01be95dd74b6de9636.png) no-repeat 0 0;
+	float: left;
+	height: 16px;
+	margin: 5px;
+	width: 16px;
+}
+.dialog-war .dialog-content p {
+	color: #27292b;
+	font-size: 16px;
+	line-height: 24px;
+	margin: 30px 0 32px;
+	padding: 0 30px;
+	text-align: center;
+}
+.dialog-war .dialog-console a.console-btn-confirm {
+background: #87cb27;
+border: 1px #7ebb48 solid;
+border-radius: 3px;
+color: #fff;
+font-size: 16px;
+height: 34px;
+line-height: 34px;
+width: 118px;
+}
+.dialog-war .dialog-console a, .dialog-war .dialog-console a:link, .dialog-war .dialog-console a:hover {
+	background: #8ecd1c;
+	border: 1px #7ebb48 solid;
+	display: inline-block;
+	font-size: 16px;
+	height: 34px;
+	line-height: 34px;
+	text-align: center;
+	text-decoration: none;
+	width: 118px;
+}
+.mask {
+	background: transparent!important;
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+}

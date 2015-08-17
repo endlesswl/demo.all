@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.lingcaibao.repository.DictionaryDao">
+
+	<resultMap id="resultMap" type="com.lingcaibao.entity.Dictionary">
+		<result property="id" column="id" />
+		<result property="dictno" column="dictno" />
+		<result property="level" column="level" />
+		<result property="parentcode" column="parentcode" />
+		<result property="code" column="code" />
+		<result property="name" column="name" />
+		<result property="remark" column="remark" />
+		<result property="lastflag" column="lastflag" />
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+		id,dictno,level,parentcode,code,name,remark,lastflag
+	</sql>
+
+	<!-- 获取用户: 输出直接映射到对象 -->
+	<select id="get" parameterType="Long" resultType="Dictionary">
+		SELECT
+		<include refid="columns" />
+		FROM tab_dictionary
+		WHERE id=#{id}
+	</select>
+
+	<!-- 获取字典内容 -->
+	<select id="getDictContent" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM tab_dictionary
+		<where>
+			<if test="dictno != null and dictno != ''">
+				AND dictno = #{dictno}
+			</if>
+			<if test="level != null and level != ''">
+				AND level = #{level}
+			</if>
+			<if test="parentcode != null and parentcode != ''">
+				AND parentcode = #{parentcode}
+			</if>
+		</where>
+		ORDER BY dictno,level
+	</select>
+
+	<!-- 查询用户, 不分页 -->
+	<select id="search" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM tab_dictionary
+		<where>
+			<if test="dictno != null and dictno != ''">
+				AND dictno = #{dictno}
+			</if>
+			<if test="level != null and level != ''">
+				AND level = #{level}
+			</if>
+			<if test="parentcode != null and parentcode != ''">
+				AND parentcode = #{parentcode}
+			</if>
+			<if test="code != null and code != ''">
+				AND code = #{code}
+			</if>
+			<if test="name != null and name != ''">
+				AND name = #{name}
+			</if>
+			<if test="remark != null and remark != ''">
+				AND remark = #{remark}
+			</if>
+			<if test="lastflag != null and lastflag != ''">
+				AND lastflag = #{lastflag}
+			</if>
+		</where>
+		ORDER BY dictno,level
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="searchPage" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM tab_dictionary
+		<where>
+			<if test="searchFields.dictno != null and searchFields.dictno != ''">
+				AND dictno = #{searchFields.dictno}
+			</if>
+			<if test="searchFields.level != null and searchFields.level != ''">
+				AND level = #{searchFields.level}
+			</if>
+			<if
+				test="searchFields.parentcode != null and searchFields.parentcode != ''">
+				AND parentcode = #{searchFields.parentcode}
+			</if>
+			<if test="searchFields.code != null and searchFields.code != ''">
+				AND code = #{searchFields.code}
+			</if>
+			<if test="searchFields.name != null and searchFields.name != ''">
+				AND name = #{searchFields.name}
+			</if>
+			<if test="searchFields.remark != null and searchFields.remark != ''">
+				AND remark = #{searchFields.remark}
+			</if>
+			<if test="searchFields.lastflag != null and searchFields.lastflag != ''">
+				AND lastflag = #{searchFields.lastflag}
+			</if>
+		</where>
+	</select>
+
+	<!-- 新增 -->
+	<insert id="insert" parameterType="Dictionary" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO tab_dictionary (
+		dictno,
+		level,
+		parentcode,
+		code,
+		name,
+		remark,
+		lastflag
+		) VALUES (
+		#{dictno},
+		#{level},
+		#{parentcode},
+		#{code},
+		#{name},
+		#{remark},
+		#{lastflag}
+		)
+	</insert>
+
+	<!-- 更新 -->
+	<update id="update">
+		UPDATE tab_dictionary
+		<set>
+			<if test="dictno != null and dictno != ''">
+				dictno = #{dictno},
+			</if>
+			<if test="level != null and level != ''">
+				level = #{level},
+			</if>
+			<if test="parentcode != null and parentcode != ''">
+				parentcode = #{parentcode},
+			</if>
+			<if test="code != null and code != ''">
+				code = #{code},
+			</if>
+			<if test="name != null and name != ''">
+				name = #{name},
+			</if>
+			<if test="remark != null and remark != ''">
+				remark = #{remark},
+			</if>
+			<if test="lastflag != null and lastflag != ''">
+				lastflag = #{lastflag}
+			</if>
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+
+	<!-- 删除用户 -->
+	<delete id="delete" parameterType="Long">
+		DELETE FROM tab_dictionary
+		WHERE id=#{id}
+	</delete>
+
+	<!-- 获取字典项列表 -->
+	<select id="getDictItems" parameterType="String" resultType="map">
+		SELECT <include refid="columns" /> 
+		FROM tab_dictionary 
+		WHERE dictno = #{dictno} 
+		ORDER BY code
+	</select>
+
+</mapper> 

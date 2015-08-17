@@ -1,0 +1,8 @@
+
+## -----------------------------------------------------
+## 例子
+## -----------------------------------------------------
+#macro(ver,$path)$!verUtil.ver($path)#end
+#macro(load, $path) #parse("$path") #end
+#macro(dpi)<meta content="#if($!dpi)target-densitydpi=$!{dpi}, #{end}width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />#end
+#macro(clientParam)#if($ua)"&ua="$!esc.html($ua)#end#if($uid)"&uid="$!esc.html($uid)#end#if($osver)"&osver="$!esc.html($osver)#end#end

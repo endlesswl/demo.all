@@ -1,0 +1,34 @@
+<script type="text/javascript">
+	$(function(){
+		var userNameImg=$('#userNameImg').find('img').attr('src');
+		if(userNameImg == ''){
+			$('#userNameImg').find('img').attr("src","${ctx}/images/test4.jpg");
+		}
+	});
+</script>
+#if($bluempStatus =="bluemp")
+#parse("/include/bluemp/lbheader.vm")
+#else
+<div class="header-content clearfix">
+    <div class="header-logo"><a href="${ctx}/home/user/info2"><img src="http://image.lingcaibao.com/image/2015/2/2015_2_4302699b-829e-436c-a441-478f5321eeb3.png"><i>|</i><span>商家管理平台</span></a></div>
+    <div class="header-right">
+        	<div class="user-head-img">
+       			 <a id="userNameImg" href='${ctx}/location/user?path=business/account/userInfo'>
+           			<img src="$!user.avatar">
+        		</a>
+            </div>
+            <span class="user-name">
+       			 <a href='${ctx}/location/business?path=business/account/userInfo'>
+                 $!user.nickname
+    			</a>，欢迎使用零彩宝平台！
+            </span>
+        <a onclick="window.location.href='${ctx}/location/business?path=business/account/message'">
+	        <div class="messages-icon">
+	        	#if($user.emails >0)
+	            <div class="messages-number">$user.emails</div>
+	            #end
+	        </div>
+        </a>
+        <span class="user-quit"><a href="${ctx}/login/logout" class="blue">退出</a></span></div>
+</div>
+#end

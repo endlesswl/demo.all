@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    ##set( $lzzUrl = "http://localhost" )
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>我的账户-账户统计</title>
+    <link href='${ctx}/style/personal/index.css' rel="stylesheet" type="text/css"/>
+    <link href='${ctx}/style/personal/model.css' rel="stylesheet" type="text/css"/>
+    <!-- <script src='${ctx}/script/jquery-2.0.2.min.js'></script> -->
+    <script src='${ctx}/script/jquery-1.11.1.min.js'></script>
+    <script src='${ctx}/script/json2.js'></script>
+    <link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"/>
+    <script src='${ctx}/script/people/myAccount/MyAccount.js'></script>
+    <script src='${ctx}/script/plugin/util/util.js'></script>
+	<script src='${ctx}/script/people/header.js'></script>
+	
+    <script src="${ctx}/plugin/echarts/echarts.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            MyAccount.path = "${ctx}";
+            MyAccount.init();
+            MyAccount.getLotteryInfo("");
+        });
+    </script>
+
+</head>
+<body>
+<!-- 公共顶导 -->
+#parse("/person/include/topnav.vm")
+<div class="container">
+    <div class="content pb0">
+        <div class="item-title">个人中心</div>
+        <div class="user-center">
+            <!-- 公共用户信息 -->
+            #parse("/person/include/frafirst.vm")
+            <div class="clearfix">
+                <div class="leftit">
+                    <ul>
+                       <a href="${ctx}/home/user/info2"> <li class="l2">基本信息</li></a>
+					   <a href="${ctx}/location/user?path=person/myAccount/MyAccount"><li class="lon1">我的账户</li></a>
+                    </ul>
+                </div>
+                <div class="right-box" style="position:relative;">
+                    <div class="account-tit  clearfix">
+                        <ul>
+                            <a href="${ctx}/location/user?path=person/myAccount/MyAccount">
+                                <li class="acon1"><span>账户统计</span></li>
+                            </a>
+                            <a href="${ctx}/location/user?path=person/myAccount/transactionRecords">
+                                <li class="ac2"><span>提现记录</span></li>
+                            </a>
+                            <a href="${ctx}/location/user?path=person/myAccount/transactionRecords2"><li class="ac3"><span>福利记录</span></li></a>
+                        </ul>
+                    </div>
+                    <div class="account_fra clearfix">
+                        <div class="account_item"><p>可用余额</p>
+
+                            <div class="red" id="total"><font class="f24" id="totalInteger"></font></div>
+                        </div>
+                        <div class="account_item account_mn">
+                            <div>可提现：<span class="red" id="amount">
+                            		<font class="f24" id="amountInteger">0</font></span><font class="f14">元</font>
+	                            <!-- <img src="http://image.lingcaibao.com/image/2015/3/2015_3_f8a7858e-63b4-4e26-a372-a0b98453c735.png 
+											" width="17" height="17" id="tc1"/> -->
+								<a class=" input_btn ml20 bgreen" onclick="MyAccount.withdraw()">提现</a>
+							</div>
+                            <div>不可提现：<span class="red" id="coupon">
+	                            <font class="f24" id="couponInteger"></font></span><font class="f14">元</font>
+	                           <!--  <img src="http://image.lingcaibao.com/image/2015/3/2015_3_f8a7858e-63b4-4e26-a372-a0b98453c735.png 
+											" width="17" height="17" id="tc2"><a class=" input_btn ml20"/>充 值</a> -->
+							</div>
+                        </div>
+                        <!-- <div class="account_item"><p>零彩荷包</p>
+
+                            <div class="orange"><font class="f24">0</font>.00元</div>
+                        </div> -->
+                        <div class="account_item"><p>累计资产</p>
+
+                            <div class="orange" id="assetsTotal"><font class="f24" id="assetsTotalInteger"></font></div>
+                        </div>
+                        <div class="account_item bornone" ><p>月累计资产</p>
+
+                            <div class="orange" id="assetsTotalMonth"><font class="f24" id="assetsTotalMonthInteger"></font></div>
+                        </div>
+                    </div>
+                    <div class="right_tit2" id="totalMoney">累计资产：0.00 元</div>
+                    <div class="fl">
+                        <table id="agent" width="375" border="0" cellspacing="0" cellpadding="4" class="tab8">
+                            <!--<tr>-->
+                                <!--<td width="40" class="fd1"><img src="${ctx}/images/personal/tb8.png"></td>-->
+                                <!--<td width="228">话费</td>-->
+                                <!--<td>0.00元</td>-->
+                            <!--</tr>-->
+                        </table>
+                    </div>
+                    <div  id="main" style="height:350px ;position:absolute;width: 350px;top:423px;left: 450px">
+                    </div>
+                    <div class="clear"></div>
+
+
+                    <div class="right_tit2 " style="margin-top:200px">彩票</div> 
+                    <font class="f16" style="margin-left: 20px" id="prizeTotalMoney"></font>
+                    <div id="main1" style="height:350px ">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 公共底部导 -->
+#parse("/person/include/footernav.vm")
+</body>
+</html>
+

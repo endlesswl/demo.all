@@ -1,0 +1,103 @@
+
+<script type="text/javascript">
+	var prizeClass={
+			prizeType : "0",// 奖品类型
+			prizeMedium : "",// 奖品介质类型
+			prizeMap : null,
+			save_url : '/home/marketplan/saveMarketplan',
+			lotteryType:'',//彩种
+			prizeName:'',//3d...
+			quotaVal:'',//面额
+			init:function(ctx){
+				this.save_url = ctx + this.save_url;
+				$(".ui-button").click(function() {
+					$($(this).parent().parent()).children("li").each(function() {
+						$(this).children().attr("class", "ui-button");
+					});
+					$(this).attr("class", "ui-button ui-button-on");
+				});
+				this.prizeClassGetValue();
+			},
+			// 奖品类型
+			prizeTypeFun:function(prizeType, prizeMedium, bottomShow, oThis){
+				if (Util.isNotEmpty(prizeType) && Util.isNotEmpty(prizeMedium)) {
+					this.prizeType = prizeType;
+					this.prizeMedium = prizeMedium;
+				}
+				$(oThis).parent().parent().parent().siblings().hide();
+				$(bottomShow).css("display", "block");
+			},
+			//彩种选择
+			lotteryClassFun:function(aLottery){
+				$(".3dWrap").children("div").css("display", "none");
+				$(aLottery).css("display", "block");								
+			},
+			prizeClassGetValue:function(){
+				lotteryType=$('#CZ').find('.ui-button-on').attr('value');//彩种
+				prizeName=$('#'+lotteryType).find('.ui-button-on').attr('value');//3d。。。				
+				quotaVal = $("#quotaValue .ui-button-on").attr("value");//面额
+			}
+		}
+</script>
+<div class="order-item prizeClass">
+  <div class="order-item">
+           	<label>奖品类型：</label>
+           	<div class="order-right clearfix">
+           		<ul class="button-box clearfix fl prizeClass">
+           			<li onclick="prizeClass.prizeTypeFun('0','0',fWrap_1,this)"><a class="ui-button ui-button-on">彩票</a></li>
+           			<li onclick="prizeClass.prizeTypeFun('0','CALL',fWrap_2,this)"><a class="ui-button">话费</a></li>
+           			<li onclick="prizeClass.prizeTypeFun('0','FLOW',fWrap_3,this)"><a class="ui-button">流量</a></li>
+                       <li onclick="prizeClass.prizeTypeFun('0','0',fWrap_4,this)"><a class="ui-button">Q币</a></li>
+                       <li onclick="prizeClass.prizeTypeFun('0','CINEMA',fWrap_5,this)"><a class="ui-button">电影券</a></li>
+           		</ul>
+           	</div>
+          </div>
+          <div class="lotteryWrap" id="fWrap_1">
+            <div class="order-item">
+            	<label>选择彩种：</label>
+            	<div class="order-right clearfix">
+            		<ul class="button-box clearfix fl" id="CZ">
+            			<li onclick="prizeClass.lotteryClassFun(FC)"><a class="ui-button ui-button-on" value="FC">福彩</a></li>
+            			<li onclick="prizeClass.lotteryClassFun(TC)"><a class="ui-button" value="TC">体彩</a></li>
+            		</ul>
+            	</div>
+            </div>
+            <div class="3dWrap">
+            	<div class="order-item" id="FC">
+             	<label></label>
+             	<div class="order-right clearfix">
+             		<ul class="button-box clearfix fl">
+            				<li><a class="ui-button ui-button-on" value="SSQ">双色球</a></li>
+                        	<li><a class="ui-button" value="3D">3D</a></li> 
+                     </ul>
+             	</div>
+             </div>
+           		 <div class="order-item" id="TC" style="display:none">
+             	<label></label>
+             	<div class="order-right clearfix">
+             		<ul class="button-box clearfix fl">
+            				<li><a class="ui-button ui-button-on" value="DLT">大乐透</a></li>
+                     </ul>
+             	</div>
+            	</div>
+            </div>
+            <div class="order-item">
+            	<label>零彩面额：</label>
+            	<div class="order-right clearfix">
+            		<ul class="button-box clearfix fl" id="quotaValue">
+            			<li><a class="ui-button ui-button-on" value="0.1">0.1元</a></li>
+            			<li><a class="ui-button" value="0.2">0.2元</a></li>
+                        <li><a class="ui-button" value="0.5">0.5元</a></li>
+                        <li><a class="ui-button" value="1">1元</a></li>
+                        <li><a class="ui-button" value="2">2元</a></li>
+            		</ul>
+            	</div>
+            </div>
+        </div>
+        <div id="fWrap_2" style="display: none"></div>
+		<div id="fWrap_3" style="display: none"></div>
+		<div id="fWrap_4" style="display: none"></div>
+		<div id="fWrap_5" style="display: none"></div>
+		<div id="fWrap_0" style="display: none"></div>
+       <!-- <input type="button" value="确定" id="btnTrue" onclick="prizeClass.btnTrueFun()"/>-->
+</div>

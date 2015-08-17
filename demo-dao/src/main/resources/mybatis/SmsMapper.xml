@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.lingcaibao.repository.SmsDao">
+
+	<resultMap id="resultMap" type="com.lingcaibao.entity.Sms">
+        <result property="id" column="id"/>
+        <result property="mobile" column="mobile"/>
+        <result property="userid" column="userid"/>
+        <result property="content" column="content"/>
+        <result property="operator" column="operator"/>
+        <result property="createtime" column="createtime"/>
+        <result property="numbers" column="numbers"/>
+        <result property="msgid" column="msgid"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+		id,mobile,userid,content,operator,createtime,numbers,msgid
+	</sql>
+	
+	<!-- 获取用户: 输出直接映射到对象 -->
+	<select id="get" parameterType="Long" resultType="Sms">
+		SELECT <include refid="columns" />
+		FROM tab_sms
+		WHERE id=#{id}
+	</select>
+	
+	<!-- 获取该手机号最近一小时的发送列表 -->
+	<select id="getLastHourList" parameterType="String" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		FROM tab_sms 
+		WHERE mobile = #{mobile} AND DAYOFYEAR(createtime) = DAYOFYEAR(NOW()) AND HOUR(createtime) = HOUR(NOW())
+		ORDER BY createtime DESC
+	</select>
+
+	<!-- 查询用户, 不分页 -->
+	<select id="search" parameterType="map" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		FROM tab_sms
+		<where>
+	       <if test="mobile != null and mobile != ''">
+				AND mobile = #{mobile}
+		   </if>
+	       <if test="userid != null and userid != ''">
+				AND userid = #{userid}
+		   </if>
+	       <if test="content != null and content != ''">
+				AND content = #{content}
+		   </if>
+	       <if test="operator != null and operator != ''">
+				AND operator = #{operator}
+		   </if>
+	       <if test="createtime != null and createtime != ''">
+				AND createtime = #{createtime}
+		   </if>
+	       <if test="numbers != null and numbers != ''">
+				AND numbers = #{numbers}
+		   </if>
+		   <if test="msgid != null and msgid != ''">
+				AND msgid = #{msgid}
+		   </if>
+		</where>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="searchPage" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		FROM tab_sms
+		<where>
+	       <if test="searchFields.mobile != null and searchFields.mobile != ''">
+				AND mobile = #{searchFields.mobile}
+			</if>
+	       <if test="searchFields.userid != null and searchFields.userid != ''">
+				AND userid = #{searchFields.userid}
+			</if>
+	       <if test="searchFields.content != null and searchFields.content != ''">
+				AND content = #{searchFields.content}
+			</if>
+	       <if test="searchFields.operator != null and searchFields.operator != ''">
+				AND operator = #{searchFields.operator}
+			</if>
+	       <if test="searchFields.createtime != null and searchFields.createtime != ''">
+				AND createtime = #{searchFields.createtime}
+			</if>
+	       <if test="searchFields.numbers != null and searchFields.numbers != ''">
+				AND numbers = #{searchFields.numbers}
+			</if>
+			<if test="searchFields.msgid != null and searchFields.msgid != ''">
+				AND msgid = #{searchFields.msgid}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="Sms" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tab_sms (
+        	mobile,
+        	userid,
+        	content,
+        	operator,
+        	createtime,
+        	numbers,
+        	msgid
+		) VALUES (
+        	#{mobile},
+        	#{userid},
+        	#{content},
+        	#{operator},
+        	#{createtime},
+        	#{numbers},
+        	#{msgid}
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" >
+        UPDATE tab_sms
+		<set>
+	        	<if test="mobile != null and mobile != ''">
+				mobile = #{mobile},
+		</if>
+	        	<if test="userid != null and userid != ''">
+				userid = #{userid},
+		</if>
+	        	<if test="content != null and content != ''">
+				content = #{content},
+		</if>
+	        	<if test="operator != null and operator != ''">
+				operator = #{operator},
+		</if>
+	        	<if test="createtime != null and createtime != ''">
+				createtime = #{createtime},
+		</if>
+	        	<if test="numbers != null and numbers != ''">
+				numbers = #{numbers},
+		</if>
+	        	<if test="msgid != null and msgid != ''">
+				msgid = #{msgid}
+		</if>
+		</set>
+        WHERE 
+	        id = #{id}
+	</update>
+	
+	<!-- 删除用户 -->
+	<delete id="delete" parameterType="Long">
+	     DELETE FROM tab_sms WHERE id=#{id}
+	</delete>
+</mapper> 

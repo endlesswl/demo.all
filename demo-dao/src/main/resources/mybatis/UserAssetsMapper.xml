@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.lingcaibao.repository.UserAssetsDao">
+
+	<resultMap id="resultMap" type="com.lingcaibao.entity.UserAssets">
+		<result property="id" column="id" />
+		<result property="userid" column="userid" />
+		<result property="marketid" column="marketid" />
+		<result property="assetcode" column="assetcode" />
+		<result property="assetname" column="assetname" />
+		<result property="excode" column="excode" />
+		<result property="quantity" column="quantity" />
+		<result property="unit" column="unit" />
+		<result property="unitprice" column="unitprice" />
+		<result property="orderid" column="orderid" />
+		<result property="status" column="status" />
+		<result property="source" column="source" />
+		<result property="scanip" column="scanip" />
+		<result property="createtime" column="createtime" />
+		<result property="modifytime" column="modifytime" />
+		<result property="remark" column="remark" />
+		<result property="prizeid" column="prizeid" />
+		<result property="drawid" column="drawid" />
+		<result property="money" column="money" />
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+		id,userid,marketid,assetcode,assetname,excode,quantity,unit,unitprice,orderid,status,source,scanip,createtime,modifytime,remark,prizeid,drawid,money
+	</sql>
+
+	<!-- 获取用户: 输出直接映射到对象 -->
+	<select id="get" parameterType="Long" resultType="UserAssets">
+		SELECT
+		<include refid="columns" />
+		FROM tab_user_assets
+		WHERE id=#{id}
+	</select>
+	<select id="getByDrawid" parameterType="Long" resultType="UserAssets">
+		SELECT
+		<include refid="columns" />
+		FROM tab_user_assets
+		WHERE drawid=#{drawid}
+	</select>
+
+	<!-- 按合同号获取用户资产 -->
+	<select id="getAssetsByOrderid" parameterType="String"
+		resultType="UserAssets">
+		SELECT
+		<include refid="columns" />
+		FROM tab_user_assets
+		WHERE orderid=#{orderid}
+	</select>
+
+	<!-- 查询用户, 不分页 -->
+	<select id="search" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM tab_user_assets
+		<where>
+			<if test="userid != null and userid != ''">
+				AND userid = #{userid}
+			</if>
+			<if test="marketid != null and marketid != ''">
+				AND marketid = #{marketid}
+			</if>
+			<if test="assetcode != null and assetcode != ''">
+				AND assetcode = #{assetcode}
+			</if>
+			<if test="assetname != null and assetname != ''">
+				AND assetname = #{assetname}
+			</if>
+			<if test="excode != null and excode != ''">
+				AND excode = #{excode}
+			</if>
+			<if test="quantity != null and quantity != ''">
+				AND quantity = #{quantity}
+			</if>
+			<if test="unit != null and unit != ''">
+				AND unit = #{unit}
+			</if>
+			<if test="unitprice != null and unitprice != ''">
+				AND unitprice = #{unitprice}
+			</if>
+			<if test="orderid != null and orderid != ''">
+				AND orderid = #{orderid}
+			</if>
+			<if test="status != null and status != ''">
+				AND status = #{status}
+			</if>
+			<if test="source != null and source != ''">
+				AND source = #{source}
+			</if>
+			<if test="scanip != null and scanip != ''">
+				AND scanip = #{scanip}
+			</if>
+			<if test="createtime != null and createtime != ''">
+				AND createtime = #{createtime}
+			</if>
+			<if test="modifytime != null and modifytime != ''">
+				AND modifytime = #{modifytime}
+			</if>
+			<if test="remark != null and remark != ''">
+				AND remark = #{remark}
+			</if>
+			<if test="prizeid != null and prizeid != ''">
+				AND prizeid = #{prizeid}
+			</if>
+			<if test="drawid != null and drawid != ''">
+				AND drawid = #{drawid}
+			</if>
+		</where>
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="searchPage" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM tab_user_assets
+		<where>
+			<if test="searchFields.userid != null and searchFields.userid != ''">
+				AND userid = #{searchFields.userid}
+			</if>
+			<if test="searchFields.marketid != null and searchFields.marketid != ''">
+				AND marketid = #{searchFields.marketid}
+			</if>
+			<if test="searchFields.assetcode != null and searchFields.assetcode != ''">
+				AND assetcode = #{searchFields.assetcode}
+			</if>
+			<if test="searchFields.assetname != null and searchFields.assetname != ''">
+				AND assetname = #{searchFields.assetname}
+			</if>
+			<if test="searchFields.excode != null and searchFields.excode != ''">
+				AND excode = #{searchFields.excode}
+			</if>
+			<if test="searchFields.quantity != null and searchFields.quantity != ''">
+				AND quantity = #{searchFields.quantity}
+			</if>
+			<if test="searchFields.unit != null and searchFields.unit != ''">
+				AND unit = #{searchFields.unit}
+			</if>
+			<if test="searchFields.unitprice != null and searchFields.unitprice != ''">
+				AND unitprice = #{searchFields.unitprice}
+			</if>
+			<if test="searchFields.orderid != null and searchFields.orderid != ''">
+				AND orderid = #{searchFields.orderid}
+			</if>
+			<if test="searchFields.status != null and searchFields.status != ''">
+				AND status = #{searchFields.status}
+			</if>
+			<if test="searchFields.source != null and searchFields.source != ''">
+				AND source = #{searchFields.source}
+			</if>
+			<if test="searchFields.scanip != null and searchFields.scanip != ''">
+				AND scanip = #{searchFields.scanip}
+			</if>
+			<if
+				test="searchFields.createtime != null and searchFields.createtime != ''">
+				AND createtime = #{searchFields.createtime}
+			</if>
+			<if
+				test="searchFields.modifytime != null and searchFields.modifytime != ''">
+				AND modifytime = #{searchFields.modifytime}
+			</if>
+			<if test="searchFields.remark != null and searchFields.remark != ''">
+				AND remark = #{searchFields.remark}
+			</if>
+			<if test="searchFields.prizeid != null and searchFields.prizeid != ''">
+				AND prizeid = #{searchFields.prizeid}
+			</if>
+			<if test="searchFields.drawid != null and searchFields.drawid != ''">
+				AND drawid = #{searchFields.drawid}
+			</if>
+		</where>
+	</select>
+
+	<!-- 新增 -->
+	<insert id="insert" parameterType="UserAssets" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO tab_user_assets (
+		userid,
+		marketid,
+		assetcode,
+		assetname,
+		excode,
+		quantity,
+		unit,
+		unitprice,
+		orderid,
+		status,
+		source,
+		scanip,
+		createtime,
+		modifytime,
+		remark,
+		prizeid,
+		drawid,
+		money
+		) VALUES (
+		#{userid},
+		#{marketid},
+		#{assetcode},
+		#{assetname},
+		#{excode},
+		#{quantity},
+		#{unit},
+		#{unitprice},
+		#{orderid},
+		#{status},
+		#{source},
+		#{scanip},
+		#{createtime},
+		#{modifytime},
+		#{remark},
+		#{prizeid},
+		#{drawid},
+		#{money}
+		)
+	</insert>
+
+	<!-- 更新 -->
+	<update id="update">
+		UPDATE tab_user_assets
+		<set>
+			<if test="userid != null and userid != ''">
+				userid = #{userid},
+			</if>
+			<if test="marketid != null and marketid != ''">
+				marketid = #{marketid},
+			</if>
+			<if test="prizeid != null and prizeid != ''">
+				prizeid = #{prizeid},
+			</if>
+			<if test="drawid != null and drawid != ''">
+				drawid = #{drawid},
+			</if>
+			<if test="assetcode != null and assetcode != ''">
+				assetcode = #{assetcode},
+			</if>
+			<if test="assetname != null and assetname != ''">
+				assetname = #{assetname},
+			</if>
+			<if test="excode != null and excode != ''">
+				excode = #{excode},
+			</if>
+			<if test="quantity != null and quantity != ''">
+				quantity = #{quantity},
+			</if>
+			<if test="unit != null and unit != ''">
+				unit = #{unit},
+			</if>
+			<if test="unitprice != null and unitprice != ''">
+				unitprice = #{unitprice},
+			</if>
+			<if test="orderid != null and orderid != ''">
+				orderid = #{orderid},
+			</if>
+			<if test="status != null and status != ''">
+				status = #{status},
+			</if>
+			<if test="source != null and source != ''">
+				source = #{source},
+			</if>
+			<if test="scanip != null and scanip != ''">
+				scanip = #{scanip},
+			</if>
+			<if test="createtime != null and createtime != ''">
+				createtime = #{createtime},
+			</if>
+			<if test="modifytime != null and modifytime != ''">
+				modifytime = #{modifytime},
+			</if>
+			<if test="remark != null and remark != ''">
+				remark = #{remark},
+			</if>
+			<if test="money != null and money != ''">
+				money = #{money}
+			</if>
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+
+
+	<!-- 删除用户 -->
+	<delete id="delete" parameterType="Long">
+		DELETE FROM tab_user_assets WHERE id=#{id}
+	</delete>
+	<!-- 我的福利 -->
+	<select id="getMyAssets" resultType="Map">
+		SELECT
+		tm.marketName as name,
+		tua.assetname ,
+		tm.starttime as stime,
+		tm.endtime as etime,
+		tua.id,
+		tua.money,
+		tua.assetcode as code,
+		tua.excode,
+		tua.drawid,
+		tua.orderid
+		FROM
+		tab_user_assets tua
+		JOIN
+		tab_marketplan tm ON tua.marketid = tm.id
+		<where>
+			<if
+				test="searchFields.marketName != null and searchFields.marketName != ''">
+				AND tm.marketName like '%${searchFields.marketName}%'
+			</if>
+			<if test="searchFields.startTime != null and searchFields.startTime != ''">
+	                <![CDATA[
+						AND tua.createtime >=#{searchFields.startTime}
+					]]>
+			</if>
+			<if test="searchFields.endTime != null and searchFields.endTime != ''">
+	        		<![CDATA[
+						AND tua.createtime <= #{searchFields.endTime}
+					]]>
+			</if>
+			<if
+				test="searchFields.assetsName != null and searchFields.assetsName != ''">
+				AND tua.assetcode = #{searchFields.assetstype}
+			</if>
+			<if
+				test="searchFields.whereConditions != null and searchFields.whereConditions != ''">
+				({searchFields.whereConditions})
+			</if>
+			<if test="searchFields.status != null and searchFields.status != ''">
+				tua.status = #{searchFields.status}
+			</if>
+			and tua.userId = #{searchFields.userId}
+		</where>
+		ORDER BY
+		tua.createtime
+	</select>
+	
+	<!-- 我的福利 -->
+	<select id="getH5MyAssets" resultType="Map">
+		SELECT
+			tua.drawid as drawid,
+			tm.id as marketid,
+			tua.id as assetid,
+			tm.marketName as marketName,
+			tua.assetname as prizename,
+			tm.starttime as startTime,
+			tm.endtime as endTime,
+			tua.money as money,
+			tua.assetcode as prizecode,
+			tua.excode as excode,
+			tua.orderid as orderid
+		FROM
+			tab_user_assets tua
+		LEFT JOIN 
+			tab_marketplan tm ON tua.marketid = tm.id
+		<where> 
+			<if test="searchFields.marketName != null and searchFields.marketName != ''">
+				tm.marketName like '%${searchFields.marketName}%'
+			</if>
+			<if test="searchFields.startTime != null and searchFields.startTime != ''">
+	        	<![CDATA[
+			  		AND tua.createtime >= #{searchFields.startTime}
+			  	]]>
+			</if>
+			<if test="searchFields.endTime != null and searchFields.endTime != ''">
+        		<![CDATA[
+					AND tua.createtime <= #{searchFields.endTime}
+				]]>
+			</if>
+			<if test="searchFields.assetstype != null and searchFields.assetstype != ''">
+				AND tua.assetcode = #{searchFields.assetstype}
+			</if>
+			<if test="searchFields.status != null and searchFields.status != ''">
+				AND tua.status = #{searchFields.status}
+			</if>
+			and tua.userId = #{searchFields.userId}
+		</where>			  
+		ORDER BY tua.createtime
+	</select>
+	
+</mapper> 

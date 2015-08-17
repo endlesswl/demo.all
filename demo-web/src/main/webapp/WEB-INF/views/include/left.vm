@@ -1,0 +1,121 @@
+<script type="text/javascript">
+(function($) {
+    $.fn.menu = function(oCtrl) {
+        var oThis,
+        item,
+        httpAdress;
+        oCtrl = jQuery.extend({
+            Speed: 220,
+            autostart: 1,
+            autohide: 1
+        },
+        oCtrl);
+        oThis = $(this);
+        item = oThis.children("ul").parent("li").children("a");
+        itemChildren= oThis.children('ul').children('li').children('a');
+        item.addClass("inactive");
+        var menu_code=getMenuCode(window.location.href);
+        function _item() {
+            var aThis = $(this);
+            if (oCtrl.autohide) {
+            	aThis.parent().parent().find(".active").parent("li").children("ul").slideUp(oCtrl.Speed / 1.2, 
+                function() {
+                    $(this).parent("li").children("a").removeAttr("class");
+                    $(this).parent("li").children("a").attr("class", "inactive")
+                })
+            }
+            if (aThis.attr("class") == "inactive") {
+            	aThis.parent("li").children("ul").slideDown(oCtrl.Speed, 
+                function() {
+            		aThis.removeAttr("class");
+            		aThis.addClass("active on")
+                })
+            }
+            if (aThis.attr("class") == "active") {
+            	aThis.removeAttr("class");
+            	aThis.addClass("inactive");
+            	aThis.parent("li").children("ul").slideUp()
+            }
+        }
+        item.unbind('click').click(_item);
+        if (oCtrl.autostart) {
+        	oThis.children("a").each(function() {
+                if(this.href.indexOf("menu="+menu_code)>-1 && menu_code!=""){
+	                 $(this).parent("li").parent("ul").show();
+	                 $(this).parent("li").parent('ul').parent('li').children(".inactive").removeAttr("class");
+	                 $(this).parent("li").parent('ul').parent('li').children("a").addClass("active on");
+	                 $(this).addClass("curr_munu");
+                }
+            })
+        }
+    }
+})(jQuery);
+
+</script>
+<style>
+	.curr_munu{color:#fff;background:#252F3B}
+</style>
+<script type="text/javascript">
+	$(function(){
+		$(".menu ul li").menu();
+	})
+	
+	//截取浏览器地址
+	function getMenuCode(url) {
+		var temp = url.split("&menu=");
+		if (temp.length <= 1) {
+			return ""
+		}
+		var menuCode = temp[1].split("/")[0];
+		return menuCode;
+	}
+
+</script>
+
+<div class="menu">
+	<ul>
+		<li><a id="left-sider-name"  href="${ctx}/static?path=business/index/index"><i class="left-sider-icon icon-a"></i><span>首页</span></a></li>
+		<li><a><i class="left-sider-icon icon-b"></i>营销计划</a>
+			<ul>
+				<li><a href="${ctx}/location/business?path=business/marketingPlan/luckyDraw/luckyDrawList&menu=11" ><i class=""></i><span>抽奖</span></a></li>
+				<li><a href="${ctx}/location/business?path=business/marketingPlan/research/researchList&menu=12" ><i class=""></i><span>调研</span></a></li>
+				<li><a href="${ctx}/location/business?path=business/marketingPlan/taskReward/taskList&menu=13" ><i class=""></i><span>任务激励</span></a></li>
+				<li><a href="${ctx}/location/business?path=business/marketingPlan/newProduct/productList&menu=14" ><i class=""></i><span>新品发布</span></a></li>
+				<li><a href="${ctx}/location/business?path=business/marketingPlan/sendWishes&menu=15" ><i class=""></i><span>送祝福</span></a></li>
+				<li><a href="${ctx}/location/business?path=business/marketingPlan/workAttendance&menu=16"><i class=""></i><span>上班考勤</span></a></li>
+			</ul>
+		</li>
+		<li><a><i class="left-sider-icon icon-c"></i>定制记录</a>
+			<ul>
+				<li><a href="${ctx}/location/business?path=business/marketRecord/customRecord&menu=21"><i class=""></i><span>定制记录</span></a></li>
+			</ul>
+		</li>
+		<li><a><i class="left-sider-icon icon-d"></i>数据监控</a>
+			<ul>
+				<li><a href="${ctx}/location/business?path=business/dataMonitor/monitorList&menu=31"><i class=""></i><span>查看数据</span></a></li>
+			</ul>
+		</li>
+		<li><a><i class="left-sider-icon icon-e"></i>用户管理</a>
+			<ul>
+				<li><a class="" href="${ctx}/location/business?path=business/user/userList&menu=41" ><i class=""></i><span>用户列表</span></a></li>
+             	<li><a href="${ctx}/location/business?path=business/user/userImport&menu=42"><i class=""></i><span>群组管理</span></a></li>
+             	<li><a href="${ctx}/location/business?path=business/user/channelSend&menu=43"><i class=""></i><span>下发渠道</span></a></li>
+			</ul>
+		</li>
+		<li><a><i class="left-sider-icon icon-f"></i>交易记录</a>
+			<ul>
+				<li class="first_dd"><a href="${ctx}/location/business?path=business/dealRecord/dealRecord&menu=51"><i class=""></i><span>交易记录</span></a></li>
+			</ul>
+		</li>
+		<li>
+			<a><i class="left-sider-icon icon-g"></i>我的账户</a>
+			<ul>
+				 <li><a href="${ctx}/location/business?path=business/account/accountDetail&menu=61"><i class=""></i><span>账户明细</span></a></li>
+	             <li><a href="${ctx}/location/business?path=business/account/userInfo&menu=62"><i class=""></i><span>基本资料</span></a></li>
+	             <li><a href="${ctx}/location/business?path=business/account/Security_center&menu=63"><i class=""></i><span>安全中心</span></a></li>
+	             <li><a href="${ctx}/location/business?path=business/account/bank&menu=64"><i class=""></i><span>银行卡管理</span></a></li>
+	             <li><a href="${ctx}/location/business?path=business/account/message&menu=65"><i class=""></i><span>消息</span></a></li>
+			</ul>
+		</li>	
+	</ul>
+</div>

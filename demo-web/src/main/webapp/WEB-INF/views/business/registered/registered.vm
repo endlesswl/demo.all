@@ -1,0 +1,335 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	##set( $lzzUrl = "http://localhost" )
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>零彩宝商家后台-注册登录</title>
+    <link href='${lzzUrl}/prd/style/model#ver("/ver/style/model.css.ver").css' rel="stylesheet" type="text/css"/>
+    <link href='${lzzUrl}/prd/style/index#ver("/ver/style/index.css.ver").css' rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"></link>
+    <script src='${lzzUrl}/prd/script/jquery-2.0.2.min#ver("/ver/script/jquery-2.0.2.min.js.ver").js'></script>
+    <script src='${lzzUrl}/prd/script/json2#ver("/ver/script/json2.js.ver").js'></script>
+	<script src='${lzzUrl}/prd/script/plugin/util/util#ver("/ver/script/plugin/util/util.js.ver").js'></script>
+	<script src='${lzzUrl}/prd/script/plugin/util/map#ver("/ver/script/plugin/util/map.js.ver").js'></script>
+	<!-- 表单验证插件 -->
+	<script src="/plugin/jquery.validate.js"></script>
+	<script src="/plugin/validate_expand.js"></script>
+	<!-- 图片上传插件 -->
+	<script src="/plugin/ajaxfileupload/ajaxfileupload.js"></script>
+	<!-- my js -->
+    <script src='${lzzUrl}/prd/script/business/registered/registered#ver("/ver/script/business/registered/registered.js.ver").js'></script>
+	<script type="text/javascript">
+		var wWidth;
+		var wHeight;
+		$(function(){
+			Registered.init('${ctx}');
+			
+			if("$!{userType}"=="2"){
+				$("#li_sj").click();
+			}else if("$!{userType}"=="4"){
+				$("#li_dls").click();
+			} else{
+				$("#li_gr").click();
+			}
+			getSrceenWH()
+			
+		});
+		function closeDialog(){
+			$('#dialogBg').fadeOut()
+			$('#dialog').fadeOut();
+		}
+		function showDialog(species){
+			var aDialogLeft=(wWidth-$('#dialog').width())/2+'px';
+			var aDialogTop=(wHeight-$('#dialog').height())/2+'px';
+			$('#dialogBg').fadeIn(300);
+			$('.agreement').css('display','none')
+			$('#'+species).css('display','block');
+			$('#dialog').css({left:aDialogLeft,top:aDialogTop}).fadeIn();
+		}
+		function getSrceenWH(){
+			wWidth = $(window).width();
+			wHeight = $(window).height();
+			$('#dialogBg').width(wWidth).height(wHeight);
+		}
+	</script>
+</head>
+<body>
+<div class="login_header_box"><div class="container" style="padding-bottom:0px"><div class="header-content clearfix">
+    	<div class="header-logo"><img src="${ctx}/images/logo.png"><i>|</i><span>全球首家营销激励平台</span></div>
+        
+    </div></div></div>
+
+	<div>
+	<div class="login_fra_box clearfix">
+    	
+        <div class="resigest_left">
+        	<ul class="gr_nav clearfix" style="padding:0 16px 0 34px">
+        		<li id="li_gr" value="1" class="current"><a>个人注册</a></li>
+        		<li id="li_sj" value="2"><a>商家注册</a></li>
+        		<li id="li_dls" value="4"><a>代理商注册</a></li></ul>
+            <div class="resigest-content">
+
+            <div class="resigest_infor">
+                <form action="" method="post" name="personalRegister" id="personalRegister">
+            	<ul>
+                	<li><label>用户名：</label><div class="resigest_ifor_right"><input type="text"  onblur="Registered.userBlurFun(this)" placeholder="支持4-20位、字母、数字和下划线" id="perUser" name="perUser" class="ui-input-res"><div class="tipinfo tipinfo-position"></div></div></li>
+                    <li><label>密码：</label><div class="resigest_ifor_right"><input type="password" placeholder="密码长度为6-12位" id="perPassword" name="perPassword" class="ui-input-res"><div class="tipinfo tipinfo-position"></div></div></li>
+                    <li><label>确认密码：</label><div class="resigest_ifor_right"><input type="password" placeholder="请再次输入密码" id="perPassRepeat" name="perPassRepeat" class="ui-input-res"><div class="tipinfo tipinfo-position"></div></div></li>
+                    <li><label>手机号：</label><div class="resigest_ifor_right"><input type="text"  id="perPhone" name="perPhone" placeholder="请输入手机号" class="ui-input-res"><div class="tipinfo tipinfo-position"></div></div></li>
+                    <li><label>验证码：</label><div class="resigest_ifor_right"><input style="width:140px;margin-right:10px;" type="text" id="perCode" name="perCode" placeholder="请输入短信验证码" class="ui-input-res fl"><div class="gdcode" onclick="Registered.getCodeFun(this)">获取验证码</div><div class="clear"></div><div class="tipinfo tipinfo-position"></div></div></li>
+                    <li class="agree_rule"><input type="checkbox" class="mr10" name="preAgreement">我已阅读并同意<a class="blue r_agreement" onclick="showDialog('personAgreement')">《零彩精准营销平台注册协议》</a></li>
+                </ul>
+                <div class=" resigest_btn"><input type="submit" value="点击注册" onclick="Registered.perSubmitFun()"><div class="tipinfo tipinfo-position" style="top:36px;"></div></div>
+              </form>
+            </div>
+          <div class="resigest_infor" style="display:none;">
+         	<form action="" method="post" name="businessRegister" id="businessRegister">
+            	<ul>
+                	<li><label>用户名：</label><div class="resigest_ifor_right"><input type="text" onblur="Registered.userBlurFun(this)" placeholder="支持4-20位、字母、数字和下划线" id="busiUser" name="busiUser" class="ui-input-res"><div class="tipinfo tipinfo-position"></div></div></li>
+                    <li><label>密码：</label><div class="resigest_ifor_right"><input type="password" placeholder="密码长度为6-12位" id="busiPassword" name="busiPassword" class="ui-input-res"><div class="tipinfo tipinfo-position"></div></div></li>
+                    <li><label>确认密码：</label><div class="resigest_ifor_right"><input type="password" placeholder="请再次输入密码" id="busiPassRepeat" name="busiPassRepeat" class="ui-input-res"><div class="tipinfo tipinfo-position"></div></div></li>
+                    <li><label>联系人姓名：</label><div class="resigest_ifor_right"><input type="text" placeholder="请输入联系人姓名" id="busiName" name="busiName" class="ui-input-res"><div class="tipinfo tipinfo-position"></div></div></li>
+                    <li><label>邮箱：</label><div class="resigest_ifor_right"><input type="text" placeholder="请输入有效的邮箱" id="busiEmail" name="busiEmail" class="ui-input-res"><div class="tipinfo tipinfo-position"></div></div></li>
+                    <li><label>验证码：</label><div class="resigest_ifor_right"><input style="width:140px;margin-right:10px;" type="text" id="busiCode" name="busiCode" placeholder="请输入邮箱验证码" class="ui-input-res fl"><div class="gdcode" onclick="Registered.getEmailCodeFun(this,'busiEmail')">获取验证码</div><div class="clear"></div><div class="tipinfo tipinfo-position"></div></div></li>
+                    <li class="agree_rule"><input type="checkbox" class="mr10" name="busiAgreement">我已阅读并同意<a class="blue" onclick="showDialog('busiAgreement')">《零彩精准营销平台注册协议》</a></li>
+                </ul>
+                <div class=" resigest_btn"><input type="submit" value="点击注册" onclick="Registered.busiSubmitFun()"><div class="tipinfo tipinfo-position" style="top:36px;"></div></div>
+            </form>
+            </div>
+        
+           
+	        <div class="resigest_infor" style="display:none;">
+	        	<form action="" method="post" name="agentRegister" id="agentRegister">
+            	<ul>
+                	<li><label>邮箱：</label><div class="resigest_ifor_right"><input type="text" onblur="Registered.userBlurFun(this)" placeholder="请输入有效邮箱" id="agentEmail" name="agentEmail" class="ui-input-res"><div class="tipinfo tipinfo-position"></div></div></li>
+                    <li><label>密码：</label><div class="resigest_ifor_right"><input type="password" placeholder="密码长度为6-12位" id="agentPassword" name="agentPassword" class="ui-input-res"><div class="tipinfo tipinfo-position"></div></div></li>
+                    <li><label>确认密码：</label><div class="resigest_ifor_right"><input type="password" placeholder="请再次输入密码" id="agentPassRepeat" name="agentPassRepeat" class="ui-input-res"><div class="tipinfo tipinfo-position"></div></div></li>
+                    <li><label>公司名称：</label><div class="resigest_ifor_right"><input type="text" placeholder="请输入公司名称"  id="companyName" name="companyName" class="ui-input-res"><div class="tipinfo tipinfo-position"></div></div></li>
+                    <li><label>公司地址：</label><div class="resigest_ifor_right"><input type="text" placeholder="公司详细地址"  id="companyaddress" name="companyaddress" class="ui-input-res"><div class="tipinfo tipinfo-position"></div></div></li>
+                    <li><label>联系人姓名：</label><div class="resigest_ifor_right"><input type="text" placeholder="请输入联系人姓名"  id="agentName" name="agentName" class="ui-input-res"><div class="tipinfo tipinfo-position"></div></div></li>
+                    <li><label>办公电话：</label><div class="resigest_ifor_right"><input type="text" placeholder="请输入办公电话"  id="officePhone" name="officePhone" class="ui-input-res"><div class="tipinfo tipinfo-position"></div></div></li>
+                    <li >
+	                    <label>上传营业执照：</label>
+	                    <div class="resigest_ifor_right">
+	                    	<div style="overflow:hidden;" class="order-right">
+	                    		<div class="user-logo">	
+	                				<img id="headImg" src="${ctx}/images/test4.jpg">
+	                			</div>
+		                		<!--  <input  id="imgUrl1" type="text" placeholder="名称" class="sr-text6" style="float:left" />-->
+		                        <input type="file" id="file" name="file" style="display:none" onchange="Registered.upload('file','headImg')"/>
+								<div class="HeadImgaddBtn">
+								   <a  class="btn btn-info" onclick="$('input[id=file]').click();">
+								     添加
+								   </a>
+								</div>
+								<div class="lh30 red f12 clear">建议尺寸640x160px</div>
+	                        </div>
+	                    	<div class="tipinfo tipinfo-position"></div>
+	                    </div></li>
+                    <li><label>验证码：</label><div class="resigest_ifor_right"><input style="width:140px;margin-right:10px;" type="text" id="agentCode" name="agentCode"  placeholder="请输入邮箱验证码" class="ui-input-res fl" ><div class="gdcode" onclick="Registered.getEmailCodeFun(this,'agentEmail')">获取验证码</div><div class="clear"></div><div class="tipinfo "></div></div></li>
+                    <li class="agree_rule"><input type="checkbox" class="mr10" name="agentAgreement">我已阅读并同意<a class="blue" onclick="showDialog('agentAgreement')">《零彩精准营销平台注册协议》</a></li>
+                </ul>
+                <div class="resigest_btn"><input type="submit" value="点击注册" onclick="Registered.agentSubmitFun()"><div class="tipinfo tipinfo-position" style="top:36px;"></div></div>
+                 </form> 
+            </div>
+	          
+            </div>
+        </div>
+        <div class="ercode"><p class="lh60 f16 gray">已有零彩宝帐号？<a class="blue tl" onclick="Registered.toLogin('${ctx}/static?path=business/login/login')">立即登录</a><img src="${ctx}/images/code.jpg" width="132"><p class="f14 lh200">扫一扫，加官方微信</p></div>
+ </div>
+</div>
+<div class="borline"></div>
+<div id="dialogBg"></div>
+<div id="dialog" class="animated">
+	<div class="dialogTop"><a href="javascript:;" class="closeDialogBtn" onclick="closeDialog()">关闭</a></div>
+	<div class="editInfos">
+		<p class="tc fb" style="color:red;">服务协议</p>
+		<div class="agreement" id="busiAgreement">
+			<h3>商家用户协议：</h3>
+			<h4>零彩营销平台商家用户服务协议</h4>
+			<p>重要提示：掌信彩通信息技术（中国）有限公司（本段简称“掌信彩通”）依据本协议为用户提供服务。掌信彩通在此特别提醒用户认真阅读、充分理解本协议各条款，特别是其中所涉及的免除或者限制掌信彩通责任、对用户权利限制、争议解决和法律适用等条款。请审慎阅读并选择接受或不接受本协议（未成年人应在监护人陪同下阅读），不论发生任何纠纷，用户不得以未仔细阅读为由进行任何实体或程序的抗辩。除非用户接受本协议项下所有条款，否则用户无权使用掌信彩通根据本协议所提供的所有服务。用户一经注册或使用本协议下任何服务即视为对本协议项下所有条款的充分理解和完全接受。</p>
+			<h4>一、 本协议术语定义</h4>
+			<p>1.1零彩技术：就是将现有国家发行的彩票以合买的方式拆分成面额更小的技术。通过把1注单价为2元的彩票拆分成任意更小单位的彩票，例如0.1注或0.2注，那么消费者只需要用商家赠送的或自己的0.1元或0.2元即可购得相应份额的彩票，如果彩票有幸中奖，那么消费者也将获得相应份额的中奖金额。</p>
+			<p>1.2零彩营销：是指将彩票这一有价证券作为消费市场的激励资本结合时下最流行的二维码或其他方式以合买的形式用于广告营销、商品行销和内容营销中。商家根据广告和营销的需求，将营销需求和营销形式上传到零彩营销平台，平台自动出零彩或进一步生成多样化营销内容的零彩二维码，消费者用手机扫描二维码或直接互动获取营销信息后赠送一定面额的零钱，商家受消费者委托以合买方式代购彩票，达到营销价值。</p>
+			<p>1.3零彩营销平台（以下简称“本平台”或”平台方“）：是指由掌信彩通搭建并进行运营管理，提供零彩营销相关服务的自助网络服务平台。</p>
+			<p>1.4营销经营者（以下简称“经营商“）：是指掌信彩通信息技术有限公司，其受商家委托提供广告、营销的零彩出票、营销定制制作、代理服务。</p>
+			<p>1.5商家用户（以下简称“用户”）：是指为推销商品或者提供服务，自行或者委托平台方及代理商设计、制作、并利用本平台发布营销或广告的法人、其他经济组织或者个人，即注册用户。</p>
+			<p>1.6零彩营销费预付款：是指用户为使用本平台服务应该预先支付的零彩费用和营销服务费用，具体数额详见本平台各项服务项下要求。</p>
+			<p>1.7零彩营销费续费：是指用户为继续使用本平台项下服务在本平台系统提示下续交的零彩营销费用，具体数额详见本平台各项服务项下要求。</p>
+			<p>1.8系统提示：是指平台方可通过网页公告、电子邮件、手机短信或常规的信件传送等方式向用户发出书面通知，该等通知在发送时即视为已送达用户。</p>
+			<h4>二、用户的权利和义务</h4>
+			<p>2.1 用户在本平台使用零彩营销定制服务之前，用户应先注册成为本平台用户。用户应妥善保管本平台帐户信息，不得将帐户信息实施转让、出售、再授权等提供给其他方的行为。</p>
+			<p>2.2用户应及时向平台或经营商支付零彩营销费预付款或者进行零彩营销费续费，以保证享受本平台项下服务。</p>
+			<p>2.3 涉及平台方、经营商及本平台的新闻稿件、公关宣传等，用户应提供给平台方及经营商审核，审核通过后方可发布。</p>
+			<p>2.4用户同意接收来自平台方及经营商发出的邮件、信息，包括但不限于关于用户利益、商业推广的信息等。</p>
+			<p>2.5用户可在书面通知平台方后停止使用本平台服务，平台方在收到用户书面通知之日起两个工作日内停止对用户提供服务，并通过代理商向用户退还其未消费完毕的零彩营销费用余额，本协议终止。用户未书面通知平台方要求停止服务或者向平台方续费继续使用本平台服务的，视为用户认可平台方的数据统计报告。</p>
+			<p>2.6用户应确保在本平台上定制的营销和广告等内容真实、准确、完整、安全；不会有任何欺诈成份；不会侵犯任何第三人之合法权益，包括但不限于著作权、商标权、专利权等；不会违反任何法律、法规、条例或规章。对于任何因用户发布的广告和营销信息造成的法律责任，由用户单独承担，与经营商及平台方无关，若造成经营商及平台方损失的，用户应当赔偿由此给经营商及平台方造成的一切损失，包括但不限于诉讼费用、律师费用、差旅费用、和解金额、罚款或生效法律文书中规定的损害赔偿金额等全部损失。</p>
+			<p>2.7如用户违反本协议规定的任何条款，平台方有权拒绝向用户提供本平台服务，并终止本协议，用户已支付的广告费不予退还，平台方及代理商由此造成的一切损失应由用户负责赔偿，同时平台方及代理商有进一步追究用户法律责任的权利。</p>
+			<h4>三、 平台方的权利和义务</h4>
+			<p>3.1平台方负责与本平台相关服务的一切技术支持、平台零彩出票，并负责解决用户注册、充值等系统故障性客服服务。</p>
+			<p>3.2 平台方有权收集用户的注册数据及交易信息，如发现注册数据或交易行为中存在任何问题或怀疑，可要求和用户改正，或者直接做出删除、屏蔽等处理。</p>
+			<p>3.3平台方向成功定制并付费的用户提供营销结果实时查询权限，即：有多少用户在何时从何种渠道观看或互动了哪些广告或营销信息，获得了哪些彩票或者其他奖励，中奖结果如何；</p>
+			<p>3.4平台方保证为用户代购的国家公益彩票和体育彩票都是来自正规、合法渠道，并拥有相关出票协议。</p>
+			<p>3.5用户发布的广告和营销信息及用户所从事的经营业务不得对平台方及平台方的关联公司的利益构成任何现实或潜在的损害或冲突，否则平台方有权通知用户后立即终止本平台提供的所有服务，并通过经营商退还其未消费完毕的零彩营销费余额，而无需承担其他法律责任。</p>
+			<p>3.6由于平台方的业务性调整，平台方可以提前3日通知用户终止本平台服务并通过经营商退还其未消费完毕的零彩营销费用余额，而无需承担其他法律责任。</p>
+			<p>3.7 如发现用户违约，平台方可通过系统提示而直接删除相关信息，或终止或暂停为用户提供服务，而无需承担其他法律责任和费用补偿。</p>
+			<p>3.8用户确认平台方对用户的注册数据及交易信息的任何审核权不为平台方设定任何义务，也不免除用户对注册数据或交易行为的任何义务。</p>
+			<h4>四、经营商的权利和义务</h4>
+			<p>经营商按照《营销经营者服务协议》的约定享受相应权利履行相应的义务。</p>
+			<h4>五、本平台的规则条款</h4>
+			<p>5.3 用户承诺其对发布的广告内容的真实、安全和合法性负责，并承诺遵守如下规则：</p>
+			<p>5.3.1 不利用本平台上传、展示或传播任何虚假的、骚扰性的、中伤他人的、辱骂性的、恐吓性的、庸俗淫秽的或其他任何非法的信息资料；</p>
+			<p>5.3.2 不侵犯其他任何第三方的专利权、著作权、商标权、名誉权或其他任何合法权益；</p>
+			<p>5.3.3 不提供包括但不限于涉黄、赌、毒、反动等各类违法违规的信息；</p>
+			<p>5.3.4 不提供或买卖国家禁止或限制交易的产品、不提供或买卖侵犯他人合法权益的产品，不提供或买卖违背社会公共利益或公共道德的、或是平台方认为不适合交易的产品或信息内容；</p>
+			<p>5.3.5 不提供存在不正当竞争行为的信息内容，不提供扰乱网上交易正常秩序的信息内容。</p>
+			<p>5.4 用户在使用本平台时应保证本平台的正常运行，并遵守如下规则：</p>
+			<p>5.4.1 不得对本平台进行反向工程、反向汇编、反向编译；</p>
+			<p>5.4.2不实施任何危害计算机网络安全的行为，包括但不限于：使用未经许可的数据或进入未经许可的服务器/帐号；未经允许进入公众计算机网络或者他人计算机系统并删除、修改、增加存储信息；未经许可，企图探查、扫描、测试掌信彩通开放平台或网络的弱点或其它实施破坏网络安全的行为；企图干涉、破坏零彩营销平台或网站的正常运行，故意传播恶意程序或病毒以及其他破坏干扰正常网络信息服务的行为；伪造TCP/IP数据包名称或部分名称等；</p>
+			<p>5.4.3不得收集、窃取帐号及他人专属信息、财产、保密信息的软件等，不得提供、传播可以实现前述目的的工具。</p>
+			<p>5.5本平台运营数据的全部权利均归属平台方，未经书面许可，用户不得为任何目的擅自使用。</p>
+			<h4>六、 服务的暂停或终止</h4>
+			<p>6.1 用户应确保在注册时填写的姓名（名称）、地址、电子邮箱等相关资料真实、准确，若有更新的，用户应在三个工作日内予以更新；如平台方发现其不真实或不准确的，平台方有权暂停或终止向其提供本协议下服务,由此产生的一切法律责任由用户自行承担。</p>
+			<p>6.2 如用户书面通知平台方不接受经平台方修改的新的服务协议的，平台方有权随时暂停或终止向其提供本协议下服务。</p>
+			<p>6.3 本协议约定的其他协议终止条件发生或实现的，平台方有权随时暂停或终止向用户提供本协议下服务。</p>
+			<p>6.4 在用户违反本协议规定时，平台方有权随时暂停或终止向该用户提供服务。如该用户后续再以其他名义注册成为本平台用户的，平台方有权直接单方面暂停或终止向该用户提供本协议下服务。</p>
+			<p>6.5 如本协议服务终止，平台方有权为用户保留或不保留原账号中与之相关的任何信息，也可不将该信息转发给该用户，也有权保存或不保存该用户的数据及以前的记录。</p>
+			<h4>七、 隐私相关条款</h4>
+			<p>7.1 在用户使用本平台时，平台方可自动接收并记录用户浏览器上的服务器数值，包括但不限于IP地址等数据、用户和平台用户要求取用的网页记录及各种记录等。</p>
+			<p>7.2如发生下列任一情况，平台方有权对用户的信息予以披露：</p>
+			<p>7.2.1 经用户同意披露的；</p>
+			<p>7.2.2. 根据法律的有关规定，或者行政或司法机构的要求，向第三方或者行政、司法机构披露；</p>
+			<p>7.2.3. 如果用户出现违反中华人民共和国有关法律、法规、规章、政策的，需要向第三方披露；</p>
+			<p>7.2.4. 其他法律规定应当予以披露之情形。</p>
+			<h4>八、 知识产权条款</h4>
+			<p>8.1本平台上所有内容，包括但不限于著作、图片、档案、资讯、资料、网站架构、网站画面的安排、网页设计，均由平台方或其他权利人依法拥有其知识产权，包括但不限于商标权、专利权、著作权、商业秘密等。非经平台方或其他权利人书面同意任何人不得擅自使用、修改、复制、公开传播、改变、散布、发行或公开发表本平台网站程序或内容。</p>
+			<p>8.2本平台运营数据的全部权利，均归属平台方。未经平台方事先书面同意，用户不得为任何目的使用。</p>
+			<h4>九、 协议内容、修改、转让</h4>
+			<p>9.1 本协议内容包括协议正文及所有平台方已经发布的或将来可能发布的各类相关规则。上述内容为本协议不可分割的一部分，与本协议协议正文具有同等法律效力。</p>
+			<p>9.2 平台方可将本协议下的权利和义务的部分或全部转让给其他第三方，如果用户不同意平台方的该转让，则其有权停止使用本协议下服务。如果用户继续使用，则视用户对此予以接受。</p>
+			<p>9.3 用户在使用平台方提供的各项服务的同时，承诺接受并遵守各项相关规则的规定。平台方有权根据需要不时地制订、修改本协议或各类规则，且毋须另行通知。其一旦发生变动，平台方将会在相关页面上公布修改后的协议或规则，如果用户不同意所改动的内容，应主动停止使用本平台下所有服务，如果继续使用服务则视为接受协议或规则的变动。除另行明确声明外，任何使“服务”范围扩大或功能增强的新内容均受本协议约束。</p>
+			<h4>十、 免责事由</h4>
+			<p>10.1 平台方有权定期或不定期地对提供网络服务的平台或相关的设备进行检修或者维护，如因此类情况而造成网络服务在合理时间内的中断或暂停，平台方无需为此承担任何责任。</p>
+			<p>10.2 如发生下述任一情况而导致用户损失的，平台方不承担责任：</p>
+			<p>10.2.1. 发生不可抗力情形的；</p>
+			<p>10.2.2. 黑客攻击、计算机病毒侵入或发作的；</p>
+			<p>10.2.3. 计算机系统遭到破坏、瘫痪或无法正常使用的；</p>
+			<p>10.2.4. 电信部门技术调整的；</p>
+			<p>10.2.5. 因政府管制而造成暂时性关闭的；</p>
+			<p>10.2.6. 其它非因平台方的过错而引起的。</p>
+			<p>10.3 平台方有权但没有义务审查用户是否具备合法的经营资格，用户和平台用户同意自行审查交易相对一方的经营资信和资质，并自担风险，与平台方无关。</p>
+			<h4>十一、 本协议的解释、法律适用及争端解决</h4>
+			<p>11.1 平台方对本协议条款拥有最终的解释权。</p>
+			<p>11.2 本协议的有效性、履行和与本协议及其修订本效力有关的所有事宜，将受中华人民共和国法律管辖，任何争议仅适用中华人民共和国法律。</p>
+			<p>11.3因本协议所引起的与平台方的任何纠纷或争议，协议各方首先应友好协商解决，协商不成的，各方在此完全同意将纠纷或争议提交北京市东城区人民法院诉讼解决。</p>
+			<h4>十二、其他</h4>
+			<p>用户及代理商之间的权利义务按《营销经营者服务协议》的相关约定履行。本平台网站上的其他相关规定及《营销经营者服务协议》与本协议具有同等法律效力；若有冲突的，则以《广告经营者服务协议》与本协议为准。用户在接受本协议之前应该阅读上述相关规定及协议，用户对本协议的接受即是对上述相关规定及协议的完全接受和同意。</p>
+			<p class='tr pt10'>掌信彩通信息技术（中国）有限公司</p>
+		</div>
+		<div class="agreement" id="agentAgreement">
+			<h3>营销经营者服务协议：</h3>
+			<h4>营销经营者服务协议</h4>
+			<p>重要提示：掌信彩通信息（中国）技术有限公司（本段简称“掌信彩通”）依据本协议为商家用户提供服务。掌信彩通在此特别提醒用户认真阅读、充分理解本协议各条款，特别是其中所涉及的免除或者限制掌信彩通责任、对用户权利限制、争议解决和法律适用等条款。请审慎阅读并选择接受或不接受本协议（未成年人应在监护人陪同下阅读），不论发生任何纠纷，用户不得以未仔细阅读为由进行任何实体或程序的抗辩。除非用户接受本协议项下所有条款，否则用户无权使用掌信彩通根据本协议所提供的所有服务。用户一经注册或使用本协议下任何服务即视为对本协议项下所有条款的充分理解和完全接受。</p>
+			<h4>一、 本协议术语定义</h4>
+			<p>1.1零彩技术：就是将现有国家发行的彩票以合买的方式拆分成面额更小的技术。通过把1注单价为2元的彩票拆分成任意更小单位的彩票，例如0.1注或0.2注，那么消费者只需要用商家赠送的或自己的0.1元或0.2元即可购得相应份额的彩票，如果彩票有幸中奖，那么消费者也将获得相应份额的中奖金额</p>
+			<p>1.2零彩营销：是指将彩票这一有价证券作为消费市场的激励资本结合时下最流行的二维码或其他方式以合买的形式用于广告营销、商品行销和内容营销中。商家根据广告和营销的需求，将营销需求和营销形式上传到零彩营销平台，平台自动出零彩或进一步生成多样化营销内容的零彩二维码，消费者用手机扫描二维码或直接互动获取营销信息后赠送一定面额的零钱，商家受消费者委托以合买方式代购彩票，达到营销价值。</p>
+			<p>1.3零彩营销平台（以下简称“本平台”或”平台方“）：是指由掌信彩通搭建并进行运营管理，提供零彩营销相关服务的自助网络服务平台。</p>
+			<p>1.4营销经营者（以下简称“经营商“）：是指掌信彩通信息技术有限公司，其受商家委托提供广告、营销的零彩出票、营销定制制作、代理服务。</p>
+			<p>1.5商家用户（以下简称“用户”）：是指为推销商品或者提供服务，自行或者委托平台方及代理商设计、制作、并利用本平台发布营销或广告的法人、其他经济组织或者个人，即注册用户。</p>
+			<p>1.6零彩营销费预付款：是指用户为使用本平台服务应该预先支付的零彩费用和营销服务费用，具体数额详见本平台各项服务项下要求。</p>
+			<p>1.7零彩营销费续费：是指用户为继续使用本平台项下服务在本平台系统提示下续交的零彩营销费用，具体数额详见本平台各项服务项下要求。</p>
+			<p>1.8系统提示：是指平台方可通过网页公告、电子邮件、手机短信或常规的信件传送等方式向用户发出书面通知，该等通知在发送时即视为已送达用户。</p>
+			<h4>二、经营商的权利义务</h4>
+			<p>2.1用户在其定制的营销信息成功定制之前，经营商有权对该广告或营销信息内容予以审核，经营商有权依据其自身判断决定是否同意定制该信息。</p>
+			<p>2.2经营商有权要求用户提供与广告内容相关的营业执照、特许经营资质、广告产品合格证书以其他必要资料等。</p>
+			<p>2.3 经营商负责对用户提交的广告内容按照本平台的要求进行编辑、排版，负责提供用户广告推广方面的客服服务（用户注册、充值等系统技术相关的客服服务由平台方负责提供）。</p>
+			<p>2.4用户发布其广告后，经营商有权对用户发布的广告和营销信息进行再次审核，如发现用户违约、违反任何法律法规或经营商根据自己的独立判断认为广告内容不符合经营商要求，经营商有权在通知用户的情况下让平台方对用户定制的营销服务予以取消或停止服务，如果用户的广告和营销信息因为以上原因被平台方取消，用户已支付的广告费将不予退还，由此造成经营商损失的，用户应全额赔偿。</p>
+			<p>2.5用户确认经营商对广告和营销信息的任何审核权不为代理商设定任何义务，也不免除用户对广告和营销新信息的任何义务。</p>
+			<p>2.6如用户违反本协议规定的任何条款，经营商有权拒绝向用户提供零彩营销定制服务，并终止本协议，用户已支付的广告费不予退还，经营商及平台方由此造成的一切损失用户应负责赔偿，同时经营商及平台方有进一步追究用户法律责任的权利。</p>
+			<h4>三、用户的权利义务</h4>
+			<p>3.1用户应及时支付零彩营销费用（包括赠送零彩费用和零彩营销服务费用）预付款或者进行零彩营销费用续费，以保证享受本平台项下服务。</p>
+			<p>3.2用户应确保通过本平台生成的营销和广告内容真实、准确、完整、安全；不会有任何欺诈成份；不会侵犯任何第三人之合法权益，包括但不限于著作权、商标权、专利权等；不会违反任何法律、法规、条例或规章。对于任何因用户发布的营销和广告造成的法律责任，由用户单独承担，与经营商及平台方无关，若造成经营商及平台方损失的，用户应当赔偿由此给经营商及平台方造成的一切损失，包括但不限于诉讼费用、律师费用、差旅费用、和解金额、罚款或生效法律文书中规定的损害赔偿金额等全部损失。</p>
+			<h4>四、零彩营销费用</h4>
+			<p>4.1用户应认真阅读本平台项下各项服务的收费方式，按照本平台系统提示向代理商支付零彩营销费用预付款或者进行零彩营销费用续费，否则经营商有权通知平台方立即终止向用户提供服务，并有权要求用户赔偿由此造成的一切损失。</p>
+			<p>4.2用户已明确知道并同意，其所支付的零彩营销费用包括但不限于应支付给经营商的赠送零彩费用和零彩营销服务费用，增送零彩费用按照用户实际需要赠送零彩的总额收取，零彩营销服务费用按平台统一收费标准0.2元/次收取。</p>
+			<h4>五、本协议的解释、法律适用及争端解决</h4>
+			<p>5.1 经营商对本协议条款拥有最终的解释权。</p>
+			<p>5.2 本协议的有效性、履行和与本协议及其修订本效力有关的所有事宜，将受中华人民共和国法律管辖，任何争议仅适用中华人民共和国法律。</p>
+			<p>5.3本协议所引起的与平台方的任何纠纷或争议，协议各方首先应友好协商解决，协商不成的，各方在此完全同意将纠纷或争议提交北京市东城区人民法院诉讼解决。</p>
+			<h4>六、其他</h4>
+			<p>本平台网站上的其他相关规定及《零彩营销平台商家用户服务协议》与本协议具有同等法律效力；若有冲突的，则以《零彩营销平台商家用户服务协议》与本协议为准。用户在接受本协议之前应该阅读上述相关规定及协议，用户对本协议的接受即是对上述相关规定及协议的完全接受和同意。</p>
+			<p class="tr pt10">掌信彩通信息科技（中国）有限公司</p>
+		</div>
+		<div class="agreement" id="personAgreement">
+			<h3>个人用户协议：</h3>
+			<h4>“零彩宝”个人用户服务协议</h4>
+			<h5>一、	总则</h5>
+			<p>1、	零彩宝的所有权和运营权归掌信彩通信息技术（中国）有限公司所有。</p>
+			<p>2、	用户在注册之前，应自信阅读本协议，在同意遵守本协议后方可注册成为“零彩宝”用户。一旦注册成功，用户与本公司之间自动形成协议关系，相关行为受本协议的保护和约束。用户在使用产品或服务时，默认同意接受相关协议。</p>
+			<p>3、	本公司保留随时更新本协议的权利和无需事先通知用户。本公司的通知、公告、声明或其他类似内容是本协议的一部分。</p>
+			<h5>二、	服务内容</h5>
+			<p>1、“零彩宝”的服务内容由本公司根据实际情况提供，包括但不限于：零彩和其他奖品信息管理、中奖信息查询、彩票奖金提现、用户信息管理、消费引导等。</p>
+			<p>2、本公司仅提供相关的网络服务，除此之外与相关网络服务有关的设备（如个人电脑、手机、及其它与接入互联网或移动互联网有关的装备）及所需的费用（如为接入互联网而支付的电话费及上网费、为使用移动网络而支付的手机费）均应由用户自行负担。</p>
+			<h5>三、	用户的权利</h5>
+			<p>1、	账户管理权。用户有权随时查询个人资料，并可对除用户名、用户真实姓名、身份证号码以外的信息进行修改。</p>
+			<p>2、	免费使用权。用户有权免费使用“零彩宝”系统所提供的服务以及免费获得相关资讯。</p>
+			<p>3、	奖金和奖品查询权。用户获赠奖金或奖品后，有权利用“零彩宝”系统查询所获赠的彩票奖金及其它礼品的状态。</p>
+			<p>4、	奖金使用权。用户所获赠的彩票中奖后，系统在用户完善个人信息后通过一定流程将中奖金额存入用户的系统账号。用户可以在“零彩宝”系统查询中奖金额，并可以利用虚拟账户中得余额进行彩票购买、话费充值及在其他合作渠道商家消费。</p>
+			<p>5、	申请提现权。对于中奖奖金，当用户账户金额大于5元时，用户可以对自己账户中得奖金申请提现，“零彩宝”平台在收到用户请求后，于10个工作日内将用户账户中需提取的款项转账到用户本人银行账户上；对于实物奖品，“零彩宝”在收到用户请求后，将奖品通过通知用户到合作渠道商家领取；对于虚拟奖品，“零彩宝”在收到用户请求后，5个工作日内即通过相应途径惊醒交付。</p>
+			<h5>四、	用户的义务</h5>
+			<p>1、	如实提供资料义务。为保障用户的合法权益和利益，避免在中奖时出现用户资料与真实情况不符导致无法兑奖等情况，用户需真实、全面、准确提供个人资料。因用户资料不真实、不全面、不准确等原因造成不能兑奖、不能提款的情况，由用户承担全部责任。</p>
+			<p>2、	对应注册义务。一个用户名、一个身份证号和一个用户的真实姓名只能有效注册一次，且三者之间必须一一对应，不能做二次修改。严禁任何形式的重复注册及多次恶意注册，由此造成的一切后果，由用户自行承担。</p>
+			<p>3、	保护个人资料义务。用户务必妥善保管好个人资料，以免用户资料被盗用或篡改。因用户保管不当导致跟人资料被盗用或篡改而给用户造成的任何损失及法律责任由用户自行承担。</p>
+			<h5>4、	遵守网络安全管理条例的义务。用户不得利用本公司网站制作、复制和传播下列信息： </h5>
+			<p>（1）	（1）煽动抗拒、破坏宪法和法律、行政法规实施的；</p>
+			<p>（2）	煽动颠覆国家政权，推翻社会主义制度的；</p>
+			<p>（3）	煽动分裂国家、破坏国家统一的；</p>
+			<p>（4）	煽动民族仇恨、民族歧视，破坏民族团结的；</p>
+			<p>（5）	捏造或者歪曲事实，散布谣言，扰乱社会秩序的；</p>
+			<p>（6）	宣扬迷信、淫秽、色情、赌博、暴力、凶杀、恐怖、教唆犯罪的；</p>
+			<p>（7）	公然侮辱他人或者捏造事实诽谤他人的，或者进行其他恶意攻击的；</p>
+			<p>（8）	损害国家机关信誉的；</p>
+			<p>（9）	其他违反宪法、法律、行政法规、行政规章、地方性法规的行为。</p>
+			<p>5、	承担额外费用的义务。在申请提取奖金时，款项从系统账户转账至用户银行账户的相关手续费用由用户承担；在申请提取实物礼品时，礼品通过邮寄或其他方式送达用户所产生的相关费用由用户承担。</p>
+			<h5>五、	“零彩宝”平台的权利</h5>
+			<p>1、	用户权限变更权。“零彩宝”保留对用户的权限设置与变更的权利。</p>
+			<p>2、	特殊情况下的用户信息公开权。在下列特殊情况中，本公司有权向有关方面提供相关用户的资料信息及用户在使用网络服务时存储在本公司的信息内容：</p>
+			<p>（1）	事先获得用户的明确授权；</p>
+			<p>（2）	根据有关的法律法规要求；</p>
+			<p>（3）	按照相关政府主管部门的要求；</p>
+			<p>（4）	为维护社会公众的利益。</p>
+			<p>3、	共享用户信息权。当本公司与第三方合作商向用户提供相关服务时，在遵守国家相关用户隐私保密的相关法律法规前提下，且该第三方同意承担与本公司相等的保护用户隐私的责任，则本公司有权与第三方共享用户注册资料。</p>
+			<p>4、	用户信息利用权。在不透漏单个用户隐私资料的前提下，本公司有权对整个用户数据库进行分析并对用户数据库进行商业上的利用。</p>
+			<p>5、	同一零彩营销活动或二维码获赠奖品次数的限制权。对于同一个营销活动或同一个零彩定制二维码，本公司有权对同一账户用户在一定时间内拍摄所获得奖品的次数进行限制，以防止恶意拍摄行为对本公司及零彩营销平台的注册商家和合作伙伴造成损失。</p>
+			<p>6、	活动终止的权利。本公司有权对于包括但不限于活动到期，或者应赠送奖品达到限额的活动进行终止。活动终止后，用户继续扫描零彩二维码或参与活动将被通知该活动已经终止。</p>
+			<h5>六、	“零彩宝”的义务</h5>
+			<p>1、	保护用户信息的义务。对用户的重要隐私信息提供最大限度的安全保护。</p>
+			<p>2、	公布彩票中奖情况的义务。在官方彩票发行和销售机构发布中奖结果后第二个工作日，在系统上发布中奖情况，并为用户提供查询入口。</p>
+			<p>3、	送出奖品义务。详见本协议第三条第4、5款。</p>
+			<h5>七、	奖品相关规定</h5>
+			<p>1、	用户获赠奖品为小额现金时，具体金额由奖金提供方确定，奖金提供方包括本公司及零彩营销平台的注册商家、企业和个人。</p>
+			<p>2、	“零彩宝”系统状态默认用户同意将其所获赠小额现金委托本公司用于购买成国家公益彩票或国家体育彩票，彩票号码由系统随机生成，默认彩种为中国福利彩票“双色球”彩种，具体根据商家选择的彩种为准。本公司为用户购买的彩票品种、号码、期号将会在零彩营销平台和微信“零彩宝”服务号及一些合作商家的用户系统中展示给用户，用户也可以通过零彩营销平台（www.lingcaibao.com ）、零彩宝微信服务号查询自己获赠的彩票彩种、期号和彩票面额。相关细则参考《中国福利彩票“双色球”游戏规则》、《中国福利彩票“快乐8”游戏规则》、《中国福利彩票“3D福彩”游戏规则》、《中国福利彩票“15选5”游戏规则》、《中国体育彩票“大乐透”游戏规则》、《中国体育彩票“七星彩”游戏规则》。</p>
+			<p>3、	用户所获赠的小额现金如果不足两元，或者不是两元的整倍数时，本公司将会集合多个用户所获赠现金合起来购买整注彩票，若果中奖，则根据用户在该获奖彩票中所占份额获得相应比例金额的奖金。彩票中奖后根据国家规定先行由彩票中心代为扣除相关税费后由本公司代为兑奖，并按用户所占份额比例分配给用户。</p>
+			<p>4、	根据彩票中心的规定，奖金税票只能开具至在个彩票中心备案的本公司兑奖人员名下，而无法直接开具至具体获奖人名下。本公司可出具证明文件为获奖人提供奖金来源证明。</p>
+			<p>5、	所赠金额购买的彩票只对应当期的彩票，用户可以通过零彩营销平台（www.lingcaibao.com ）、零彩宝微信服务号查询自己获赠的彩票彩种、期号和彩票面额、开奖号码等信息。</p>
+			<p>6、	若果用户希望自己所获赠的小额现金奖品不委托本公司用于购买彩票，用户可以向本公司提出书面申请，在合法合规的前提下，经审核后本公司将根据用户要求通过转账或者其他方式处理用户所获赠的奖品。</p>
+			<p>7、	对于用户委托本公司将其所获赠小额现金奖品购买彩票，本公司有权根据市场和合作伙伴要求，变更彩票票种，并不必事先通知用户。不过本公司将会告知用户所购买彩票的票种、期号和最大可能中奖金额。</p>
+			<h5>八、	免责声明</h5>
+			<p>发生下列情况时，本公司不予承担任何法律责任：</p>
+			<p>1、	用户资料泄露。由于用户保管不当或者由于用户的疏忽，导致的用户注册信息及任何个人资料泄露，以及由此产生的纠纷。</p>
+			<p>2、	不可抗力及不可预见的情势发生。因不可抗力和不可预见情势造成：暂时性关闭，用户资料丢失、被盗用、被篡改，兑换奖品失败等，以及由此产生的纠纷。不可抗力和不可预见情势包括：自然灾害、政府行为、罢工、战争等；黑客攻击、计算机病毒浸入或发作、政府管制、彩票发行和销售机构的原因、购彩出票机或服务的故障、网络故障、国家政策变化、法律法规的变化等。</p>
+			<p>3、	本公司向用户提供下列产品或服务的质量缺陷或者引发的任何损失：</p>
+			<h5>九、	附则</h5>
+			<p>1、	本协议适用中华人民共和国法律，发生的争议提交北京市东城区人民法院仲裁，其仲裁裁决是终局的。</p>
+			<p>2、	如本协议中的任何条款无论因何种原因完全或部分无效或不具有执行力，本协议的其余条款仍有效并且有约束力。</p>
+			<p>3、	本协议最终解释权及修订权归掌信彩通信息技术（中国）有限公司所有。有任何疑问请及时与我们取得联系。</p>
+			<p class="tr pt10">掌信彩通信息科技（中国）有限公司</p>
+		</div>
+	</div>
+	<div class="agree-wrap"><a class="gdcode" onclick="closeDialog()" style="float:none;display:block;margin:0 auto;margin-top:30px;" href="javascript:void;">同意并继续</a></div>
+</div>
+<!-- 底部文件 -->
+#parse("/include/footer.vm")
+</body>
+</html>
+

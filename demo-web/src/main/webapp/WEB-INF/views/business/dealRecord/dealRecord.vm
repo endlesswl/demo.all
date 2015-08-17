@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<!-- test -->
+##set( $lzzUrl = "http://localhost" )
+<!-- test end-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>零彩宝商家后台-交易记录</title>
+    <link href='${lzzUrl}/prd/style/model#ver("/ver/style/model.css.ver").css' rel="stylesheet" type="text/css"/>
+    <link href='${lzzUrl}/prd/style/index#ver("/ver/style/index.css.ver").css' rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"/>
+    <script src='${lzzUrl}/prd/script/jquery-2.0.2.min#ver("/ver/script/jquery-2.0.2.min.js.ver").js'></script>
+	<script src='${lzzUrl}/prd/script/plugin/lingcaitable/table#ver("/ver/script/plugin/lingcaitable/table.js.ver").js'></script>
+	<script src='${lzzUrl}/prd/script/plugin/lingcaitable/PageLc#ver("/ver/script/plugin/lingcaitable/PageLc.js.ver").js'></script>
+	<script src='${lzzUrl}/prd/script/json2#ver("/ver/script/json2.js.ver").js'></script>
+ 	<script src='${lzzUrl}/prd/script/plugin/util/util#ver("/ver/script/plugin/util/util.js.ver").js'></script>
+    <script src='${lzzUrl}/prd/script/plugin/util/date#ver("/ver/script/plugin/util/date.js.ver").js'></script>
+ 	<script type="text/javascript" src="/plugin/My97DatePicker/WdatePicker.js"></script>
+ 	
+ 	<!-- my JS -->
+	<script src='${lzzUrl}/prd/script/business/dealRecord/dealRecord#ver("/ver/script/business/dealRecord/dealRecord.js.ver").js'></script>
+
+<script type="text/javascript">
+	$(function() {
+		//按钮效果
+		$(".ui-button").click(function() {
+			$($(this).parent().parent()).children("li").each(function() {
+				$(this).children(".ui-button").attr("class", "ui-button");
+			});
+			$(this).attr("class", "ui-button ui-button-on");
+		});
+
+		//tab页效果
+		$(".deals-records-tit.clearfix").children().children("li").click(function() {
+			$($(this).parent()).children().each(function() {
+				$(this).attr("class", "");
+			});
+			$(this).attr("class", "on");
+		});
+
+		//init bill
+		DealRecord.init('${ctx}/home/bill/billList');
+	});
+</script>
+
+</head>
+<body>
+<div class="container">
+	<!-- 公共顶导 -->
+	#parse("/include/header.vm")
+	<div class="content clearfix">
+		<!-- 左边导航 -->
+    	#parse("/include/left.vm")
+		<!-- 右边导航 -->
+       <div class="merchants-main ">
+       		<div class="title">交易记录</div>          
+            <div class="deals-records-tit clearfix">
+            	<ul>
+            		<!-- 0(充值),1(直接支付),2(回滚),3(结算),4(系统操作),5(兑奖),6(提现),7(零彩券),8(账户余额)', -->
+            		<li onclick="DealRecord.changeTab('')" class="on">交易记录</li>
+            		<li onclick="DealRecord.changeTab('0')">充值记录</li>
+            		<li onclick="DealRecord.changeTab('1')">支付记录</li>
+            		<li onclick="DealRecord.changeTab('6')">提现记录</li>
+            		<li onclick="DealRecord.changeTab('3')" style="margin-right:0px">退款记录</li>
+            	</ul>
+            </div>
+            <div class="white-box-a h1500">
+	            <div class="order-statue pt20 pb10">
+	            <div class="order-item">
+	                	<label>起始日期：</label>
+	                	<div class="order-right clearfix">
+	                    	<div class="order-date">
+	                    		<input type="text" onchange="DealRecord.setQuery()" class="sr-text date-text inputData" id="sBillTime" onFocus="WdatePicker({startDate:'%y-%M-01',dateFmt:'yyyy-MM-dd',alwaysUseStartDate:true})"/>
+	                    		至
+								<input type="text" onchange="DealRecord.setQuery()" class="sr-text date-text inputData" id="eBillTime" onFocus="WdatePicker({startDate:'%y-%M-01',dateFmt:'yyyy-MM-dd',alwaysUseStartDate:true})"/>
+	                    	</div>
+	                    	<div class="order-right clearfix" style="margin:-4px 0px 0px -8px">
+	                		<ul class="button-box clearfix fl">
+	                			<li><a class="ui-button" onclick="DealRecord.setQuery('today','')">今天</a></li>
+	                			<li><a class="ui-button" onclick="DealRecord.setQuery('oneMonth','')">最近1个月</a></li>
+	                			<li><a class="ui-button" onclick="DealRecord.setQuery('threeMonth','')">3个月</a></li>
+	                            <li><a class="ui-button" onclick="DealRecord.setQuery('oneYear','')">1年</a></li>
+	                		</ul>
+	                	</div>
+	                	</div>
+	                </div>	                
+	                <div class="order-item">
+	                	<label>支付状态：</label>
+	                	<div class="order-right">
+	                		<ul class="button-box clearfix">
+	                			<li><a class="ui-button ui-button-on" onclick="DealRecord.setQuery('','-1')">全部</a></li>
+	                			<li><a class="ui-button" onclick="DealRecord.setQuery('','1')">成功</a></li>
+	                			<li><a class="ui-button" onclick="DealRecord.setQuery('','2')">失败</a></li>
+	                			<li><a class="ui-button" onclick="DealRecord.setQuery('','0')">未处理</a></li>
+	                		</ul>
+	                	</div>
+	                </div>
+	        	</div>
+	        	<table id="dataList" width="760" border="0" cellspacing="0" cellpadding="0" class="tab6 mt0">
+					<tr>    
+	 					<th width="70">序号</th>
+	                    <th>创建时间</th>
+	                    <th>交易类别</th>
+	                    <th>收入（元）</th> 
+	                    <th>支出（元）</th>
+	                    <!-- <th>余额（元）</th> -->
+	                    <th>状态</th>  
+	                    <th width="120px">备注</th>
+	                </tr>
+				</table>
+				
+			<!-- 分页 -->
+            <div class="lc_pagination" id="pageDiv">
+     		</div>
+            </div>
+        </div>
+    </div>
+    <!-- 底部文件 -->
+	#parse("/include/footer.vm")
+</div>
+</body>
+</html>

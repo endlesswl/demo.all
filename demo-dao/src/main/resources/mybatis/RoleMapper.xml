@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.lingcaibao.repository.RoleDao">
+
+	<resultMap id="resultMap" type="com.lingcaibao.entity.Role">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="rule" column="rule"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+		id,name,description,rule
+	</sql>
+	
+	<!-- 获取用户: 输出直接映射到对象 -->
+	<select id="get" parameterType="Long" resultType="Role">
+		SELECT <include refid="columns" />
+		FROM tab_role
+		WHERE id=#{id}
+	</select>
+	
+	<!-- 获取角色权限 -->
+	<select id="findPermissionLinks" parameterType="Long" resultType="map">
+		SELECT roleid,permissionid
+		FROM tab_role_permission
+		WHERE roleid=#{roleId}
+	</select>
+
+	<!-- 查询用户, 不分页 -->
+	<select id="search" parameterType="map" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		FROM tab_role
+		<where>
+	       <if test="name != null and name != ''">
+				AND name = #{name}
+		   </if>
+	       <if test="description != null and description != ''">
+				AND description = #{description}
+		   </if>
+	       <if test="rule != null and rule != ''">
+				AND rule = #{rule}
+		   </if>
+		</where>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="searchPage" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		FROM tab_role
+		<where>
+	       <if test="searchFields.name != null and searchFields.name != ''">
+				AND name = #{searchFields.name}
+			</if>
+	       <if test="searchFields.description != null and searchFields.description != ''">
+				AND description = #{searchFields.description}
+			</if>
+	       <if test="searchFields.rule != null and searchFields.rule != ''">
+				AND rule = #{searchFields.rule}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="Role" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tab_role (
+        	name,
+        	description,
+        	rule
+		) VALUES (
+        	#{name},
+        	#{description},
+        	#{rule}
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" >
+        UPDATE tab_role
+		<set>
+	        	<if test="name != null and name != ''">
+				name = #{name},
+		</if>
+	        	<if test="description != null and description != ''">
+				description = #{description},
+		</if>
+	        	<if test="rule != null and rule != ''">
+				rule = #{rule}
+		</if>
+		</set>
+        WHERE 
+	        id = #{id}
+	</update>
+	
+	<!-- 删除用户 -->
+	<delete id="delete" parameterType="Long">
+	     DELETE FROM tab_role WHERE id=#{id}
+	</delete>
+</mapper> 

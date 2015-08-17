@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.lingcaibao.repository.BankDao">
+
+	<resultMap id="resultMap" type="com.lingcaibao.entity.Bank">
+		<result property="id" column="id" />
+		<result property="userid" column="userid" />
+		<result property="city" column="city" />
+		<result property="bankname" column="bankname" />
+		<result property="abbreviation" column="abbreviation" />
+		<result property="description" column="description" />
+		<result property="accountname" column="accountname" />
+		<result property="cardno" column="cardno" />
+		<result property="cardtype" column="cardtype" />
+		<result property="deleteFlag" column="deleteFlag" />
+		<result property="province" column="province" />
+		<result property="subbranch" column="subbranch" />
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+		id,userid,city,bankname,abbreviation,description,accountname,cardno,cardtype,deleteFlag,province,subbranch
+	</sql>
+
+	<!-- 获取用户: 输出直接映射到对象 -->
+	<select id="get" parameterType="Long" resultType="Bank">
+		SELECT
+		<include refid="columns" />
+		FROM tab_bank
+		WHERE id=#{id}
+	</select>
+
+	<!-- 查询用户, 不分页 -->
+	<select id="search" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM tab_bank
+		<where>
+			<if test="userid != null and userid != ''">
+				AND userid = #{userid}
+			</if>
+			<if test="city != null and city != ''">
+				AND city = #{city}
+			</if>
+			<if test="bankname != null and bankname != ''">
+				AND bankname = #{bankname}
+			</if>
+			<if test="abbreviation != null and abbreviation != ''">
+				AND abbreviation = #{abbreviation}
+			</if>
+			<if test="description != null and description != ''">
+				AND description = #{description}
+			</if>
+			<if test="accountname != null and accountname != ''">
+				AND accountname = #{accountname}
+			</if>
+			<if test="cardno != null and cardno != ''">
+				AND cardno = #{cardno}
+			</if>
+			<if test="cardtype != null and cardtype != ''">
+				AND cardtype = #{cardtype}
+			</if>
+			AND deleteFlag = 0
+			<if test="province != null and province != ''">
+				AND province = #{province}
+			</if>
+			<if test="subbranch != null and subbranch != ''">
+				AND subbranch = #{subbranch}
+			</if>
+		</where>
+		ORDER BY id DESC
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="searchPage" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM tab_bank
+		<where>
+			<if test="searchFields.userid != null and searchFields.userid != ''">
+				AND userid = #{searchFields.userid}
+			</if>
+			<if test="searchFields.city != null and searchFields.city != ''">
+				AND city = #{searchFields.city}
+			</if>
+			<if test="searchFields.bankname != null and searchFields.bankname != ''">
+				AND bankname = #{searchFields.bankname}
+			</if>
+			<if
+				test="searchFields.abbreviation != null and searchFields.abbreviation != ''">
+				AND abbreviation = #{searchFields.abbreviation}
+			</if>
+			<if
+				test="searchFields.description != null and searchFields.description != ''">
+				AND description = #{searchFields.description}
+			</if>
+			<if
+				test="searchFields.accountname != null and searchFields.accountname != ''">
+				AND accountname = #{searchFields.accountname}
+			</if>
+			<if test="searchFields.cardno != null and searchFields.cardno != ''">
+				AND cardno = #{searchFields.cardno}
+			</if>
+			<if test="searchFields.cardtype != null and searchFields.cardtype != ''">
+				AND cardtype = #{searchFields.cardtype}
+			</if>
+			<if
+				test="searchFields.deleteFlag != null and searchFields.deleteFlag != ''">
+				AND deleteFlag = #{searchFields.deleteFlag}
+			</if>
+			<if test="searchFields.province != null and searchFields.province != ''">
+				AND province = #{searchFields.province}
+			</if>
+			<if test="searchFields.subbranch != null and searchFields.subbranch != ''">
+				AND subbranch = #{searchFields.subbranch}
+			</if>
+		</where>
+	</select>
+
+	<!-- 新增 -->
+	<insert id="insert" parameterType="Bank" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO tab_bank (
+		userid,
+		city,
+		bankname,
+		abbreviation,
+		description,
+		accountname,
+		cardno,
+		cardtype,
+		deleteFlag,
+		province,
+		subbranch
+		) VALUES (
+		#{userid},
+		#{city},
+		#{bankname},
+		#{abbreviation},
+		#{description},
+		#{accountname},
+		#{cardno},
+		#{cardtype},
+		#{deleteFlag},
+		#{province},
+		#{subbranch}
+		)
+	</insert>
+	
+	<!-- 废弃银行卡 -->
+	<update id="discardBank" parameterType="map">
+		UPDATE tab_bank 
+		SET deleteFlag = 1
+		<where>
+			<if test="id != null and id != ''">
+				AND id = #{id}
+			</if>
+			<if test="userid != null and userid != ''">
+				AND userid = #{userid}
+			</if>
+		</where>
+	</update>
+
+	<!-- 更新 -->
+	<update id="update">
+		UPDATE tab_bank
+		<set>
+			<if test="userid != null and userid != ''">
+				userid = #{userid},
+			</if>
+			<if test="city != null and city != ''">
+				city = #{city},
+			</if>
+			<if test="bankname != null and bankname != ''">
+				bankname = #{bankname},
+			</if>
+			<if test="abbreviation != null and abbreviation != ''">
+				abbreviation = #{abbreviation},
+			</if>
+			<if test="description != null and description != ''">
+				description = #{description},
+			</if>
+			<if test="accountname != null and accountname != ''">
+				accountname = #{accountname},
+			</if>
+			<if test="cardno != null and cardno != ''">
+				cardno = #{cardno},
+			</if>
+			<if test="cardtype != null and cardtype != ''">
+				cardtype = #{cardtype},
+			</if>
+			<if test="deleteFlag != null and deleteFlag != ''">
+				deleteFlag = #{deleteFlag},
+			</if>
+			<if test="province != null and province != ''">
+				province = #{province},
+			</if>
+			<if test="subbranch != null and subbranch != ''">
+				subbranch = #{subbranch}
+			</if>
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+	<select id="getUserBankList" parameterType="Long" resultType="map">
+		SELECT
+		b.id,
+		b.userid,
+		b.city,
+		b.bankname,
+		b.abbreviation,
+		b.description,
+		b.accountname,
+		b.cardno,
+		b.cardtype,
+		b.deleteFlag,
+		b.province,
+		b.subbranch,
+		d.remark AS imageUrl
+		FROM
+		tab_bank b 
+		LEFT JOIN tab_dictionary d ON b.abbreviation = d.code
+		WHERE 
+		b.deleteFlag = 0 
+		AND d.dictno = 'D0003'
+		<if test="userid != null and userid != ''">
+			AND b.userid = #{userid}
+		</if>
+	</select>
+	<!-- 删除用户 -->
+	<delete id="delete" parameterType="Long">
+		DELETE FROM tab_bank WHERE id=#{id}
+	</delete>
+</mapper> 

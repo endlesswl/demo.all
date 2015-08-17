@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.lingcaibao.repository.BillDao">
+
+	<resultMap id="resultMap" type="com.lingcaibao.entity.Bill">
+		<result property="id" column="id" />
+		<result property="orderid" column="orderid" />
+		<result property="serialno" column="serialno" />
+		<result property="tradeno" column="tradeno" />
+		<result property="amount" column="amount" />
+		<result property="userid" column="userid" />
+		<result property="marketid" column="marketid" />
+		<result property="billtime" column="billtime" />
+		<result property="indecr" column="indecr" />
+		<result property="billchannel" column="billchannel" />
+		<result property="billret" column="billret" />
+		<result property="prebalance" column="prebalance" />
+		<result property="ipaddr" column="ipaddr" />
+		<result property="salt" column="salt" />
+		<result property="packets" column="packets" />
+		<result property="createtime" column="createtime" />
+		<result property="modifytime" column="modifytime" />
+		<result property="expiretime" column="expiretime" />
+		<result property="information" column="information" />
+		<result property="locked" column="locked" />
+		<result property="confirmed" column="confirmed" />
+		<result property="afterbalance" column="afterbalance" />
+		<result property="subject" column="subject" />
+		<result property="method" column="method" />
+		<result property="balanceid" column="balanceid" />
+		<result property="userLotteryId" column="userLotteryId" />
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+		id,orderid,serialno,tradeno,amount,userid,marketid,billtime,indecr,billchannel,billret,prebalance,ipaddr,salt,packets,createtime,modifytime,expiretime,information,locked,confirmed,afterbalance,subject,method,balanceid,userLotteryId
+	</sql>
+
+	<!-- 获取用户: 输出直接映射到对象 -->
+	<select id="get" parameterType="Long" resultType="Bill">
+		SELECT
+		<include refid="columns" />
+		FROM tab_bill
+		WHERE id=#{id}
+	</select>
+
+	<!-- 获取用户: 输出直接映射到对象 -->
+	<select id="getBillByOrderid" parameterType="Long" resultType="Bill">
+		SELECT
+		<include refid="columns" />
+		FROM tab_bill
+		WHERE orderid=#{orderid}
+	</select>
+
+	<!-- 按照渠道获取订单 -->
+	<select id="getBillByChannel" resultType="Bill">
+		SELECT
+		<include refid="columns" />
+		FROM tab_bill
+		WHERE orderid=#{orderid} AND billchannel=#{billchannel}
+	</select>
+
+	<!-- 按照渠道删除订单  -->
+	<delete id="deleteBillByChannel">
+		DELETE FROM tab_bill WHERE orderid=#{orderid} AND billchannel=#{billchannel}
+	</delete>
+
+	<!-- 查询用户, 不分页 -->
+	<select id="search" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM tab_bill
+		<where>
+			<if test="orderid != null and orderid != ''">
+				AND orderid = #{orderid}
+			</if>
+			<if test="serialno != null and serialno != ''">
+				AND serialno = #{serialno}
+			</if>
+			<if test="tradeno != null and tradeno != ''">
+				AND tradeno = #{tradeno}
+			</if>
+			<if test="amount != null and amount != ''">
+				AND amount = #{amount}
+			</if>
+			<if test="userid != null and userid != ''">
+				AND userid = #{userid}
+			</if>
+			<if test="marketid != null and marketid != ''">
+				AND marketid = #{marketid}
+			</if>
+			<if test="billtime != null and billtime != ''">
+				AND billtime = #{billtime}
+			</if>
+			<if test="indecr != null and indecr != ''">
+				AND indecr = #{indecr}
+			</if>
+			<if test="billchannel != null and billchannel != ''">
+				AND billchannel = #{billchannel}
+			</if>
+			<if test="billret != null and billret != ''">
+				AND billret = #{billret}
+			</if>
+			<if test="prebalance != null and prebalance != ''">
+				AND prebalance = #{prebalance}
+			</if>
+			<if test="ipaddr != null and ipaddr != ''">
+				AND ipaddr = #{ipaddr}
+			</if>
+			<if test="salt != null and salt != ''">
+				AND salt = #{salt}
+			</if>
+			<if test="packets != null and packets != ''">
+				AND packets = #{packets}
+			</if>
+			<if test="createtime != null and createtime != ''">
+				AND createtime = #{createtime}
+			</if>
+			<if test="modifytime != null and modifytime != ''">
+				AND modifytime = #{modifytime}
+			</if>
+			<if test="expiretime != null and expiretime != ''">
+				AND expiretime = #{expiretime}
+			</if>
+			<if test="information != null and information != ''">
+				AND information = #{information}
+			</if>
+			<if test="locked != null and locked != ''">
+				AND locked = #{locked}
+			</if>
+			<if test="confirmed != null and confirmed != ''">
+				AND confirmed = #{confirmed}
+			</if>
+			<if test="afterbalance != null and afterbalance != ''">
+				AND afterbalance = #{afterbalance}
+			</if>
+			<if test="subject != null and subject != ''">
+				AND subject = #{subject}
+			</if>
+			<if test="method != null and method != ''">
+				AND method = #{method}
+			</if>
+			<if test="balanceid != null and balanceid != ''">
+				AND balanceid = #{balanceid}
+			</if>
+			<if test="userLotteryId != null and userLotteryId != ''">
+				AND userLotteryId = #{userLotteryId}
+			</if>
+		</where>
+		<if test="sortColumns != null and sortColumns != ''">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="searchPage" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM tab_bill
+		<where>
+			<if test="searchFields.orderid != null and searchFields.orderid != ''">
+				AND orderid = #{searchFields.orderid}
+			</if>
+			<if test="searchFields.serialno != null and searchFields.serialno != ''">
+				AND serialno = #{searchFields.serialno}
+			</if>
+			<if test="searchFields.tradeno != null and searchFields.tradeno != ''">
+				AND tradeno = #{searchFields.tradeno}
+			</if>
+			<if test="searchFields.amount != null and searchFields.amount != ''">
+				AND amount = #{searchFields.amount}
+			</if>
+			<if test="searchFields.userid != null and searchFields.userid != ''">
+				AND userid = #{searchFields.userid}
+			</if>
+			<if test="searchFields.marketid != null and searchFields.marketid != ''">
+				AND marketid = #{searchFields.marketid}
+			</if>
+			<if test="searchFields.billtime != null and searchFields.billtime != ''">
+				AND billtime = #{searchFields.billtime}
+			</if>
+			<if test="searchFields.indecr != null and searchFields.indecr != ''">
+				AND indecr = #{searchFields.indecr}
+			</if>
+			<if
+				test="searchFields.billchannel != null and searchFields.billchannel != ''">
+				AND billchannel = #{searchFields.billchannel}
+			</if>
+			<if test="searchFields.billret != null and searchFields.billret != ''">
+				AND billret = #{searchFields.billret}
+			</if>
+			<if
+				test="searchFields.prebalance != null and searchFields.prebalance != ''">
+				AND prebalance = #{searchFields.prebalance}
+			</if>
+			<if test="searchFields.ipaddr != null and searchFields.ipaddr != ''">
+				AND ipaddr = #{searchFields.ipaddr}
+			</if>
+			<if test="searchFields.salt != null and searchFields.salt != ''">
+				AND salt = #{searchFields.salt}
+			</if>
+			<if test="searchFields.packets != null and searchFields.packets != ''">
+				AND packets = #{searchFields.packets}
+			</if>
+			<if
+				test="searchFields.createtime != null and searchFields.createtime != ''">
+				AND createtime = #{searchFields.createtime}
+			</if>
+			<if
+				test="searchFields.modifytime != null and searchFields.modifytime != ''">
+				AND modifytime = #{searchFields.modifytime}
+			</if>
+			<if
+				test="searchFields.expiretime != null and searchFields.expiretime != ''">
+				AND expiretime = #{searchFields.expiretime}
+			</if>
+			<if
+				test="searchFields.information != null and searchFields.information != ''">
+				AND information = #{searchFields.information}
+			</if>
+			<if test="searchFields.locked != null and searchFields.locked != ''">
+				AND locked = #{searchFields.locked}
+			</if>
+			<if test="searchFields.confirmed != null and searchFields.confirmed != ''">
+				AND confirmed = #{searchFields.confirmed}
+			</if>
+			<if
+				test="searchFields.afterbalance != null and searchFields.afterbalance != ''">
+				AND afterbalance = #{searchFields.afterbalance}
+			</if>
+			<if test="searchFields.subject != null and searchFields.subject != ''">
+				AND subject = #{searchFields.subject}
+			</if>
+			<if test="searchFields.method != null and searchFields.method != ''">
+				AND method = #{searchFields.method}
+			</if>
+			<if test="searchFields.balanceid != null and searchFields.balanceid != ''">
+				AND balanceid = #{searchFields.balanceid}
+			</if>
+			<if
+				test="searchFields.userLotteryId != null and searchFields.userLotteryId != ''">
+				AND userLotteryId = #{searchFields.userLotteryId}
+			</if>
+			<if test="searchFields.sBillTime != null and searchFields.sBillTime != ''">
+	       		<![CDATA[ AND createtime >= #{searchFields.sBillTime}]]>
+			</if>
+			<if test="searchFields.eBillTime != null and searchFields.eBillTime != ''">
+				<![CDATA[ AND createtime  <= #{searchFields.eBillTime}]]>
+			</if>
+			and  billret != 4
+		</where>
+		<if
+			test="searchFields.sortColumns != null and searchFields.sortColumns != ''">
+			ORDER BY ${searchFields.sortColumns}
+		</if>
+	</select>
+
+	<!-- 新增 -->
+	<insert id="insert" parameterType="Bill" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO tab_bill (
+		orderid,
+		serialno,
+		tradeno,
+		amount,
+		userid,
+		marketid,
+		billtime,
+		indecr,
+		billchannel,
+		billret,
+		prebalance,
+		ipaddr,
+		salt,
+		packets,
+		createtime,
+		modifytime,
+		expiretime,
+		information,
+		locked,
+		confirmed,
+		afterbalance,
+		subject,
+		method,
+		balanceid,
+		userLotteryId
+		) VALUES (
+		#{orderid},
+		#{serialno},
+		#{tradeno},
+		#{amount},
+		#{userid},
+		#{marketid},
+		#{billtime},
+		#{indecr},
+		#{billchannel},
+		#{billret},
+		#{prebalance},
+		#{ipaddr},
+		#{salt},
+		#{packets},
+		#{createtime},
+		#{modifytime},
+		#{expiretime},
+		#{information},
+		#{locked},
+		#{confirmed},
+		#{afterbalance},
+		#{subject},
+		#{method},
+		#{balanceid},
+		#{userLotteryId}
+		)
+	</insert>
+
+	<!-- 更新 -->
+	<update id="update">
+		UPDATE tab_bill
+		<set>
+			<if test="orderid != null and orderid != ''">
+				orderid = #{orderid},
+			</if>
+			<if test="serialno != null and serialno != ''">
+				serialno = #{serialno},
+			</if>
+			<if test="tradeno != null and tradeno != ''">
+				tradeno = #{tradeno},
+			</if>
+			<if test="amount != null and amount != ''">
+				amount = #{amount},
+			</if>
+			<if test="userid != null and userid != ''">
+				userid = #{userid},
+			</if>
+			<if test="marketid != null and marketid != ''">
+				marketid = #{marketid},
+			</if>
+			<if test="billtime != null and billtime != ''">
+				billtime = #{billtime},
+			</if>
+			<if test="indecr != null and indecr != ''">
+				indecr = #{indecr},
+			</if>
+			<if test="billchannel != null and billchannel != ''">
+				billchannel = #{billchannel},
+			</if>
+			<if test="billret != null and billret != ''">
+				billret = #{billret},
+			</if>
+			<if test="prebalance != null and prebalance != ''">
+				prebalance = #{prebalance},
+			</if>
+			<if test="ipaddr != null and ipaddr != ''">
+				ipaddr = #{ipaddr},
+			</if>
+			<if test="salt != null and salt != ''">
+				salt = #{salt},
+			</if>
+			<if test="packets != null and packets != ''">
+				packets = #{packets},
+			</if>
+			<if test="createtime != null and createtime != ''">
+				createtime = #{createtime},
+			</if>
+			<if test="modifytime != null and modifytime != ''">
+				modifytime = #{modifytime},
+			</if>
+			<if test="expiretime != null and expiretime != ''">
+				expiretime = #{expiretime},
+			</if>
+			<if test="information != null and information != ''">
+				information = #{information},
+			</if>
+			<if test="locked != null and locked != ''">
+				locked = #{locked},
+			</if>
+			<if test="confirmed != null and confirmed != ''">
+				confirmed = #{confirmed},
+			</if>
+			<if test="afterbalance != null and afterbalance != ''">
+				afterbalance = #{afterbalance},
+			</if>
+			<if test="subject != null and subject != ''">
+				subject = #{subject},
+			</if>
+			<if test="method != null and method != ''">
+				method = #{method},
+			</if>
+			<if test="balanceid != null and balanceid != ''">
+				balanceid = #{balanceid},
+			</if>
+			<if test="userLotteryId != null and userLotteryId != ''">
+				userLotteryId = #{userLotteryId}
+			</if>
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+
+	<!-- 删除用户 -->
+	<delete id="delete" parameterType="Long">
+		DELETE FROM tab_bill WHERE id=#{id}
+	</delete>
+
+	<!-- 查询订单列表 -->
+	<select id="searchBillList" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM tab_bill
+		<where>
+			<if test="searchFields.orderid != null and searchFields.orderid != ''">
+				AND orderid = #{searchFields.orderid}
+			</if>
+			<if test="searchFields.serialno != null and searchFields.serialno != ''">
+				AND serialno = #{searchFields.serialno}
+			</if>
+			<if test="searchFields.tradeno != null and searchFields.tradeno != ''">
+				AND tradeno = #{searchFields.tradeno}
+			</if>
+			<if test="searchFields.amount != null and searchFields.amount != ''">
+				AND amount = #{searchFields.amount}
+			</if>
+			<if test="searchFields.userid != null and searchFields.userid != ''">
+				AND userid = #{searchFields.userid}
+			</if>
+			<if test="searchFields.marketid != null and searchFields.marketid != ''">
+				AND marketid = #{searchFields.marketid}
+			</if>
+			<if test="searchFields.billtime != null and searchFields.billtime != ''">
+				AND billtime = #{searchFields.billtime}
+			</if>
+			<if test="searchFields.indecr != null and searchFields.indecr != ''">
+				AND indecr = #{searchFields.indecr}
+			</if>
+			<if
+				test="searchFields.billchannel != null and searchFields.billchannel != ''">
+				AND billchannel = #{searchFields.billchannel}
+			</if>
+			<if test="searchFields.billret != null and searchFields.billret != ''">
+				AND billret = #{searchFields.billret}
+			</if>
+			<if
+				test="searchFields.prebalance != null and searchFields.prebalance != ''">
+				AND prebalance = #{searchFields.prebalance}
+			</if>
+			<if test="searchFields.ipaddr != null and searchFields.ipaddr != ''">
+				AND ipaddr = #{searchFields.ipaddr}
+			</if>
+			<if test="searchFields.salt != null and searchFields.salt != ''">
+				AND salt = #{searchFields.salt}
+			</if>
+			<if test="searchFields.packets != null and searchFields.packets != ''">
+				AND packets = #{searchFields.packets}
+			</if>
+			<if
+				test="searchFields.createtime != null and searchFields.createtime != ''">
+				AND createtime = #{searchFields.createtime}
+			</if>
+			<if
+				test="searchFields.modifytime != null and searchFields.modifytime != ''">
+				AND modifytime = #{searchFields.modifytime}
+			</if>
+			<if
+				test="searchFields.expiretime != null and searchFields.expiretime != ''">
+				AND expiretime = #{searchFields.expiretime}
+			</if>
+			<if
+				test="searchFields.information != null and searchFields.information != ''">
+				AND information = #{searchFields.information}
+			</if>
+			<if test="searchFields.locked != null and searchFields.locked != ''">
+				AND locked = #{searchFields.locked}
+			</if>
+			<if test="searchFields.confirmed != null and searchFields.confirmed != ''">
+				AND confirmed = #{searchFields.confirmed}
+			</if>
+			<if
+				test="searchFields.afterbalance != null and searchFields.afterbalance != ''">
+				AND afterbalance = #{searchFields.afterbalance}
+			</if>
+			<if test="searchFields.subject != null and searchFields.subject != ''">
+				AND subject = #{searchFields.subject}
+			</if>
+			<if test="searchFields.method != null and searchFields.method != ''">
+				AND method = #{searchFields.method}
+			</if>
+			<if test="searchFields.balanceid != null and searchFields.balanceid != ''">
+				AND balanceid = #{searchFields.balanceid}
+			</if>
+			<if
+				test="searchFields.userLotteryId != null and searchFields.userLotteryId != ''">
+				AND userLotteryId = #{searchFields.userLotteryId}
+			</if>
+			<if test="searchFields.sBillTime != null and searchFields.sBillTime != ''">
+	       		<![CDATA[AND createtime  >= #{searchFields.sBillTime}]]>
+			</if>
+			<if test="searchFields.eBillTime != null and searchFields.eBillTime != ''">
+				<![CDATA[AND createtime  <= #{searchFields.eBillTime}]]>
+			</if>
+		</where>
+	</select>
+	<select id="getUserBillDetial" parameterType="Long" resultType="map">
+		SELECT
+		id,
+		orderid,
+		serialno,
+		tradeno,
+		amount,
+		userid,
+		marketid,
+		from_unixtime(
+		billtime/1000
+		) as billtime
+		,
+		indecr,
+		billchannel,
+		billret,
+		prebalance,
+		ipaddr,
+		salt,
+		packets,
+		from_unixtime(
+		modifytime/1000
+		) as modifytime
+		,
+		from_unixtime(
+		expiretime/1000
+		) as expiretime
+		,
+		information,
+		locked,
+		confirmed,
+		afterbalance,
+		SUBJECT,
+		method,
+		balanceid,
+		userLotteryId,
+		from_unixtime(
+		createtime/1000
+		) as createtime
+		FROM
+		tab_bill
+		where id=#{id}
+	</select>
+
+	<!-- 获取代理商交易记录 -->
+	<select id="searchProxyBillPage" parameterType="Long"
+		resultType="map">
+		select sum(amount)
+		amount,tb.billchannel,tm.createtime,tm.marketName,tb.billret from
+		tab_marketplan tm
+		left join
+		tab_bill tb
+		on tb.marketid =tm.id
+		where tb.userid=#{searchFields.userid}
+		<if
+			test="searchFields.billchannel != null and searchFields.billchannel != ''">
+			AND tb.billchannel = #{searchFields.billchannel}
+		</if>
+		<if test="searchFields.billret != null and searchFields.billret != ''">
+			AND tb.billret = #{searchFields.billret}
+		</if>
+		<if test="searchFields.sBillTime != null and searchFields.sBillTime != ''">
+		       		<![CDATA[ AND tb.createtime >= #{searchFields.sBillTime}]]>
+		</if>
+		<if test="searchFields.eBillTime != null and searchFields.eBillTime != ''">
+					<![CDATA[ AND tb.createtime  <= #{searchFields.eBillTime}]]>
+		</if>
+		group by tm.id,tb.billchannel
+	</select>
+</mapper> 

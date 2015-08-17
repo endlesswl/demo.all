@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.lingcaibao.repository.UserRoleDao">
+
+	<resultMap id="resultMap" type="com.lingcaibao.entity.UserRole">
+        <result property="id" column="id"/>
+        <result property="roleid" column="roleid"/>
+        <result property="userid" column="userid"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+		id,roleid,userid
+	</sql>
+	
+	<!-- 获取用户: 输出直接映射到对象 -->
+	<select id="get" parameterType="Long" resultType="UserRole">
+		SELECT <include refid="columns" />
+		FROM tab_user_role
+		WHERE id=#{id}
+	</select>
+	
+
+	<!-- 查询用户, 不分页 -->
+	<select id="search" parameterType="map" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		FROM tab_user_role
+		<where>
+	       <if test="roleid != null and roleid != ''">
+				AND roleid = #{roleid}
+		   </if>
+	       <if test="userid != null and userid != ''">
+				AND userid = #{userid}
+		   </if>
+		</where>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="searchPage" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		FROM tab_user_role
+		<where>
+	       <if test="searchFields.roleid != null and searchFields.roleid != ''">
+				AND roleid = #{searchFields.roleid}
+			</if>
+	       <if test="searchFields.userid != null and searchFields.userid != ''">
+				AND userid = #{searchFields.userid}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="UserRole" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tab_user_role (
+        	roleid,
+        	userid
+		) VALUES (
+        	#{roleid},
+        	#{userid}
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" >
+        UPDATE tab_user_role
+		<set>
+	        	<if test="roleid != null and roleid != ''">
+				roleid = #{roleid},
+		</if>
+	        	<if test="userid != null and userid != ''">
+				userid = #{userid}
+		</if>
+		</set>
+        WHERE 
+	        id = #{id}
+	</update>
+	
+	<!-- 删除用户 -->
+	<delete id="delete" parameterType="Long">
+	     DELETE FROM tab_user_role WHERE id=#{id}
+	</delete>
+</mapper> 

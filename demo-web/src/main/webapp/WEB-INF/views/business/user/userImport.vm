@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<!-- test -->
+##set( $lzzUrl = "http://localhost:80" )
+<!-- test end-->
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>零彩宝商家后台-群组管理</title>
+<link href='${lzzUrl}/prd/style/model#ver("/ver/style/model.css.ver").css' rel="stylesheet" type="text/css" />
+<link href='${lzzUrl}/prd/style/index#ver("/ver/style/index.css.ver").css' rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"/>
+<link href='${lzzUrl}/prd/style/plugin/artDialog/black#ver("/ver/style/plugin/artDialog/black.css.ver").css' rel="stylesheet" type="text/css" />
+<script src='${lzzUrl}/prd/script/jquery-2.0.2.min#ver("/ver/script/jquery-2.0.2.min.js.ver").js'></script>
+<script src='${lzzUrl}/prd/script/plugin/util/util#ver("/ver/script/plugin/util/util.js.ver").js'></script>
+<script src='${lzzUrl}/prd/script/plugin/lingcaitable/PageLc#ver("/ver/script/plugin/lingcaitable/PageLc.js.ver").js'></script>
+<script src="/plugin/ajaxfileupload/ajaxfileupload.js"></script>
+<script src='/plugin/artDialog/jquery.artDialog.min.js'></script>
+<!-- my JS -->
+<script src='${lzzUrl}/prd/script/business/user/UserImport#ver("/ver/script/business/user/UserImport.js.ver").js'></script>
+
+<script type="text/javascript">
+	$(function() {
+		UserImport.init('${ctx}/home/user/getUserGroup',
+						'${ctx}/home/user/delUserGroup',//删除
+						'${ctx}/home/user/updateUserGroup',//修改
+						'${ctx}/home/user/createGroup','${ctx}');//新建
+	});
+</script>
+</head>
+<div class="container">
+	<!-- 公共顶导 -->
+	#parse("/include/header.vm")
+	<div class="content clearfix">
+		<!-- 左边导航 -->
+		#parse("/include/left.vm")
+		<!-- 右边导航 -->
+		<div class="merchants-main ">
+			<div class="title">群组管理</div>
+			<div class="white-box-a clearfix">
+				<div>
+					<div class="import phone-item">
+						<label class="f16">分组名称:</label><input type="text" id="clustname" placeholder="分组名称" class="sr-text fl"/>
+						<span class="ui-search fl"  style="margin-top:0px;margin-right:5px;" onclick="UserImport.query()">查询</span>
+					</div>
+					<div class="group">
+							<a href="#" class="mr20" onclick="UserImport.addGroup();">新建分组</a>
+					</div>
+						<table width="778" border="0" cellspacing="0" cellpadding="0" class="tab6 ma" id="dataList">
+							<tr>
+								<th width="70">序号</th>
+								<th width="150">分组名称</th>
+								<th>创建时间</th>
+								<th style="padding-right:10px;">备注</th>
+							</tr>						
+						</table>
+						 <!-- 分页 -->
+			            <div class="lc_pagination" id="pageDiv">
+			            </div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+</div>
+<div id="addGroupDiv" style="display:none;">
+	<input type="text" id="addclustname" placeholder="分组名称" class="sr-text w140 ml20 bd"/>
+</div>
+<div id="updateGroupDiv" style="display:none;">
+	<input type="text" id="updateClustname" placeholder="分组名称" class="sr-text w140 ml20 bd"/>
+</div>
+	<!-- 底部文件 -->
+	#parse("/include/footer.vm")
+</body>
+</html>
+

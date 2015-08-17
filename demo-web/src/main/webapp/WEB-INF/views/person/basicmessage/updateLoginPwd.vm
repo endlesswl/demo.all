@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<!-- test -->
+ ##set( $lzzUrl = "http://localhost")
+<!-- test end-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>零彩宝商家后台-修改密码</title>
+<link href='${lzzUrl}/prd/style/model#ver("/ver/style/model.css.ver").css' rel="stylesheet" type="text/css" />
+<link href='${lzzUrl}/prd/style/index#ver("/ver/style/index.css.ver").css' rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"></link>
+<script src='${lzzUrl}/prd/script/jquery-2.0.2.min#ver("/ver/script/jquery-2.0.2.min.js.ver").js'></script>
+<script src='${lzzUrl}/prd/script/plugin/util/util#ver("/ver/script/plugin/util/util.js.ver").js'></script>
+<!-- 表单验证插件 -->
+<script src="/plugin/jquery.validate.js"></script>
+<script src="/plugin/validate_expand.js"></script>
+<!-- my JS -->
+<script src='${lzzUrl}/prd/script/people/myAccount/pwd#ver("/ver/script/business/account/pwd.js.ver").js'></script>
+
+<script type="text/javascript">
+	$(function() {
+		Pwd.init('${ctx}', 'MODIFY_PWD', '${user.mobile}');
+	});
+</script>
+
+</head>
+<body>
+<body>
+	<!-- 公共顶导 -->
+	#parse("/person/include/topnav.vm")
+	<div class="container">
+		<div class="content pb0">
+			<div class="item-title">个人中心</div>
+			<div class="user-center">
+				<!-- 公共用户信息 -->
+				#parse("/person/include/frafirst.vm")
+				<div class="mt15 clearfix">
+					<div class="leftit">
+						<ul>
+							<a href="${ctx}/location/user?path=person/basicmessage/PersonalUserInfo"><li class="lon1">基本信息</li></a>
+                            <a href="${ctx}/location/user?path=person/myAccount/MyAccount"><li class="l2">我的账户</li></a>
+						</ul>
+					</div>
+					<div class="right-box">
+						<div class="rightit clearfix">
+							<ul>
+								<a href="${ctx}/location/user?path=person/basicmessage/PersonalUserInfo"><li class="qb2"><span>个人信息</span></li></a>
+								<a href="${ctx}/location/user?path=person/basicmessage/PeopleSecurityCenter"><li class="qbon1"><span>安全中心</span></li></a>
+							</ul>
+						</div>
+						<div class="user-safe clearfix">
+							<div class="user-tx">
+								<img src="${ctx}/images/test4.jpg" width="136" height="136" id="headImg" />
+							</div>
+							<div class="user-dj">
+								<h2 id="h2Time">中午好！ 13146499517</h2>
+								<div class="user-safedj clearfix">
+									<div class="fl mt10">账户安全等级:</div>
+									&nbsp;&nbsp;
+									<div class="safe-level middle-level">中</div>
+								</div>
+
+								<p class="red f14">中奖很重要，账户安全更重要，建议您绑定所有安全信息，以保障账户及资金安全。</p>
+							</div>
+						</div>
+						<div class="sub-title">账户安全</div>
+						<table width="700" border="0" cellspacing="0" cellpadding="0"
+							class="tab7">
+							<tr>
+								<td width="100" class="black">登录密码：</td>
+								<td>强度高的密码更安全，目前强度：<font class="red" id="pwdgradeFont"></font>
+								<a class="ui-button-gray ml20" href="javascript:void(0)" onclick="securityCenter.toUpdatePwd()" class="ui-button-b marL20">修改</a></td>
+							</tr>
+							<tr>
+								<td width="100" class="black">交易密码：</td>
+								<td>强度高的密码更安全，目前强度：<font class="red" id="paypwdgradeFont">中</font>
+								#if ($user.payPwd)
+						            <a class="ui-button-gray ml20" href="javascript:void(0)" onclick="securityCenter.toUpdatePayPwd()" class="ui-button-b marL20""display:none">修改</a>
+						            <a class="ui-button-gray ml20" href="javascript:void(0)" onclick="securityCenter.toFindPayPwd()" class="ui-button-b marL20">找回</a>
+						        #else
+						        	<a class="ui-button-gray ml20" href="${ctx}/location/business?path=business/account/setPayPwd" class="ui-button-b marL20">设置交易密码</a>
+						        #end
+						        </td>
+							</tr>
+							<tr>
+								<td width="100" class="black">实名认证：</td>
+								<td><font class="blue" id="authflags">已认证</font></td>
+							</tr>
+							<tr>
+								<td width="100" class="black">绑定手机：</td>
+								<td>用于保存投注方案和找回密码<a class="ui-button-gray ml20" href="${ctx}/location/business?path=business/account/updateBindMobile">修改</a></td>
+							</tr>
+							<tr>
+								<td width="100" class="black">邮箱管理：</td>
+								<td>个人身份信息官方认证、用于提款和确认身份等<a class="ui-button-gray ml20" href="${ctx}/location/business?path=business/account/updateBindEmail">立刻绑定</a></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 公共底部导 -->
+	#parse("/person/include/footernav.vm")
+</body>
+</body>
+</html>
+
+
+

@@ -1,0 +1,33 @@
+﻿<script type="text/javascript">
+/* 	$(function() {
+		header.init('${ctx}');				
+	}); */
+</script>
+<!-- 
+<div class="mt15 clearfix">
+	<div class="bd-wz">
+		<img
+			src="http://image.lingcaibao.com/image/2015/3/2015_3_77fdbf10-6661-415e-b584-6ff2647236aa.png "
+			width="736" height="330">
+	</div>
+	<div class="user-infro">
+		<div class="tp-lp">
+			<img
+				src="http://image.lingcaibao.com/image/2015/3/2015_3_1b01c198-f63a-4bdc-b966-e2bb8d638267.png"
+				width="147">
+		</div>
+		<span class="yh-name">用户名</span>
+		<p class="f14 tc mt5 mb10">
+			余额：<font class="f24 red">0.</font><font class="f14 red">00</font>
+			元
+		</p>
+		<div class="tc  pb10">
+			<a class="btn-green" href="${ctx}/location/user?path=person/myAccount/accountRecharge">充值</a>
+		</div>
+		<p class="f14 tc mt5">
+			个人资料完成 80%&nbsp;&nbsp;&nbsp;<a class="blue" href="${ctx}/location/user?path=person/basicmessage/PersonalUserInfo">完善 >></a>
+		</p>
+	</div>
+</div>
+
+ -->

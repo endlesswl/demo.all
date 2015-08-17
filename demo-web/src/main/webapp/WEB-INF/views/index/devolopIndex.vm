@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>零彩宝</title>
+<link href='${lzzUrl}/prd/style/platformHome/home#ver("/ver/style/platformHome/home.css.ver").css' rel="stylesheet" type="text/css" />
+<script src='${lzzUrl}/prd/script/jquery-2.0.2.min#ver("/ver/script/jquery-2.0.2.min.js.ver").js'></script>
+<script src='${lzzUrl}/prd/script/json2#ver("/ver/script/json2.js.ver").js'></script>
+<script src='${lzzUrl}/prd/script/plugin/util/util#ver("/ver/script/plugin/util/util.js.ver").js'></script>
+
+<!-- my js -->
+<script src='${lzzUrl}/prd/script/platformHome/home#ver("/ver/script/platformHome/home.js.ver").js'></script>
+<script type="text/javascript">
+$(function(){
+	  $.stellar({
+		horizontalScrolling: false,
+		verticalOffset: 40
+	}); 
+	var contentTopHeight=$('.content:visible').height()-home.contentBtHeight;
+	$(window).scroll(function(e) {
+		scrollFun(home.firstHeight,contentTopHeight);
+	})
+	home.init('${ctx}');
+});
+</script>
+</head>
+
+<body>
+<!--S header-->
+<div id="topbar" class="topbar">
+    <div class="toppic">
+            <div id="logoWrap" style="display:block;"><a href="index.shtml" class="logoLink">www.lingcaibao.com</a></div>
+            <div id="logoWrap2" style="display:none;"><a href="index.shtml" class="logoLink">www.lingcaibao.com</a></div>
+             <ul id="toggleNav" class="toggleNav" style="display:none">
+               <li class="f1"><a href="#">个人</a></li>
+                <li class="f2"><a href="#">商家</a></li>
+                <li class="f3"><a href="#">代理商</a></li>
+                <li class="f4"><a class="hover" href="#">开发者</a></li>
+                <!--  <li class="f1"><a href="${ctx}/static?path=index/personIndex">个人</a></li>
+                <li class="f2"><a  href="${ctx}/static?path=index/businessIndex">商家</a></li>
+                <li class="f3"><a  href="${ctx}/static?path=index/agentIndex">代理商</a></li>
+                <li class="f4"><a class="hover" href="${ctx}/static?path=index/devolopIndex">开发者</a></li> -->
+            </ul>
+            <div class="head_right">
+	            <ul id="topNav" class="topNav">
+	                <li class="current"><a  href="">首页</a></li>
+	                <li><a  href="">活动专区</a></li>
+	                <li><a  href="">行业案例</a></li>
+	                <li><a href="">帮助中心</a></li>
+	            </ul>
+	            <div class="topTool">
+		            <a class="barzc"  href="" target="_blank">注册</a>
+		            <a class="bardl"  href="" target="_blank">登录</a>
+	       		</div>
+       		</div>
+    </div>
+</div>
+
+<div class="crossbanenr">
+	<div class="topBanner">
+		<div class='top-banner-in'>
+			<div class='banner-text-wrap'>
+				<p class='top-text'>欢迎来到零彩精准营销平台！</p>
+				<h2>无激励  不营销</h2>
+				<p class='bottom-text'>No Motivation   No Marketing</p>
+			</div>
+		</div>
+	</div>
+	<div class='content-nav-wrap'>
+		<div id='contentNav'>
+			<div class='title'>我们的服务</div>
+			<ul class='nav-wrap'>
+				<li class='nav-1'><a href='#'>个人</a></li>
+				<li class='nav-2'><a href='#'>商家</a></li>
+				<li class='nav-3'><a href='#'>代理商</a></li>
+				<li class='nav-4'><a class="hover" href='#'>开发者</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div style="content-wrap">
+	<!-- 开发者页面 -->
+	<div class="content content-devolop">
+	    <div id="fisrtbg" name="fisrtbg" class="activebg fisrtbg" data-stellar-background-ratio="0.03"></div>
+	    <div class="qfigure develop_g">
+	        <div class="qw980">
+	            <div class="txtwrap">
+	                <h2>零彩宝开发者模式</h2>
+	                 <p>致力于为广大开发者提供专业的营销激励开放平台，开发者可以借助
+	                   	 平台资源及平台OpenAPI，实现对Androd、IOS、html5活动的敏捷
+	                   	 开发及发布，配合平台提供的丰富的激励介质，整合研发具备个性化
+	                   	 的营销激励产品。</p>
+	                 <div class="download"><a href="#">接口下载</a></div> 
+	            </div>
+	            <div class="qdevelopAnimate">
+	                <div class="develop_gWrap"> 
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <div id="secondbg" class="activebg secondbg" data-stellar-background-ratio="0.05"></div>
+	    <div class="qfigure activeDataWrap">
+	    	<div class="active-text-wrap">
+	    		<p class="big-text">WE OFFER THE ACTIVITY</p>
+	    		<p class="little-text">我们的活动</p>
+	    	</div>
+	    	<div class="active-content">
+	    		<div class="active-left left-top">
+	    			<div class="siggle-wrap">
+		    			<p class='title'>中信银行送你双色球</p>
+		    			<p class='description'>手机号是是因为保证领取兑换码的用户为北京用户，后台技术可以根据手机号进行限制领取的用户的地域</p>
+		    			<img class='logo' src="/index/images/leftTop.png" />
+	    			</div>
+	    		</div>
+	    		<div class="active-left left-center">
+	    			<div class="siggle-wrap">
+		    			<p class='title'>中粮土豪送彩</p>
+		    			<p class='description'>手机号是是因为保证领取兑换码的用户为北京用户，后台技术可以根据手机号进行限制领取的用户的地域</p>
+		    			<img class='logo' src="/index/images/leftCenter.png" />
+	    			</div>
+	    		</div>
+	    		<div class="active-left left-bottom">
+	    			<div class="siggle-wrap">
+	    				<img class='logo' src="/index/images/leftBottom.png" />
+		    			<p class='title'>民生银行千万大奖等你拿</p>
+		    			<p class='description'>手机号是是因为保证领取兑换码的用户为北京用户，后台技术可以根据手机号进行限制领取的用户的地域</p>
+		    			
+	    			</div>
+	    		</div>
+	    		<div class="active-right right-top">
+	    			<div class="siggle-wrap">
+	    				<img class='logo' src="/index/images/rightTop.png" />
+		    			<p class='title'>招商银行送红包活动</p>
+		    			<p class='description'>50元红包包括两个3元的，两个5元的，两个7元的，两个10元的兑换券，用户在发起时会随机获取一种价值兑换券的兑换码，输入手机号</p>
+		    			
+	    			</div>
+	    		</div>
+	    		<div class="active-right right-center">
+	    			<div class="siggle-wrap">
+	    				<img class='logo' src="/index/images/rightCenter.png" />
+		    			<p class='title'>伊利竞猜世界杯</p>
+		    			<p class='description'>输入手机号领取红包，输入手机号是是因为保证领取兑换码的用户为北京用户，后台技术可以根据手机号进行限制领取的用户的地域。</p>
+	    			</div>
+	    		</div>
+	    		<div class="active-right right-bottom">
+	    			<div class="siggle-wrap">
+	    				<img class='logo' src="/index/images/rightBottom.png" />
+		    			<p class='title'>中国联通送精彩</p>
+		    			<p class='description'>手机号是是因为保证领取兑换码的用户为北京用户，后台技术可以根据手机号进行限制领取的用户的地域</p>
+		    			
+	    			</div>
+	    		</div>
+	    	</div>
+	    </div>
+	    <div id="thirdbg" class="activebg thirdbg" data-stellar-background-ratio="0.05"></div>
+	</div>
+</div>
+
+<!--底部轮播-->
+<div class="qfigure btBanner">
+ 	<p class="big-text">数百万企业在这里成功</p>
+ 	<p class="little-text">成功从这里开始</p>
+	 <div class="mr_frbox">
+         <p class="mr_frBtnL next"></p>
+        <div class="mr_frUl">
+            <ul id="mr_fu">
+                <li><a href="#">
+                    <img src="/index/images/btBanner1.png" />
+                </a>
+                </li>
+                <li><a href="#">
+                    <img src="/index/images/btBanner2.png" />
+                </a>
+                </li>
+                <li><a href="#">
+                    <img src="/index/images/btBanner3.png" />
+                </a>
+                </li>
+                <li><a href="#">
+                    <img src="/index/images/btBanner4.png" />
+                </a>
+                </li>
+            </ul>
+        </div>
+        <p class="mr_frBtnR next"></p>
+    </div>
+</div>
+<!-- 视差插件 -->
+<script type="text/javascript" src="/plugin/stellar.js"></script>
+<!-- slide轮播插件 -->
+<script type="text/javascript" src="/plugin/jquery.SuperSlide2.js"></script>
+
+<!--S footer-->
+<div class="newfoot">
+	<div class="footTop">
+		<div class="leftLink"></div>
+		<div class="centerLink"></div>
+		<div class="rightData">
+			<p>网站公告</p>
+			<ul class="announcement" id="announcement">
+				<li><a href="#">供的丰富的激励介质，整合研发具备个</a></li>
+				<li><a href="#">供的丰富的激励介质，整合研发具备个</a></li>
+				<li><a href="#">供的丰富的激励介质，整合研发具备个</a></li>
+				<li><a href="#">供的丰富的激励介质，整合研发具备个</a></li>
+				<li><a href="#">供的丰富的激励介质，整合研发具备个</a></li>
+			</ul>
+		</div>
+	</div>
+    <div class="copyright">
+    	<div class="btNav"><a> 关于我们</a>|<a>媒体报道</a>|<a>联系我们</a>|<a>服务条款</a>|<a>代理加盟</a>|<a>用户反馈</a></div>
+        <p>京ICP备11038002号-3 Copyright &copy2014 北京零彩宝网络技术有限公司 All Rights </p>
+    </div>
+</div>
+</body>
+</html>
+

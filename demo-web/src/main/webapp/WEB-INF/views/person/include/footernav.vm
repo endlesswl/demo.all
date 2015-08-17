@@ -1,0 +1,15 @@
+﻿<!-- <div class="sub-nav">
+<div class="sub-nav-bg bgray"></div>
+底部导航默认状态 li 序列 是s1 到s6 选中状态 b1 到b6  无状态是 无样式bgray 有状态是 有bgray
+<div class="container" >
+	<ul class="sub-nav-item clearfix">
+    	<li class="s1"><span class="q1">最新活动</span></li>
+        <li class="s2 "><span class="q2">定制祝福</span></li>
+        <li class="s3 "><span class="q3">活动回报</span></li>
+        <li class="s4 "><span class="q4">定制祝福</span></li>
+        <li class="s5 "><span class="q5">个人中心</span></li>
+        <li class="s6 "><span class="q6">钱生多钱</span></li>
+    </ul>
+
+</div>
+</div> -->

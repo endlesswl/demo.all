@@ -1,0 +1,1434 @@
+﻿﻿/* [export] */
+/*CSS reset*/
+html { color:#000; background:#FFF; }
+body,h1,h2,h3,h4,h5,h6,hr,div,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td,h1,h2,h3,h4,h5,h6,span,p,input{margin:0;padding:0; font:12px; font-weight:normal;}
+body,button,input,select,textarea{font:12px/1.5 tahoma,arial,"Microsoft YaHei","\5b8b\4f53"}
+address, caption, cite, code, dfn, em, strong, th, var, optgroup { font-style:inherit; font-weight:inherit; }
+del, ins { text-decoration:none; }
+li { list-style:none; }
+caption, th { text-align:left; }
+h1, h2, h3, h4, h5, h6 { font-size:100%; font-weight:normal; }
+q:before, q:after { content:''; }
+abbr, acronym { border:0; font-variant:normal; }
+sup { vertical-align:baseline; }
+sub { vertical-align:baseline; }
+legend { color:#000; }
+input, button, textarea, select, optgroup, option { font-family:inherit; font-size:inherit; font-style:inherit; font-weight:inherit; }
+input, button, textarea, select { *font-size:100%;}
+a:link{ text-decoration:none;outline:none;hide-focus:expression(this.hideFocus=true);}
+a:visited{text-decoration:none; outline:none;hide-focus:expression(this.hideFocus=true);}
+a:hover{outline:none;cursor:pointer;hide-focus:expression(this.hideFocus=true);}
+.fl{ float:left}
+.clear {clear: both;height: 0;overflow: hidden;}
+.clearfix:after{display:block;content:".";height:0;line-height:0;clear:both;visibility:hidden;}
+.clearfix {zoom:1;}
+img{ border:0;}
+/*文字排版*/
+.f12 { font-size:12px; }
+.f13 { font-size:13px; }
+.f14 { font-size:14px; }
+.f16 { font-size:16px; }
+.f20 { font-size:20px; }
+.fb { font-weight:bold }
+.fn { font-weight:normal; }
+.t2 { text-indent:2em; }
+.lh150 { line-height:150%; }
+.lh180 { line-height:180%; }
+.lh200 { line-height:200%; }
+.unl { text-decoration:underline; }
+.no_unl { text-decoration:none; }
+/*定位*/
+.tl { text-align:left; }
+.tc { text-align:center; }
+.tr { text-align:right; }
+.bc { margin-left:0; margin-right:0; }
+.fl { float:left; display:inline; }
+.fr { float:right; display:inline; }
+.cb,.clear { clear:both; }
+.cl { clear:left; }
+.cr { clear:right; }
+.clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
+.vm { verticle-align:middle; }
+.pr { position:relative; }
+.pa { position:absolute; }
+.abs-right { position:absolute; right:0 }
+.zoom { zoom:1; }
+.hidden { visiility:hidden; }
+.none { display:none; }
+/*长度高度*/
+.w10 { width:10px; }
+.w20 { width:20px; }
+.w30 { width:30px; }
+.w40 { width:40px; }
+.w50 { width:50px; }
+.w60 { width:60px; }
+.w70 { width:70px; }
+.w80 { width:80px; }
+.w90 { width:90px; }
+.w100 { width:100px; }
+.w200 { width:200px; }
+.w300 { width:300px; }
+.w400 { width:400px; }
+.w500 { width:500px; }
+.w600 { width:600px; }
+.w700 { width:700px; }
+.w800 { width:800px; }
+.w { width:100% }
+.h50 { width:50px; }
+.h80 { width:80px; }
+.h100 { width:100px; }
+.h200 { width:200px; }
+.h { height:100% }
+/*边距*/
+.m10 { margin:10px; }
+.m15 { margin:15px; }
+.m30 { margin:30px; }
+.mt5 { margin-top:5px; }
+.mt10 { margin-top:10px; }
+.mt15 { margin-top:15px; }
+.mt20 { margin-top:20px; }
+.mt30 { margin-top:30px; }
+.mt50 { margin-top:50px; }
+.mt100 { margin-top:100px; }
+.mb5 { margin-bottom:5px; }
+.mb10 { margin-bottom:10px; }
+.mb15 { margin-bottom:15px; }
+.mb20 { margin-bottom:20px; }
+.mb30 { margin-bottom:30px; }
+.mb50 { margin-bottom:50px; }
+.mb100 { margin-bottom:100px; }
+.ml5 { margin-left:5px; }
+.ml10 { margin-left:10px; }
+.ml15 { margin-left:15px; }
+.ml20 { margin-left:20px; }
+.ml30 { margin-left:30px; }
+.ml50 { margin-left:50px; }
+.ml100 { margin-left:100px; }
+.mr5 { margin-right:5px; }
+.mr10 { margin-right:10px; }
+.mr15 { margin-right:15px; }
+.mr20 { margin-right:20px; }
+.mr30 { margin-right:30px; }
+.mr50 { margin-right:50px; }
+.mr100 { margin-right:100px; }
+.p10 { padding:10px; }
+.p15 { padding:15px; }
+.p30 { padding:30px; }
+.pt5 { padding-top:5px; }
+.pt10 { padding-top:10px; }
+.pt15 { padding-top:15px; }
+.pt20 { padding-top:20px; }
+.pt30 { padding-top:30px; }
+.pt50 { padding-top:50px; }
+.pt100 { padding-top:100px; }
+.pb5 { padding-bottom:5px; }
+.pb10 { padding-bottom:10px; }
+.pb15 { padding-bottom:15px; }
+.pb20 { padding-bottom:20px; }
+.pb30 { padding-bottom:30px; }
+.pb50 { padding-bottom:50px; }
+.pb100 { padding-bottom:100px; }
+.pl5 { padding-left:5px; }
+.pl10 { padding-left:10px; }
+.pl15 { padding-left:15px; }
+.pl20 { padding-left:20px; }
+.pl30 { padding-left:30px; }
+.pl50 { padding-left:50px; }
+.pl100 { padding-left:100px; }
+.pr5 { padding-right:5px; }
+.pr10 { padding-right:10px; }
+.pr15 { padding-right:15px; }
+.pr20 { padding-right:20px; }
+.pr30 { padding-right:30px; }
+.pr50 { padding-right:50px; }
+.pr100 { padding-right:100px; }
+
+
+/*头部样式*/
+.header-content{ height:76px; overflow:hidden; background:#fff; padding-left:0px; width:100%; border-bottom:1px solid #a0a0a0}
+.header-content a{color:#35404d;}
+.fra_box{ width:1024px; margin:0 auto}
+.header-logo{ float:left; padding-top:22px; height:32px; overflow:hidden}
+.header-logo img{ vertical-align:top}
+.header-logo i{ color:#16bbf9; font-style:normal; margin:0 10px;font-size:28px; line-height:28px; height:28px;vertical-align:top}
+.header-logo span{ font-size:24px;vertical-align:bottom; color:#16bbf9}
+.header-right{ float:right; margin-top:20px; padding-right:10px}
+.header-right li{ float:left; font-size:18px; color:#17bdfb; margin:0 0 0 10px; line-height:38px}
+.header-right li.hon{ background:#17bdfb; padding:0 30px; height:38px; line-height:38px; color:#fff;border-radius:18px;-webkit-border-radius:18px;-moz-border-radius:18px}
+.header-right img{ vertical-align:middle}
+.header-text{ float:left; margin: 20px 0 0 60px; display:inline}
+.header-text li{ float:left; font-size:18px; line-height:40px; color:#313131; margin:0 0 0 40px; display:inline}
+.header-text li a{font-size:18px; }
+.user-logo{ float:left}
+.user-logo img{ border-radius:22px;-webkit-border-radius:22px;-moz-border-radius:22px;}
+.messages-icon{ float:left;background:url(http://image.lingcaibao.com/image/2015/2/2015_2_e71dfc73-7f2d-45d4-9e3a-4cd164c4abbc.png) no-repeat 0 -34px; display:inline-block; width:50px; height:40px;}
+.user-name{ float:left;margin:15px 10px 0; display:inline}
+.user-quit{ float:left; margin-top:15px}
+.messages-number{ background:#eb6100; width:20px; height:20px; line-height:20px; border-radius:8px;-webkit-border-radius:8px;-moz-border-radius:8px; position:absolute; color:#fff; font-size:14px; text-align:center; margin-left:21px;}
+
+
+.container{ width:1000px; margin:0 auto; height:auto; background:#f1f2f7; padding-bottom:20px}
+.content{}
+/*左侧导航*/
+.left-sider{ float:left; width:200px; margin-right:30px; padding:0 0 50px 0;background:#1f8f17; margin-top:15px}
+.left-sider ul{width:200px;overflow:hidden;}
+
+.left-sider li{ clear:both;overflow:hidden; line-height:56px; color:#fff; font-size:16px; background:#1f8f17; border-bottom:1px solid #63b15d}
+.left-sider li a{ display:block; padding-left:62px;overflow:hidden;width:auto; color:#fff}
+.left-sider li.bgreen a{ background:#52a714; color:#fff; padding-left:15px}
+.left-sider li.bgreen .left-sider-icon{ background:url(../../images/tb1.png) no-repeat 0 5px;display: inline;float: left;height: 30px;margin-top: 15px;overflow: hidden;text-indent: -9999px;width: 30px; margin-right:15px}
+.left-sider li span{ float:left}
+
+.left-sider .sub-sider{padding:5px 0px 10px;width:176px;background:#35404d;border-radius:3px;display:none;}
+
+.left-sider li.on{ color:#fff;background:#efefef; height:auto;  color:#117700}
+.left-sider li.on a{padding-left:62px; color:#117700}
+
+
+.left-sider2{ float:left; width:200px; margin-right:30px; padding:0 0 50px 0;background:#0088d6; margin-top:15px}
+.left-sider2 ul{width:200px;overflow:hidden;}
+.left-sider2 li{ clear:both;overflow:hidden; line-height:56px; color:#fff; font-size:16px; background:#0088d6; border-bottom:1px solid #17bdfb}
+.left-sider2 li a{ display:block; padding-left:62px;overflow:hidden;width:auto; color:#fff}
+.left-sider2 li.bgreen a{ background:#17bdfb; color:#fff; padding-left:15px}
+.left-sider2 li.bgreen .left-sider-icon{ background:url(../../images/tb1.png) no-repeat 0 5px;display: inline;float: left;height: 30px;margin-top: 15px;overflow: hidden;text-indent: -9999px;width: 30px; margin-right:15px}
+.left-sider2 li span{ float:left}
+.left-sider2 .sub-sider{padding:5px 0px 10px;width:176px;background:#35404d;border-radius:3px;display:none;}
+.left-sider2 li.on{ color:#006abc;background:#fcdb50; height:auto;  color:#fff}
+.left-sider2 li.on a{padding-left:62px; color:#006abc; font-size:16px}
+
+
+.left-sider3{ float:left; width:200px; margin-right:30px; padding:0 0 50px 0;background:#eb6100; margin-top:15px}
+.left-sider3 ul{width:200px;overflow:hidden;}
+.left-sider3 li{ clear:both;overflow:hidden; line-height:56px; color:#fff; font-size:16px; background:#eb6100; border-bottom:1px solid #f1914d}
+.left-sider3 li a{ display:block; padding-left:62px;overflow:hidden;width:auto; color:#fff}
+.left-sider3 li.bgreen a{ background:#ff9600; color:#fff; padding-left:15px}
+.left-sider3 li.bgreen .left-sider-icon{ background:url(../../images/tb1.png) no-repeat 0 5px;display: inline;float: left;height: 30px;margin-top: 15px;overflow: hidden;text-indent: -9999px;width: 30px; margin-right:15px}
+.left-sider3 li span{ float:left}
+.left-sider3 .sub-sider{padding:5px 0px 10px;width:176px;background:#35404d;border-radius:3px;display:none;}
+.left-sider3 li.on{ color:#eb6100;background:#fffae1; height:auto;  color:#fff}
+.left-sider3 li.on a{padding-left:62px; color:#eb6100; font-size:16px}
+.tb-icon{ background:url(http://image.lingcaibao.com/image/2015/5/2015_5_c0cbf214aa6a4aaa9c4bd78630b1aa13.png) no-repeat 0 -1px; float:right; display:inline; width:10px; height:20px; margin:20px 30px 0 0}
+.tb-icon2{ background:url(../../images/tb8.png) no-repeat 0 -1px; float:right; display:inline; width:10px; height:20px; margin:20px 30px 0 0}
+.tb-icon3{ background:url(../../images/tb11.png) no-repeat 0 -1px; float:right; display:inline; width:10px; height:20px; margin:20px 30px 0 0}
+.tb-icon4{ background:url(../../images/tb10.png) no-repeat 0 -1px; float:right; display:inline; width:10px; height:20px; margin:20px 30px 0 0}
+
+.merchants-main{ float:left; width:794px; padding-bottom:200px}
+.title{ font-size:24px; color:#000; border-bottom:1px solid #dcdcdc; height:56px; line-height:56px; padding-left:20px; margin-top:25px; width:100%}
+.que_list li{ border-bottom:1px dashed #eeeeee; line-height:43px; background:url(../../images/dd.png) no-repeat 24px 18px; padding-left:45px; font-size:14px; color:#0068c1}
+.ans{ width:700px;  background:#f7f7f7; }
+.ans p{ font-size:14px; color:#313131; line-height:24px}
+.footer {background-color: #eee;color: #a0a0a0;height: 280px;padding-top: 20px;}
+.w-980 {margin: 0 auto;width: 980px;}
+.coop {border-bottom: 1px solid #ddd;padding-bottom: 40px;width: 100%;}
+.tit2{ background:url(../../images/tb9.png) no-repeat 18px 21px; height:40px; line-height:25px; border-bottom:1px solid #b5b5b5; font-size:18px; padding:27px 0 0 70px;}
+.alist li{ width:242px; padding:10px;height:255px; float:left; margin:18px 0 0 0}
+.alist li:hover{ border:1px solid #e6e6e6;}
+.alist li h2{ font-size:18px; color:#000; line-height:36px; }
+.alist li span{ float:left; display:block; font-size:14px; color:#0068c1}
+.alist li span a{color:#0068c1}
+.alist li em{ float:right; display:block; font-size:12px; color:#a0a0a0}
+.index-wrap .bank-list li {
+    display: inline;
+    float: left;
+}
+
+.error-wrap {
+    background-color: #9ed5e4;
+}
+.error-wrap .error {
+    padding: 0 0 80px;
+}
+.error-wrap .error .wrap {
+    margin: 0 auto;
+}
+.error-wrap .error .screen {
+    height: 310px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    width: 500px;
+}
+.error-wrap .error .screen .error-bg1, .error .screen .error-bg2 {
+    position: absolute;
+}
+.error-wrap .error .screen .error-bg1 {
+    background-repeat: no-repeat;
+    height: 359px;
+    left: 93px;
+    top: -83px;
+    width: 314px;
+}
+.error-wrap .error .screen .error-bg2 {
+    background-repeat: no-repeat;
+    height: 293px;
+    left: 67px;
+    top: 0;
+    width: 325px;
+}
+.error-wrap .error .error-msg {
+    color: #fff;
+    font-size: 26px;
+    margin: 20px 0 40px;
+    text-align: center;
+}
+.error-wrap .error .portal {
+    text-align: center;
+}
+.error-wrap .error .back-to-home {
+    background-color: #389d92;
+    font-size: 16px;
+    height: 36px;
+    line-height: 36px;
+    padding: 5px 40px;
+}
+.error-wrap .error .back-to-home:hover {
+    background-color: #33a69a;
+}
+.w-980 {
+    margin: 0 auto;
+    width: 980px;
+}
+.index-wrap {
+    background-color: #fefefe;
+}
+.index-wrap .fl {
+    display: inline;
+    float: left;
+}
+.index-wrap .fr {
+    display: inline;
+    float: right;
+}
+.index-wrap .pr {
+    position: relative;
+}
+.index-wrap .pa {
+    position: absolute;
+}
+.index-wrap .hidden {
+    display: none;
+}
+.index-wrap .login-area {
+    height: 0;
+    z-index: 100;
+}
+.index-wrap .login-box {
+    background-color: rgba(51, 51, 51, 0.6);
+    padding: 20px 0 30px;
+    position: absolute;
+    right: 0;
+    top: 25px;
+    width: 280px;
+    z-index: 101;
+}
+.index-wrap .login-box h2 {
+    color: #fff;
+    font-weight: 700;
+    padding-left: 30px;
+}
+.index-wrap .login-box .f-pass {
+    display: inline-block;
+    height: 22px;
+    margin-right: 5px;
+    padding-top: 8px;
+    text-align: center;
+    width: 80px;
+}
+.index-wrap #slider {
+    background: url("/static/wallet/index/images/loading16x16_4129bc0.gif") no-repeat scroll center center #edf7fb;
+    height: 420px;
+    width: 100%;
+    z-index: 10;
+}
+.index-wrap #slider li {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 11;
+}
+.index-wrap #slider .slider-bg a {
+    display: block;
+    height: 420px;
+    width: 100%;
+}
+.index-wrap .slider-bg {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    display: none;
+    height: 420px;
+    overflow: hidden;
+    width: 100%;
+}
+.index-wrap #slider-number-box {
+    left: 0;
+    margin-top: 5px;
+    position: absolute;
+    text-align: center;
+    top: 390px;
+    width: 100%;
+    z-index: 100;
+}
+.index-wrap #slider-number-box a {
+    background-repeat: no-repeat;
+    display: inline-block;
+    font-size: 14px;
+    height: 8px;
+    overflow: hidden;
+    width: 30px;
+}
+.index-wrap #slider-number-box a.active {
+    background-repeat: no-repeat;
+}
+.index-wrap .wrapper {
+    border-bottom: 1px solid #e5e5e5;
+    min-width: 980px;
+    padding-bottom: 30px;
+    width: 100%;
+}
+.index-wrap .wrapper a:hover {
+    color: #146fc0;
+    text-decoration: none;
+}
+.index-wrap .wrapper a:active {
+    color: #a9a9a9;
+}
+.index-wrap .enter-life {
+    padding-left: 30px;
+    padding-top: 30px;
+}
+.index-wrap .enter-life li {
+    margin-right: 100px;
+}
+.index-wrap .enter-life li.last {
+    margin-right: 0;
+}
+
+.index-wrap .footer {
+    background-color: #eee;
+    color: #a0a0a0;
+    height: 280px;
+    padding-top: 20px;
+}
+.index-wrap .coop {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 40px;
+    width: 100%;
+}
+.index-wrap .coop-item {
+    width: 326px;
+}
+.index-wrap .coop .banks {
+    width: 326px;
+}
+.index-wrap .coop .users {
+    width: 366px;
+}
+.index-wrap .coop .notice {
+    width: 246px;
+}
+.index-wrap .coop-header h3, .index-wrap .coop-header a {
+    display: inline;
+    float: left;
+}
+.index-wrap .coop-header h3 {
+    font-weight: 700;
+    margin-right: 15px;
+}
+.index-wrap .coop-header a {
+    color: #136ec2;
+    font-size: 12px;
+    line-height: 14px;
+    padding-top: 2px;
+}
+.index-wrap .bank-list, .index-wrap .comm-list, .index-wrap .anno-list {
+    margin-top: 18px;
+}
+.index-wrap .bank-list li {
+    display: inline;
+    float: left;
+}
+.index-wrap .bank-list a {
+    background-image: url("http://image.lingcaibao.com/image/2015/5/2015_5_54e96a0e8ddc4269a17a4646e7ce9a20.png");
+    background-repeat: no-repeat;
+    display: block;
+    height: 20px;
+    margin: 0 10px 10px 0;
+    width: 20px;
+}
+.index-wrap .icbc {
+    background-position: -9px -9px;
+}
+.index-wrap .aboc {
+    background-position: -41px -9px;
+}
+.index-wrap .bocl {
+    background-position: -73px -9px;
+}
+.index-wrap .ccob {
+    background-position: -107px -9px;
+}
+.index-wrap .boc {
+    background-position: -139px -9px;
+}
+.index-wrap .cmb {
+    background-position: -169px -9px;
+}
+.index-wrap .spdb {
+    background-position: -201px -9px;
+}
+.index-wrap .ibc {
+    background-position: -331px -10px;
+}
+.index-wrap .cmbc {
+    background-position: -266px -9px;
+}
+.index-wrap .ccib {
+    background-position: -298px -9px;
+}
+.index-wrap .cebc {
+    background-position: -362px -9px;
+}
+.index-wrap .pab {
+    background-position: -388px -9px;
+}
+.index-wrap .cgb {
+    background-position: -420px -9px;
+}
+.index-wrap .hxb {
+    background-position: -448px -9px;
+}
+.index-wrap .psbc {
+    background-position: -476px -9px;
+}
+.index-wrap .icbc:hover {
+    background-position: -9px -55px;
+}
+.index-wrap .aboc:hover {
+    background-position: -41px -55px;
+}
+.index-wrap .bocl:hover {
+    background-position: -73px -55px;
+}
+.index-wrap .ccob:hover {
+    background-position: -107px -55px;
+}
+.index-wrap .boc:hover {
+    background-position: -139px -55px;
+}
+.index-wrap .cmb:hover {
+    background-position: -169px -55px;
+}
+.index-wrap .spdb:hover {
+    background-position: -201px -55px;
+}
+.index-wrap .ibc:hover {
+    background-position: -331px -55px;
+}
+.index-wrap .cmbc:hover {
+    background-position: -266px -55px;
+}
+.index-wrap .ccib:hover {
+    background-position: -298px -55px;
+}
+.index-wrap .cebc:hover {
+    background-position: -362px -55px;
+}
+.index-wrap .pab:hover {
+    background-position: -388px -55px;
+}
+.index-wrap .cgb:hover {
+    background-position: -420px -55px;
+}
+.index-wrap .hxb:hover {
+    background-position: -448px -55px;
+}
+.index-wrap .psbc:hover {
+    background-position: -476px -55px;
+}
+.index-wrap .comm-list li {
+    display: inline;
+    float: left;
+}
+.index-wrap .comm-list a {
+    background-image: url("http://image.lingcaibao.com/image/2015/6/2015_6_ac62e40186994c6fbb0f1e45da9803de.png");
+    background-repeat: no-repeat;
+    display: block;
+    height: 17px;
+    margin-bottom: 12px;
+    width: 70px;
+}
+.index-wrap .comm-list a.nuomi {
+    background-position: -15px -4px;
+    width: 60px;
+}
+.index-wrap .comm-list a.aiqiyi {
+    background-position: -11px -51px;
+    margin-right: 2px;
+}
+.index-wrap .comm-list a.lecai {
+    background-position: -15px -100px;
+}
+.index-wrap .comm-list a.jumei {
+    background-position: -4px -148px;
+}
+.index-wrap .comm-list a.zhongxin {
+    background-position: -4px -195px;
+}
+.index-wrap .comm-list a.qunar {
+    background-position: -14px -242px;
+    width: 60px;
+}
+.index-wrap .comm-list a.lvmama {
+    background-position: -4px -291px;
+    margin-right: 2px;
+}
+.index-wrap .comm-list a.youbao {
+    background-position: -5px -335px;
+}
+.index-wrap .comm-list a.zhe800 {
+    background-position: -4px -380px;
+}
+.index-wrap .comm-list a.guomei {
+    background-position: -13px -428px;
+}
+.index-wrap .comm-list a.zhizhu {
+    background-position: -106px -4px;
+    width: 60px;
+}
+.index-wrap .comm-list a.shiji {
+    background-position: -99px -49px;
+    margin-right: 2px;
+}
+.index-wrap .comm-list a.womai {
+    background-position: -96px -98px;
+}
+.index-wrap .comm-list a.xunlei {
+    background-position: -106px -145px;
+}
+.index-wrap .comm-list a.gewala {
+    background-position: -105px -190px;
+}
+.index-wrap .comm-list a.fivehundred {
+    background-position: -106px -235px;
+    width: 60px;
+}
+.index-wrap .comm-list a.aoke {
+    background-position: -106px -285px;
+    width: 75px;
+}
+.index-wrap .comm-list a.lefeng {
+    background-position: -93px -330px;
+}
+.index-wrap .comm-list a.pptv {
+    background-position: -106px -383px;
+    margin-right: 2px;
+}
+.index-wrap .comm-list a.huisuoping {
+    background-position: -90px -427px;
+}
+.index-wrap .comm-list a.nuomi:hover {
+    background-position: -15px -25px;
+}
+.index-wrap .comm-list a.aiqiyi:hover {
+    background-position: -11px -75px;
+}
+.index-wrap .comm-list a.lecai:hover {
+    background-position: -15px -123px;
+}
+.index-wrap .comm-list a.jumei:hover {
+    background-position: -4px -171px;
+}
+.index-wrap .comm-list a.zhongxin:hover {
+    background-position: -4px -217px;
+}
+.index-wrap .comm-list a.qunar:hover {
+    background-position: -14px -268px;
+}
+.index-wrap .comm-list a.lvmama:hover {
+    background-position: -4px -313px;
+}
+.index-wrap .comm-list a.youbao:hover {
+    background-position: -5px -359px;
+}
+.index-wrap .comm-list a.zhe800:hover {
+    background-position: -4px -405px;
+}
+.index-wrap .comm-list a.guomei:hover {
+    background-position: -13px -451px;
+}
+.index-wrap .comm-list a.zhizhu:hover {
+    background-position: -106px -26px;
+}
+.index-wrap .comm-list a.shiji:hover {
+    background-position: -99px -73px;
+}
+.index-wrap .comm-list a.womai:hover {
+    background-position: -96px -120px;
+}
+.index-wrap .comm-list a.xunlei:hover {
+    background-position: -106px -168px;
+}
+.index-wrap .comm-list a.gewala:hover {
+    background-position: -106px -212px;
+}
+.index-wrap .comm-list a.fivehundred:hover {
+    background-position: -106px -259px;
+}
+.index-wrap .comm-list a.aoke:hover {
+    background-position: -106px -308px;
+}
+.index-wrap .comm-list a.lefeng:hover {
+    background-position: -93px -357px;
+}
+.index-wrap .comm-list a.pptv:hover {
+    background-position: -106px -404px;
+}
+.index-wrap .comm-list a.huisuoping:hover {
+    background-position: -90px -455px;
+}
+.index-wrap .anno-list {
+    color: #999;
+   
+    margin-left: 8px;
+    overflow: hidden;
+}
+.index-wrap .anno-list li {
+    background: url("http://image.lingcaibao.com/image/2015/5/2015_5_d2e38eb301944cc9807cd31e9a329578.png") no-repeat scroll left center rgba(0, 0, 0, 0);
+    padding-left: 12px; 
+    height:25px;
+    width:230px;
+    overflow:hidden;
+}
+.index-wrap .anno-list a {
+    color: #999;
+    font-size: 12px;
+    line-height: 20px;
+}
+.index-wrap .anno-list a:hover {
+    color: #146fc0;
+    text-decoration: underline;
+}
+.index-wrap .anno-list a:active {
+    color: #a9a9a9;
+}
+.index-wrap .login-tab {
+    clear: both;
+    height: 35px;
+    margin-left: 16px;
+    width: 240px;
+}
+.index-wrap .login-tab .tab-item {
+    cursor: pointer;
+    display: inline;
+    float: left;
+    height: 35px;
+    list-style: outside none none;
+    position: relative;
+    width: 80px;
+}
+.index-wrap .login-tab .tab-item a {
+    color: #b8b7b7;
+    display: block;
+    font-size: 14px;
+    height: 35px;
+    line-height: 35px;
+    outline: 0 none;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+}
+.index-wrap .login-tab .tab-selected a {
+    color: #fff;
+    font-weight: 700;
+}
+.index-wrap .tang-pass-login {
+    width: 100%;
+}
+.index-wrap .tang-pass-login form {
+    margin-left: 30px;
+}
+.index-wrap .tang-pass-login .pass-generalErrorWrapper {
+    margin: 0;
+}
+.index-wrap .tang-pass-login dl, .index-wrap .tang-pass-login dt, .index-wrap .tang-pass-login dd, .index-wrap .tang-pass-login ul, .index-wrap .tang-pass-login ol, .index-wrap .tang-pass-login li, .index-wrap .tang-pass-login input {
+    margin: 0;
+    padding: 0;
+}
+.index-wrap .tang-pass-login .clearfix::after, .index-wrap .tang-pass-login .pass-form-item::after {
+    clear: both;
+    content: " ";
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
+}
+.index-wrap .tang-pass-login .clearfix, .index-wrap .tang-pass-login .pass-form-item {
+}
+.index-wrap .tang-pass-login {
+    font: 12px/1.5 "Microsoft Yahei",tahoma,arial,Hiragino Sans GB,宋体;
+    position: relative;
+}
+.index-wrap .tang-pass-login .pass-form-item {
+    display: block;
+    margin-top: 20px;
+    position: relative;
+}
+.index-wrap .tang-pass-login .pass-label {
+    color: #fff;
+    display: none;
+    float: left;
+    font-family: "Microsoft Yahei";
+    font-size: 12px;
+    height: 26px;
+    line-height: 26px;
+    padding-right: 5px;
+    text-align: right;
+    width: 45px;
+}
+.index-wrap .tang-pass-login .pass-text-input {
+    background-color: #fff;
+    border-color: #ccc #ddd #ddd #ccc;
+    border-left: 1px solid #ccc;
+    border-style: solid;
+    border-width: 1px;
+    color: #333;
+    display: inline;
+    float: left;
+    font-family: "Microsoft Yahei";
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 5px;
+    transition-duration: 0.5s;
+    transition-property: all;
+    width: 173px;
+}
+.index-wrap .tang-pass-login .pass-text-input a {
+    color: #d70000;
+    display: block;
+    font-size: 12px;
+    line-height: 32px;
+    text-align: center;
+}
+.index-wrap .tang-pass-login .pass-text-input-hover {
+    border-color: #ababab #ccc #ccc #ababab;
+}
+.index-wrap .tang-pass-login .pass-text-input-focus {
+    border-color: #377bcb;
+}
+.index-wrap .tang-pass-login .pass-generalError {
+    color: #ff7326;
+    display: block;
+    font-size: 12px;
+    height: 30px;
+}
+.index-wrap .tang-pass-login .pass-generalError-display {
+    background-color: #fffee4;
+    height: auto;
+    line-height: 18px;
+    margin: 6px 0 10px;
+    padding: 4px 10px;
+    width: 198px;
+}
+
+.index-wrap .login-box-bottom {
+    margin-left: 30px;
+    margin-top: 20px !important;
+}
+.index-wrap .login-box-bottom a {
+    color: #bbb;
+    font-size: 12px;
+}
+.index-wrap .login-box-bottom a.register {
+    background: none repeat scroll 0 0 #3c95b2;
+    color: #fff;
+    display: inline-block;
+    height: 22px;
+    margin-right: 5px;
+    padding-top: 8px;
+    text-align: center;
+    width: 100px;
+}
+.index-wrap .register:hover {
+    background: none repeat scroll 0 0 #2cb0dc;
+    text-decoration: none;
+}
+.index-wrap .register:active {
+    background: none repeat scroll 0 0 #117596;
+}
+.index-wrap .login-nav-separate {
+    display: inline;
+    float: left;
+    height: 35px;
+    list-style: outside none none;
+    margin-right: 12px;
+    position: relative;
+    width: 10px;
+}
+.index-wrap .login-nav-separate span {
+    color: #b8b7b7;
+    display: block;
+    font-size: 14px;
+    height: 35px;
+    line-height: 35px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+.index-wrap .login-box .tang-pass-login .pass-form-item-password {
+    background: url("/static/wallet/index/images/login-box-icon_c85c5b1.jpg") no-repeat scroll 0 -34px rgba(0, 0, 0, 0);
+    margin-top: 16px;
+    padding-left: 34px;
+}
+.index-wrap .login-box .tang-pass-login .pass-form-item-password label {
+    display: none;
+    text-align: left;
+}
+.index-wrap .tang-pass-login a, .index-wrap .tang-pass-login label, .index-wrap .tang-pass-login p, .index-wrap .tang-pass-login li {
+    font-size: 12px;
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+.index-wrap .tang-pass-login .pass-form-item.pass-form-item-userName {
+    z-index: 21;
+}
+.index-wrap .tang-pass-login .pass-form-item {
+    clear: both;
+    position: relative;
+}
+.index-wrap .tang-pass-login .pass-form-item .pass-placeholder {
+    color: #a9a9a9;
+    cursor: text;
+    display: block;
+    font-size: 12px;
+    height: 28px;
+    left: 36px;
+    line-height: 28px;
+    padding-left: 13px;
+    position: absolute;
+    top: 1px;
+    width: 140px;
+    z-index: 1999;
+}
+.index-wrap .tang-pass-login .pass-form-item .pass-placeholder {
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+}
+.index-wrap .tang-pass-login .pass-form-item .pass-placeholder-password {
+    width: 30px;
+}
+.index-wrap .tang-pass-login .pass-form-item .pass-placeholder-verifyCode {
+    left: -9999px;
+}
+.index-wrap .tang-pass-login .pass-form-item .pass-placeholder-password {
+    color: #555;
+    left: -12px;
+    top: -37px;
+}
+.index-wrap .tang-pass-login .pass-form-item .pass-placeholder-password {
+}
+.login-wrap {
+    border-bottom: 1px solid #ddd;
+    color: #333;
+    font-family: "Microsoft Yahei";
+    margin: 0 auto;
+    width: 980px;
+}
+.login-wrap .login-tab {
+    clear: both;
+    height: 35px;
+    margin-left: 16px;
+    width: 240px;
+}
+.login-wrap .login-tab .tab-item {
+    cursor: pointer;
+    display: inline;
+    float: left;
+    height: 35px;
+    list-style: outside none none;
+    position: relative;
+    width: 80px;
+}
+.login-wrap .login-tab .tab-item a {
+    color: #b8b7b7;
+    display: block;
+    font-size: 14px;
+    height: 35px;
+    line-height: 35px;
+    outline: 0 none;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+}
+.login-wrap .login-tab .tab-selected a {
+    color: #fff;
+    font-weight: 700;
+}
+.login-wrap .tang-pass-login {
+    width: 100%;
+}
+.login-wrap .tang-pass-login form {
+    width: 278px;
+}
+.login-wrap .tang-pass-login .pass-generalErrorWrapper {
+    margin: 0;
+}
+.login-wrap .tang-pass-login dl, .login-wrap .tang-pass-login dt, .login-wrap .tang-pass-login dd, .login-wrap .tang-pass-login ul, .login-wrap .tang-pass-login ol, .login-wrap .tang-pass-login li, .login-wrap .tang-pass-login input {
+    margin: 0;
+    padding: 0;
+}
+.login-wrap .tang-pass-login .clearfix::after, .login-wrap .tang-pass-login .pass-form-item::after {
+    clear: both;
+    content: " ";
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
+}
+.login-wrap .tang-pass-login .clearfix, .login-wrap .tang-pass-login .pass-form-item {
+}
+.login-wrap .tang-pass-login {
+    font: 12px/1.5 "Microsoft Yahei",tahoma,arial,Hiragino Sans GB,宋体;
+    position: relative;
+}
+.login-wrap .tang-pass-login .pass-form-item {
+    display: block;
+    margin-top: 20px;
+    position: relative;
+}
+.login-wrap .tang-pass-login .pass-label {
+    color: #fff;
+    display: none;
+    float: left;
+    font-family: "Microsoft Yahei";
+    font-size: 12px;
+    height: 26px;
+    line-height: 26px;
+    padding-right: 5px;
+    text-align: right;
+    width: 45px;
+}
+.login-wrap .tang-pass-login .pass-text-input {
+    background-color: #fff;
+    border-color: #ccc #ddd #ddd #ccc;
+    border-left: 1px solid #ccc;
+    border-style: solid;
+    border-width: 1px;
+    color: #333;
+    display: inline;
+    float: left;
+    font-family: "Microsoft Yahei";
+    font-size: 14px;
+    height: 38px;
+    line-height: 38px;
+    padding: 0 5px;
+    transition-duration: 0.5s;
+    transition-property: all;
+    width: 266px;
+}
+.login-wrap .tang-pass-login .pass-text-input a {
+    color: #d70000;
+    display: block;
+    font-size: 12px;
+    line-height: 32px;
+    text-align: center;
+}
+.login-wrap .tang-pass-login .pass-text-input-hover {
+    border-color: #ababab #ccc #ccc #ababab;
+}
+.login-wrap .tang-pass-login .pass-text-input-focus {
+    border-color: #377bcb;
+}
+.login-wrap .tang-pass-login .pass-text-input-error {
+    border-color: #db1111 #d91111 #d91111;
+}
+.login-wrap .tang-pass-login .pass-generalError {
+    color: #ff7326;
+    display: block;
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+}
+.login-wrap .tang-pass-login .pass-generalError a {
+    color: #377bcb;
+    text-decoration: underline;
+}
+.login-wrap .tang-pass-login input:focus {
+    outline: 0 none;
+}
+.login-wrap .tang-pass-login .pass-form-item-userName {
+    margin-left: 0;
+    margin-top: 0;
+}
+.login-wrap .tang-pass-login .pass-text-input-verifyCode {
+    display: inline;
+    float: left;
+    height: 24px;
+    padding: 0 8px;
+    width: 42px;
+}
+.login-wrap .tang-pass-login .pass-verifyCode {
+    border: 1px solid #ddd;
+    display: inline;
+    float: left;
+    height: 24px;
+    margin-left: 5px;
+}
+.login-wrap .tang-pass-login .pass-change-verifyCode {
+    color: #fff;
+    cursor: pointer;
+    display: inline;
+    float: left;
+    font-size: 12px;
+    line-height: 26px;
+    padding-left: 5px;
+    text-decoration: underline;
+}
+.login-wrap .tang-pass-login .pass-form-item-memberPass {
+    color: #666;
+    display: none;
+    font-size: 12px;
+    height: 18px;
+    margin-top: 7px;
+    padding-left: 50px;
+    position: relative;
+}
+.login-wrap .tang-pass-login .pass-form-item-memberPass input {
+    vertical-align: middle;
+}
+.login-wrap .tang-pass-login .pass-form-item-memberPass label {
+    padding-left: 5px;
+}
+.login-wrap .tang-pass-login .pass-form-item-submit {
+    margin-bottom: 15px;
+    margin-left: 0;
+}
+.login-wrap .tang-pass-login .pass-form-item-submit {
+    height: 34px;
+    line-height: 34px;
+}
+.login-wrap .tang-pass-login .pass-form-item-submit input {
+    cursor: pointer;
+    display: inline;
+    float: left;
+    font-size: 14px;
+}
+.login-wrap .tang-pass-login .pass-form-item-submit .pass-button-submit {
+    font-size: 18px;
+    letter-spacing: 10px;
+}
+.login-wrap .tang-pass-login .pass-form-item-submit a.pass-fgtpwd {
+    color: #00c;
+    display: none;
+    float: left;
+    font-size: 12px;
+    height: 32px;
+    line-height: 32px;
+    margin-left: 20px;
+    text-decoration: underline;
+}
+
+.login-wrap .tang-pass-login .pass-button-submit:hover {
+    background-position: -7px -51px;
+}
+.login-wrap .tang-pass-login .pass-button-submit:active {
+    background-position: -7px -99px;
+}
+.login-wrap .tang-pass-login .pass-item-error, .login-wrap .tang-pass-login .pass-item-tip {
+    display: inline;
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    padding-left: 10px;
+}
+.login-wrap .tang-pass-login .pass-item-error {
+    color: #da1111;
+}
+.login-wrap .tang-pass-login .pass-item-tip {
+    color: #a4a4a4;
+}
+.login-wrap .tang-pass-login .sc-tip {
+    color: #d70000;
+    margin-top: 20px;
+}
+.login-wrap .login-box-bottom {
+    margin-left: 30px;
+    margin-top: 20px !important;
+}
+.login-wrap .login-box-bottom a {
+    color: #fff;
+    font-size: 12px;
+    text-decoration: none;
+}
+.login-wrap .register, .login-wrap .f-pass {
+    text-decoration: none;
+}
+.login-wrap .register {
+    background: none repeat scroll 0 0 #41b8de;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    height: 30px;
+    line-height: 30px;
+    margin-right: 5px;
+    text-align: center;
+    width: 100px;
+}
+.login-wrap .register:hover {
+    background: none repeat scroll 0 0 #57cbf1;
+}
+.login-wrap .register:active {
+    background: none repeat scroll 0 0 #1ba1cc;
+}
+.login-wrap .f-pass {
+    color: #666;
+    font-size: 12px;
+}
+.login-wrap .login-nav-separate {
+    display: inline;
+    float: left;
+    height: 35px;
+    list-style: outside none none;
+    margin-right: 12px;
+    position: relative;
+    width: 10px;
+}
+.login-wrap .login-nav-separate span {
+    color: #b8b7b7;
+    display: block;
+    font-size: 14px;
+    height: 35px;
+    line-height: 35px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+.login-wrap .login-box .tang-pass-login .pass-form-item-password {
+    margin-top: 6px;
+}
+.login-wrap .login-box .tang-pass-login .pass-form-item-password label {
+    display: block;
+    text-align: left;
+}
+.login-wrap .tang-pass-login a, .login-wrap .tang-pass-login label, .login-wrap .tang-pass-login p, .login-wrap .tang-pass-login li {
+    font-size: 12px;
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+.login-wrap .tang-pass-login .pass-form-item .pass-form-item-userName {
+    z-index: 21;
+}
+.login-wrap .tang-pass-login .pass-form-item {
+    clear: both;
+    position: relative;
+}
+.login-wrap .tang-pass-login .pass-form-item .pass-placeholder {
+    color: #a9a9a9;
+    cursor: text;
+    display: block;
+    font-size: 12px;
+    height: 28px;
+    left: 0;
+    line-height: 28px;
+    padding-left: 13px;
+    position: absolute;
+    top: 1px;
+    width: 140px;
+    z-index: 1999;
+}
+.login-wrap .tang-pass-login .pass-text-input-verifyCode {
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 11px;
+    width: 108px;
+}
+.login-wrap .tang-pass-login .pass-form-item .pass-placeholder {
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+}
+.login-wrap .tang-pass-login .pass-text-input-password-error {
+    width: 268px;
+}
+.login-wrap .tang-pass-login .pass-form-item .pass-placeholder-password {
+    width: 30px;
+}
+.login-wrap .tang-pass-login .pass-verifyCode {
+    height: 38px;
+    margin-left: 10px;
+    width: 78px;
+}
+.login-wrap .tang-pass-login .pass-change-verifyCode {
+    color: #666;
+    padding-left: 20px;
+}
+.login-wrap .tang-pass-login .pass-form-item .pass-placeholder-verifyCode {
+    left: -9999px;
+}
+.login-wrap .tang-pass-login .pass-form-item.pass-form-item-userName {
+    padding-bottom: 20px;
+}
+.login-wrap .tang-pass-login .pass-form-item .pass-placeholder-password {
+    color: #555;
+    left: -12px;
+    top: -37px;
+}
+.login-wrap .fl {
+    float: left;
+}
+.login-wrap .header {
+    height: 60px;
+}
+.login-wrap .header_logo {
+    width: 780px;
+}
+.login-wrap .header_logo_link {
+    background: url("/static/wallet/index/images/logo-white-bg_e634f50.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 39px;
+    margin: 10px 0 0 20px;
+    width: 132px;
+}
+.login-wrap .header_logo_title_leftSpace, .login-wrap .header_logo_title_rightSpace {
+    font-size: 1px;
+}
+.login-wrap .header_logo_title_sep {
+    font-size: 18px;
+}
+.login-wrap .header_logo_title {
+    border-left: 2px solid gray;
+    color: #b3b3b3;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 700;
+    height: 20px;
+    line-height: 20px;
+    margin: 18px 0 0 5px;
+    padding-left: 5px;
+    width: 100px;
+}
+.login-wrap .header_links, .login-wrap .header_links a {
+    color: #999;
+    font-size: 12px;
+    margin-top: 20px;
+}
+.login-wrap .main {
+    margin: 30px 0 50px;
+    min-height: 330px;
+}
+.login-wrap .advertiseOne {
+    background: url("https://co.baifubao.com/content/resource/images/advertiseOne.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.login-wrap .main_right {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #f6f6f6;
+    border-image: none;
+    border-style: none none solid solid;
+    border-width: 1px;
+    margin-left: 640px;
+    overflow: hidden;
+}
+.login-wrap .login {
+    border: 1px solid #d1d1d1;
+    padding: 19px 29px 30px;
+}
+.login-wrap .login_title {
+    color: #000;
+    font-size: 14px;
+    font-weight: 700;
+    height: 16px;
+    line-height: 16px;
+    margin-bottom: 19px;
+}
+.footer {
+    background: none repeat scroll 0 0 #fff;
+    font-family: "Microsoft Yahei";
+    height: 144px;
+    padding-top: 1px;
+}
+.footer-message {
+    margin-top: 23px;
+    text-align: center;
+}
+.footer-message, .footer-message a {
+    color: #a0a0a0;
+    font-size: 12px;
+}
+.footer-message ul {
+    display: inline-block;
+}
+.footer-message li {
+    display: inline;
+    float: left;
+    line-height: 36px;
+}
+.footer-view {
+    margin-top: 18px;
+}
+.footer-view a {
+    display: inline-block;
+}
+
+.error-wrap .error .screen .error-bg1 {
+    background-position: -11px 0;
+}
+.error-wrap .error .screen .error-bg2 {
+    background-position: 0 -369px;
+}
+.index-wrap #slider-number-box a {
+    background-position: -295px -672px;
+}
+.index-wrap #slider-number-box a.active {
+    background-position: -295px -690px;
+}
+.error-wrap .error .screen .error-bg1, .error-wrap .error .screen .error-bg2, .index-wrap #slider-number-box a, .index-wrap #slider-number-box a.active {
+    background-image: url("http://image.lingcaibao.com/image/2015/5/2015_5_bc20792c74cb471bb03ae34c3aabd063.png");
+}
+
+.c-footer {
+    background-color: #eee;
+    height: 150px;
+}
+
+.c-footer .content, .c-footer .content a {
+    color: #a0a0a0;
+}
+.c-footer .content {
+    margin: 0 auto;
+    text-align: center;
+}
+.c-footer .content .info-links, .c-footer .content .cft {
+    display: inline-block;
+}
+.c-footer .content .info-links {
+    margin-top: 36px;
+}
+.c-footer .content .info-links li, .c-footer .content .cft li {
+    float: left;
+}
+
+.c-footer .content, .c-footer .content a {
+    color: #a0a0a0; font-size:14px
+}
+
+.c-footer .content .copy-right {
+    margin: 16px 0 20px; color: #666666; font-size:14px
+}
+.wztit{ text-align:center;  border-bottom:1px solid #dcdcdc; height:100px; margin-top:50px;}
+.wztit h1{ font-size:36px; color:#000}
+.wztit span{ color:#898989; font-size:14px; text-align:center; line-height:24px;}
+.articel_txt{ margin:50px 20px 0; border-bottom:1px solid #dcdcdc; padding-bottom:40px;}
+.articel_txt p{ font-size:14px; color:#000; line-height:24px; margin-top:10px; text-indent:24px}
+.page_fy{ padding:0 0 0 20px; color:#000; font-size:14px}
+.page_fy span{ padding-top:20px; display:block;}
+.page_fy a{ color:#0068c1}

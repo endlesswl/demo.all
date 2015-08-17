@@ -1,0 +1,8 @@
+#if($bluempStatus =="bluemp")
+#parse("/include/bluemp/lbfooter.vm")
+#else
+<div class="copyright">
+	<div class="btNav"><a> 关于我们</a>|<a>媒体报道</a>|<a>联系我们</a>|<a>服务条款</a>|<a>代理加盟</a>|<a>用户反馈</a></div>
+    <p>京ICP备11038002号-3 Copyright &copy2014 北京零彩宝网络技术有限公司All Rights (版本 : 1.0.0)</p>
+</div>
+#end

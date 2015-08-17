@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+##set( $lzzUrl = "http://localhost" )
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>我的账户-账户充值</title>
+<link href='${lzzUrl}/prd/style/personal/index#ver("/ver/style/personal/index.css.ver").css' rel="stylesheet" type="text/css" />
+<link href='${lzzUrl}/prd/style/personal/model#ver("/ver/style/personal/model.css.ver").css' rel="stylesheet" type="text/css" />
+<script src='${lzzUrl}/prd/script/jquery-2.0.2.min#ver("/ver/script/jquery-2.0.2.min.js.ver").js'></script>
+<script src='${lzzUrl}/prd/script/json2#ver("/ver/script/json2.js.ver").js'></script>
+<script type="text/javascript" src="/plugin/My97DatePicker/WdatePicker.js"></script>
+<script src='${lzzUrl}/prd/script/plugin/util/util#ver("/ver/script/plugin/util/util.js.ver").js'></script>
+<link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"></link>
+<!-- my JS -->
+<script src='${lzzUrl}/prd/script/people/myAccount/accountRecharge#ver("/ver/script/people/myAccount/accountRecharge.js.ver").js'></script>
+<script src='${lzzUrl}/prd/script/people/header#ver("/ver/script/people/header.js.ver").js'></script>
+<script type="text/javascript">
+	$(function() {
+		accountRecharge.init('${ctx}/home/user/info','${ctx}/home/deposit/do');//初始化信息 
+	});
+</script>
+
+</head>
+<body>
+	#parse("/person/include/topnav.vm")
+	<div class="container">
+		<div class="content pb0">
+			<div class="item-title">个人中心</div>
+			<div class="user-center">
+				<!-- 公共用户信息 -->
+				#parse("/person/include/frafirst.vm")
+				<div class="mt15 clearfix">
+					<div class="leftit">
+						<ul>
+							<a href="${ctx}/location/user?path=person/basicmessage/PersonalUserInfo"> <li class="l2">基本信息</li></a>
+					   		<a href="${ctx}/location/user?path=person/myAccount/MyAccount"><li class="lon1">我的账户</li></a>
+						</ul>
+					</div>
+					<div class="right-box">
+
+
+						<div class="account-tit  clearfix">
+							<ul>
+								<a href="${ctx}/location/user?path=person/myAccount/MyAccount"><li class="acon1"><span>账户统计</span></li></a>
+                           		<a href="${ctx}/location/user?path=person/myAccount/TransactionRecords"> <li class="ac2"><span>交易记录</span></li> </a>
+							</ul>
+						</div>
+						<div class="sub-title">充值</div>
+						<div class="order-statue dj-infor pt30 pb10">
+							<div class="order-item ">
+								<label>充值账户：</label>
+								<div class="order-right clearfix">
+									<div class="f16 lh36" id="username">13167399464</div>
+								</div>
+							</div>
+							<div class="order-item ">
+								<label>账户余额：</label>
+								<div class="order-right clearfix">
+									<div class="f16 lh36" id="balance">
+										<font class="red">14.00</font>元
+									</div>
+								</div>
+							</div>
+							<div class="order-item">
+								<label>充值金额：</label>
+								<div class="order-right clearfix">
+									<input type="text" placeholder="" class="sr-text" id="rechargeMoney"><font
+										class="f16">元</font>
+								</div>
+							</div>
+							<div class="order-item ">
+								<label>充值方式：</label>
+								<div class="order-right clearfix">
+									<div class="recharge-fs">
+										<div class="recharge-tit">
+											<ul>
+												<li><input type="radio" name="payType" value="0">支付宝</li>
+												<li><input type="radio" name="payType" value="1">网银支付</li>
+											</ul>
+										</div>
+										<!-- <div class="blank-list clearfix">
+											<ul>
+												<li><label><input type="radio"></label>
+												<div class="card-bd2 ICBC"></div></li>
+												<li><label><input type="radio"></label>
+												<div class="card-bd2 ABC"></div></li>
+												<li><label><input type="radio"></label>
+												<div class="card-bd2 CCB"></div></li>
+												<li><label><input type="radio"></label>
+												<div class="card-bd2 BOC"></div></li>
+												<li><label><input type="radio"></label>
+												<div class="card-bd2 CMB"></div></li>
+												<li><label><input type="radio"></label>
+												<div class="card-bd2 ICBC"></div></li>
+												<li><label><input type="radio"></label>
+												<div class="card-bd2 CIB"></div></li>
+												<li><label><input type="radio"></label>
+												<div class="card-bd2 CEB"></div></li>
+												<li><label><input type="radio"></label>
+												<div class="card-bd2 GDB"></div></li>
+											</ul>
+										</div> -->
+									</div>
+								</div>
+							</div>
+							<div class="order-item">
+								<label></label>
+								<div class="order-right">
+									<input type="button" value="充值" class="ui-button-oranges" onclick="accountRecharge.pay();">
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 公共底部导 -->
+	#parse("/person/include/footernav.vm")
+</body>
+</html>

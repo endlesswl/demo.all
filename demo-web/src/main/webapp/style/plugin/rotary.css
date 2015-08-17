@@ -1,0 +1,84 @@
+/* [export] */
+.rotary_wrap{top:168px;left:16px;border-radius:50%;position:absolute;}
+.rotaryArrow { position: absolute;top:87px;left:87px;width: 48px; height: 48px; cursor: pointer; background-image: url(http://image.lingcaibao.com/image/2015/3/2015_3_c0a0d832-7c54-427c-afd3-8466acf3b519.png);background-repeat:no-repeat;}
+.rotary_block {top:0px;left:0px; width:208px; height:208px; background:#E3D6A1; padding-left:8px; padding-top:8px; position:relative; border-radius:108px; }
+
+.pie { width:200px; height:200px; background-color:blue; border-radius:100px; position:absolute; clip:rect(0px,100px,200px,0px); -o-transform:rotate(54deg); -moz-transform:rotate(54deg); -webkit-transform:rotate(54deg); }
+.six_pie { width:200px; height:200px; background-color:blue; border-radius:100px; position:absolute; clip:rect(0px,100px,200px,0px); -o-transform:rotate(30deg); -moz-transform:rotate(30deg); -webkit-transform:rotate(30deg); }
+.eight_pie { width:200px; height:200px; background-color:blue; border-radius:100px; position:absolute; clip:rect(0px,100px,200px,0px); -o-transform:rotate(45deg); -moz-transform:rotate(45deg); -webkit-transform:rotate(45deg); }
+
+ .pie1 { background:-o-linear-gradient(90deg, #00F, #fff 50%); background:-moz-linear-gradient(90deg, #00F, #fff 50%); background:-webkit-gradient(linear, 0% 100%, 50% 50%, from(#00F), to(#fff)) }
+.pie2 { background:-o-linear-gradient(90deg, #FF0, #fff 50%); background:-moz-linear-gradient(90deg, #FF0, #fff 50%); background:-webkit-gradient(linear, 0% 100%, 50% 50%, from(#FF0), to(#fff)) }
+.pie3 { background:-o-linear-gradient(90deg, #0FF, #fff 50%); background:-moz-linear-gradient(90deg, #0FF, #fff 50%); background:-webkit-gradient(linear, 0% 100%, 50% 50%, from(#0FF), to(#fff)) }
+.pie4 { background:-o-linear-gradient(90deg, #F0F, #fff 50%); background:-moz-linear-gradient(90deg, #F0F, #fff 50%); background:-webkit-gradient(linear, 0% 100%, 50% 50%, from(#F0F), to(#fff)) }
+.pie5 { background:-o-linear-gradient(90deg, #0F0, #fff 50%); background:-moz-linear-gradient(90deg, #0F0, #fff 50%); background:-webkit-gradient(linear, 0% 100%, 50% 50%, from(#0F0), to(#fff)) }
+.pie6 { background:-o-linear-gradient(90deg, #F00, #fff 50%); background:-moz-linear-gradient(90deg, #F00, #fff 50%); background:-webkit-gradient(linear, 0% 100%, 50% 50%, from(#F00), to(#fff)) }
+.pie7 { background:-o-linear-gradient(90deg, #E37504, #fff 50%); background:-moz-linear-gradient(90deg, #E37504, #fff 50%); background:-webkit-gradient(linear, 0% 100%, 50% 50%, from(#E37504), to(#fff)) }
+.pie8 { background:-o-linear-gradient(90deg, #5C3317, #fff 50%); background:-moz-linear-gradient(90deg, #5C3317, #fff 50%); background:-webkit-gradient(linear, 0% 100%, 50% 50%, from(#5C3317), to(#fff)) }
+.pie9 { background:-o-linear-gradient(90deg, #871F78 , #fff 50%); background:-moz-linear-gradient(90deg, #871F78 , #fff 50%); background:-webkit-gradient(linear, 0% 100%, 50% 50%, from(#871F78 ), to(#fff)) }
+.pie10 { background:-o-linear-gradient(90deg,#2F4F4F , #fff 50%); background:-moz-linear-gradient(90deg, #2F4F4F, #fff 50%); background:-webkit-gradient(linear, 0% 100%, 50% 50%, from(#2F4F4F), to(#fff)) } 
+
+
+.redHold .hold .pie1 {background:#F7F2A9;}
+.redHold .hold .pie2{background:#AB2323}
+.redHold .hold .pie3 {background:#F7F2A9;}
+.redHold .hold .pie4{background:#AB2323}
+.redHold .hold .pie5 {background:#F7F2A9;}
+.redHold .hold .pie6{background:#AB2323}
+.redHold .hold .pie7 {background:#F7F2A9;}
+.redHold .hold .pie8{background:#AB2323}
+.redHold .hold .pie9 {background:#F7F2A9;}
+.redHold .hold .pie10{background:#AB2323}
+
+
+.YelHold .hold .pie1 {background:#ED6519;}
+.YelHold .hold .pie2{background:#F6F299}
+.YelHold .hold .pie3 {background:#ED6519;}
+.YelHold .hold .pie4{background:#F6F299}
+.YelHold .hold .pie5 {background:#ED6519;}
+.YelHold .hold .pie6{background:#F6F299}
+.YelHold .hold .pie7 {background:#ED6519;}
+.YelHold .hold .pie8{background:#F6F299}
+.YelHold .hold .pie9 {background:#ED6519;}
+.YelHold .hold .pie10{background:#F6F299}
+
+
+
+
+
+.pie p{z-index:10;position:absolute;left:74px;text-align:left;top:122px;z-index:10;transform:rotate(198deg)}
+.six_pie p{z-index:10;position:absolute;left:63px;text-align:left;top:115px;z-index:10;transform:rotate(207deg)}
+.eight_pie p{z-index:10;position:absolute;left:68px;text-align:left;top:122px;z-index:10;transform:rotate(202deg)}
+
+.hold { width:200px; height:200px; position:absolute; clip:rect(100px,200px,200px,0px); }
+
+.six_hold1 { -o-transform:rotate(120deg); -moz-transform:rotate(120deg); -webkit-transform:rotate(120deg);/* margin-top:-4px;*/ }
+.six_hold2 { -o-transform:rotate(180deg); -moz-transform:rotate(180deg); -webkit-transform:rotate(180deg); /*margin-top:-2px; margin-left:4px;*/ }
+.six_hold3 { -o-transform:rotate(240deg); -moz-transform:rotate(240deg); -webkit-transform:rotate(240deg); /*margin-top:2px; margin-left:4px;*/ }
+.six_hold4 { -o-transform:rotate(300deg); -moz-transform:rotate(300deg); -webkit-transform:rotate(300deg); /*margin-top:4px; */}
+.six_hold5 { -o-transform:rotate(360deg); -moz-transform:rotate(360deg); -webkit-transform:rotate(360deg); /*margin-top:2px; margin-left:-4px; */}
+.six_hold6 { -o-transform:rotate(420deg); -moz-transform:rotate(420deg); -webkit-transform:rotate(420deg); /*margin-top:-2px; margin-left:-4px;*/ }
+
+.eight_hold1 { -o-transform:rotate(0deg); -moz-transform:rotate(0deg); -webkit-transform:rotate(0deg);/* margin-top:-4px;*/ }
+.eight_hold2 { -o-transform:rotate(45deg); -moz-transform:rotate(45deg); -webkit-transform:rotate(45deg); /*margin-top:-2px; margin-left:4px;*/ }
+.eight_hold3 { -o-transform:rotate(90deg); -moz-transform:rotate(90deg); -webkit-transform:rotate(90deg); /*margin-top:2px; margin-left:4px;*/ }
+.eight_hold4 { -o-transform:rotate(135deg); -moz-transform:rotate(135deg); -webkit-transform:rotate(135deg); /*margin-top:4px; */}
+.eight_hold5 { -o-transform:rotate(180deg); -moz-transform:rotate(180deg); -webkit-transform:rotate(180deg); /*margin-top:2px; margin-left:-4px; */}
+.eight_hold6 { -o-transform:rotate(225deg); -moz-transform:rotate(225deg); -webkit-transform:rotate(225deg); /*margin-top:-2px; margin-left:-4px;*/ }
+.eight_hold7 { -o-transform:rotate(270deg); -moz-transform:rotate(270deg); -webkit-transform:rotate(270deg); /*margin-top:-2px; margin-left:-4px;*/ }
+.eight_hold8 { -o-transform:rotate(315deg); -moz-transform:rotate(315deg); -webkit-transform:rotate(315deg); /*margin-top:-2px; margin-left:-4px;*/ }
+
+.hold1 {transform:rotate(0deg); -o-transform:rotate(0deg); -moz-transform:rotate(0deg); -webkit-transform:rotate(0deg);}
+.hold2 { -o-transform:rotate(36deg); -moz-transform:rotate(36deg); -webkit-transform:rotate(36deg); }
+.hold3 { -o-transform:rotate(72deg); -moz-transform:rotate(72deg); -webkit-transform:rotate(72deg);}
+.hold4 { -o-transform:rotate(108deg); -moz-transform:rotate(108deg); -webkit-transform:rotate(108deg);}
+.hold5 { -o-transform:rotate(144deg); -moz-transform:rotate(144deg); -webkit-transform:rotate(144deg);}
+.hold6 { -o-transform:rotate(180deg); -moz-transform:rotate(180deg); -webkit-transform:rotate(180deg);  }
+.hold7 { -o-transform:rotate(216deg); -moz-transform:rotate(216deg); -webkit-transform:rotate(216deg);  }
+.hold8 { -o-transform:rotate(252deg); -moz-transform:rotate(252deg); -webkit-transform:rotate(252deg);  }
+.hold9 { -o-transform:rotate(288deg); -moz-transform:rotate(288deg); -webkit-transform:rotate(288deg);}
+.hold10 { -o-transform:rotate(324deg); -moz-transform:rotate(324deg); -webkit-transform:rotate(324deg); }
+.btn_wrap{position:absolute;left:0;bottom:100px;}
+.btn_style{width:60px;height:30px;float:left;}
+/* .input_wrap{position:absolute;left:230px;top:0px}
+input{display:block;margin:20px} */

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>电商网站jQuery弹出提示层代码 </title>
+
+<link href="/plugin/alert/css/qikoo.css" type="text/css" rel="stylesheet" />
+<link href="/plugin/alert/css/store.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript" src="/plugin/jquery-1.7.2-min.js"></script>
+<script type="text/javascript" src="/plugin/alert/js/qikoo.js"></script>
+<script type="text/javascript">
+//是否付款完成
+function payment(){		
+	qikoo.dialog.payNotice(function(){
+		alert("已完成付款按钮");//已付款完成的提示
+	},function(){
+		alert("你点了付款遇到问题按钮");//付款遇到问题的提示
+	},function(){
+		alert("你点了关闭按钮");//关闭按钮的提示
+	});
+}
+
+function Confirm(){
+	qikoo.dialog.confirm('确定要删除此商品吗？',function(){
+			alert("删除啦！");
+			 			 
+        },function(){
+			alert("取消啦！");
+	});
+}
+
+function Alert(){
+	qikoo.dialog.alert("17素材网 - www.17sucai.com");
+}
+</script>
+
+<style>
+.demo button{padding:15px 20px;display:block;margin-top:50px;}
+</style>
+
+</head>
+<body>
+
+<center class="demo">
+	<button onclick="payment();">付款提示层</button>
+    <button onclick="Confirm();">确认框提示层</button>
+    <button onclick="Alert();">alert提示层</button>
+   <!-- <button class="delOrder" item_id="123">删除商品提示层</button>-->
+</center>
+
+</body>
+</html>

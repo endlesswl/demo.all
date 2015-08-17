@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+##set( $lzzUrl = "http://localhost" )
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>个人中心-个人信息</title>
+<link href='${ctx}/style/personal/model.css' rel="stylesheet" type="text/css" />
+<link href='${ctx}/style/personal/index2.css' rel="stylesheet" type="text/css" />
+<link href='${ctx}/style/personal/bank2.css' rel="stylesheet" type="text/css" />
+<!-- <script src='${ctx}/script/jquery-2.0.2.min.js'></script> -->
+    <script src='${ctx}/script/jquery-1.11.1.min.js'></script>
+<script src='${ctx}/script/json2.js'></script>
+<script type="text/javascript" src="${ctx}/plugin/My97DatePicker/WdatePicker.js"></script>
+<script src='${ctx}/script/plugin/util/util.js'></script>
+<script src='${ctx}/script/plugin/util/date.js'></script>
+<link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"></link>
+<!-- my JS -->
+<script src='${ctx}/script/people/myAccount/userLuckdrawDetail.js'></script>
+<script src='${ctx}/script/people/header.js'></script>
+<script type="text/javascript">
+$(function() {
+	PrizeInfo.init('${ctx}', '${userLotteryId}');
+});
+</script>
+</head>
+<body>
+	<!-- 公共顶导 -->
+	#parse("/person/include/topnav.vm")
+	<div class="container">
+		<div class="content pb0">
+			<div class="item-title">个人中心</div>
+			<div class="user-center">
+				<div class="mt15 clearfix">
+					<div class="leftit">
+						<ul>
+							<a
+								href="${ctx}/home/user/info2">
+								<li class="l2">基本信息</li>
+							</a>
+							<a href="${ctx}/location/user?path=person/myAccount/MyAccount">
+								<li class="lon1">我的账户</li>
+							</a>
+						</ul>
+					</div>
+					<div class="right-box">
+						<div class="sub-title">彩票详情：</div>
+						<div class="share-ball">
+							<p class="f24 lh30" id="issueNo">双色球2014080期开奖号码</p>
+							<div class="ball_fra_s50 clearfix">
+								<ul id="prizeball"></ul>
+							</div>
+							<div class="ball_fra2_s50 clearfix">
+								<ul id="ball">
+									<li class="hqon" style="width: 104px">投注号码</li>
+								</ul>
+							</div>
+						</div>
+						<table width="680" border="0" cellspacing="0" cellpadding="0"
+							class="tab6">
+							<tr>
+								<td width="80" align="left">投注金额</td>
+								<td id="money"></td>
+							</tr>
+							<tr>
+								<td>投注时间：</td>
+								<td id="createtime"></td>
+							</tr>
+							<tr>
+								<td>开奖时间：</td>
+								<td id="prizetime"></td>
+							</tr>
+							<tr>
+								<td>中奖金额：</td>
+								<td id="prizeMoney">等待开奖</td>
+							</tr>
+							<tr>
+								<td>税后金额：</td>
+								<td id="prizeMoneyAfterTax">等待开奖</td>
+							</tr>
+						</table>
+						<div class="order-item mt20">
+							<label></label>
+							<div class="order-right">
+								<input type="button" value="返回" class="ui-button-oranges" onclick="javascript:window.history.back();"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 公共底部导 -->
+	#parse("/person/include/footernav.vm")
+</body>
+</html>

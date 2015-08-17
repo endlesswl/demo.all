@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.lingcaibao.repository.UserBindsDao">
+
+	<resultMap id="resultMap" type="com.lingcaibao.entity.UserBinds">
+        <result property="lingcaiUserId" column="lingcai_user_id"/>
+        <result property="otherUserId" column="other_user_id"/>
+        <result property="source" column="source"/>
+        <result property="flag" column="flag"/>
+        <result property="createTime" column="create_time"/>
+        <result property="mobile" column="mobile"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+		lingcai_user_id,other_user_id,source,flag,create_time,mobile
+	</sql>
+	
+	<!-- 获取用户: 输出直接映射到对象 -->
+	<select id="get" parameterType="Long" resultType="UserBinds">
+		SELECT <include refid="columns" />
+		FROM tab_user_binds
+		WHERE id=#{id}
+	</select>
+	
+
+	<!-- 查询用户, 不分页 -->
+	<select id="search" parameterType="map" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		FROM tab_user_binds
+		<where>
+	       <if test="lingcaiUserId != null and lingcaiUserId != ''">
+				AND lingcai_user_id = #{lingcaiUserId}
+		   </if>
+	       <if test="otherUserId != null and otherUserId != ''">
+				AND other_user_id = #{otherUserId}
+		   </if>
+	       <if test="source != null and source != ''">
+				AND source = #{source}
+		   </if>
+	       <if test="flag != null and flag != ''">
+				AND flag = #{flag}
+		   </if>
+	       <if test="createTime != null and createTime != ''">
+				AND create_time = #{createTime}
+		   </if>
+	       <if test="mobile != null and mobile != ''">
+				AND mobile = #{mobile}
+		   </if>
+		</where>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="searchPage" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		FROM tab_user_binds
+		<where>
+	       <if test="searchFields.lingcaiUserId != null and searchFields.lingcaiUserId != ''">
+				AND lingcai_user_id = #{searchFields.lingcaiUserId}
+			</if>
+	       <if test="searchFields.otherUserId != null and searchFields.otherUserId != ''">
+				AND other_user_id = #{searchFields.otherUserId}
+			</if>
+	       <if test="searchFields.source != null and searchFields.source != ''">
+				AND source = #{searchFields.source}
+			</if>
+	       <if test="searchFields.flag != null and searchFields.flag != ''">
+				AND flag = #{searchFields.flag}
+			</if>
+	       <if test="searchFields.createTime != null and searchFields.createTime != ''">
+				AND create_time = #{searchFields.createTime}
+			</if>
+	       <if test="searchFields.mobile != null and searchFields.mobile != ''">
+				AND mobile = #{searchFields.mobile}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="UserBinds" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tab_user_binds (
+        	lingcai_user_id,
+        	other_user_id,
+        	source,
+        	flag,
+        	create_time,
+        	mobile
+		) VALUES (
+        	#{lingcaiUserId},
+        	#{otherUserId},
+        	#{source},
+        	#{flag},
+        	#{createTime},
+        	#{mobile}
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" >
+        UPDATE tab_user_binds
+		<set>
+	        	<if test="lingcaiUserId != null and lingcaiUserId != ''">
+				lingcai_user_id = #{lingcaiUserId},
+		</if>
+	        	<if test="otherUserId != null and otherUserId != ''">
+				other_user_id = #{otherUserId},
+		</if>
+	        	<if test="source != null and source != ''">
+				source = #{source},
+		</if>
+	        	<if test="flag != null and flag != ''">
+				flag = #{flag},
+		</if>
+	        	<if test="createTime != null and createTime != ''">
+				create_time = #{createTime},
+		</if>
+	        	<if test="mobile != null and mobile != ''">
+				mobile = #{mobile}
+		</if>
+		</set>
+        WHERE 
+	</update>
+	
+	<!-- 删除用户 -->
+	<delete id="delete" parameterType="Long">
+	     DELETE FROM tab_user_binds WHERE id=#{id}
+	</delete>
+</mapper> 

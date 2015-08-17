@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+##set( $lzzUrl = "http://localhost" )
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>我的账户-提现</title>
+<link href='${ctx}/style/personal/index2.css' rel="stylesheet" type="text/css" />
+<link href='${ctx}/style/personal/model.css' rel="stylesheet" type="text/css" />
+<link href='${ctx}/style/personal/bank2.css' rel="stylesheet" type="text/css" />
+<!-- <script src='${ctx}/script/jquery-2.0.2.min.js'></script> -->
+    <script src='${ctx}/script/jquery-1.11.1.min.js'></script>
+<script src='${ctx}/script/json2.js'></script>
+<script type="text/javascript" src="${ctx}/plugin/My97DatePicker/WdatePicker.js"></script>
+<script src='${ctx}/script/plugin/util/util.js'></script>
+<link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"></link>
+<!-- my JS -->
+<script src='${ctx}/script/people/myAccount/withdrawCash.js'></script>
+<script src='${ctx}/script/people/header.js'></script>
+<script type="text/javascript">
+	$(function() {
+		withdrawCash.init('${ctx}', '$!user.username')
+	});
+</script>
+
+</head>
+<body>
+	<!-- 公共顶导 -->
+	#parse("/person/include/topnav.vm")
+	<div class="container">
+		<div class="content pb0">
+			<div class="item-title">个人中心</div>
+			<div class="user-center">
+				<!-- 公共用户信息 -->
+				#parse("/person/include/frafirst.vm")
+				<div class="mt15 clearfix">
+					<div class="leftit">
+						<ul>
+							<a href="${ctx}/home/user/info2"><li class="l2">基本信息</li></a>
+							<a href="${ctx}/location/user?path=person/myAccount/MyAccount"><li class="lon1">我的账户</li></a>
+						</ul>
+					</div>
+					<div class="right-box">
+						<div class="sub-title">账户提现</div>
+						<div class="order-statue dj-infor pt20 pb10">
+							<div class="order-item ">
+								<label>银行户名：</label>
+								<div class="order-right clearfix">
+									<div class="f16 lh36">$!user.realName</div>
+								</div>
+							</div>
+							<div class="order-item  ">
+								<label>提现银行卡：</label>
+								<div class="order-right clearfix" id="bankList"></div>
+							</div>
+							<div class="order-item">
+								<label>提现金额：</label>
+								<div class="order-right clearfix">
+									<input id="money" type="text" placeholder="提现金额大于1元" class="sr-text"/><font class="f16">元</font>
+								</div>
+							</div>
+							<div class="order-item ">
+								<label>账户余额：</label>
+								<div class="order-right clearfix">
+									<div class="f16 lh36">
+										<font class="red" id="amount">14.00</font>元
+									</div>
+								</div>
+							</div>
+							<div class="order-item ">
+								<label>到账时间：</label>
+								<div class="order-right clearfix">
+									<div class="f16 lh36">3个工作日到账</div>
+								</div>
+							</div>
+							<div class="order-item ">
+								<label>手机号码：</label>
+								<div class="order-right clearfix">
+									<div class="f16 lh36">$!user.username</div>
+								</div>
+							</div>
+							<div class="order-item ">
+								<label>验 证 码：</label>
+								<div class="order-right clearfix">
+									<div class="f16 lh36">
+										<input id="captchaInfo" name="captchaInfo" type="text" placeholder="请输入验证码" class="sr-text2" />
+										<input id="getCaptcha"type="button" value="获取验证码" class="ui-button-oranges2" onclick="withdrawCash.sendVerifyCode(this)" />
+									</div>
+								</div>
+							</div>
+							<br />
+							<div class="order-item">
+								<label></label>
+								<div class="order-right">
+									<input type="button" value="提现" class="ui-button-oranges" onclick="withdrawCash.doWithdraw(this)"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 公共底部导 -->
+	#parse("/person/include/footernav.vm")
+</body>
+</html>

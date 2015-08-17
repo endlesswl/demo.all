@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+##set( $lzzUrl = "http://localhost" )
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>个人中心-个人信息</title>
+<link href='${ctx}/style/personal/model.css' rel="stylesheet" type="text/css" />
+<link href='${ctx}/style/personal/index2.css' rel="stylesheet" type="text/css" />
+<link href='${ctx}/style/personal/bank2.css' rel="stylesheet" type="text/css" />
+<!-- <script src='${ctx}/script/jquery-2.0.2.min.js'></script> -->
+    <script src='${ctx}/script/jquery-1.11.1.min.js'></script>
+<script src='${ctx}/script/json2.js'></script>
+<script type="text/javascript" src="${ctx}/plugin/My97DatePicker/WdatePicker.js"></script>
+<script src='${ctx}/script/plugin/util/util.js'></script>
+<script src='${ctx}/script/plugin/util/date.js'></script>
+<link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"></link>
+<!-- my JS -->
+<script src='${ctx}/script/people/user/personalUserInfo3.js'></script>
+<script src='${ctx}/script/people/header.js'></script>
+<script type="text/javascript">
+$(function() {
+	userInfo.init('${ctx}');
+});
+</script>
+</head>
+<body>
+	<!-- 公共顶导 -->
+	#parse("/person/include/topnav.vm")
+	<div class="container">
+		<div class="content pb0">
+			<div class="item-title">个人中心</div>
+			<div class="user-center">
+				<div class="mt15 clearfix">
+					<div class="leftit">
+						<ul>
+							<a href="${ctx}/home/user/info2">
+								<li class="lon2">基本信息</li>
+							</a>
+							<a href="${ctx}/location/user?path=person/myAccount/MyAccount">
+								<li class="l1">我的账户</li>
+							</a>
+						</ul>
+					</div>
+					<div class="right-box">
+						<div class="sub-title">实名认证：</div>
+						<p class=" f16 pt20 pl60">实名认证对您以后领奖很重要，请认真填写</p>
+						<div class="order-statue dj-infor pt20 pb10">
+							<div class="order-item ">
+								<label>真实姓名：</label>
+								<div class="order-right clearfix">
+									<div class="f16 lh36">$!user.realName</div>
+								</div>
+							</div>
+							<div class="order-item ">
+								<label>身份证号：</label>
+								<div class="order-right clearfix">
+									<div class="f16 lh36">$!user.cardNo</div>
+								</div>
+							</div>
+						</div>
+						<div class="sub-title">绑定银行卡：</div>
+						<div class="order-statue dj-infor pt20 pb10">
+							<div class="clearfix" id="bankList"></div>
+							<!--弹出层-->
+							<div id="addBankDiv" class="yhtc" style="display: none">
+								<input id="bankid" name="bankid" type="hidden" value="" />
+								<div class="order-statue dj-infor pt20 pb10">
+									<div id="divName" class="sub-title" style="border: none; height: 26px"></div>
+									<p class=" f16 pt10 pl60 lh200">请绑定持卡人本人的银行卡:</p>
+									<div class="order-item ">
+										<label>持 卡 人：</label>
+										<div class="order-right clearfix">
+											<div class="f16 lh36">$!user.realName</div>
+										</div>
+									</div>
+									<div class="order-item ">
+										<label>银行名称：</label>
+										<div class="order-right clearfix">
+											<div class="f16 lh36">
+												<select class="select-button" id="bankCode" name="bankCode" style="width: 342px;"></select>
+											</div>
+										</div>
+									</div>
+									<div class="order-item ">
+										<label>银行卡号：</label>
+										<div class="order-right clearfix">
+											<div class="f16 lh36">
+												<input id="cardno" name="cardno" type="text" placeholder="银行卡号" class="sr-text" />
+											</div>
+										</div>
+									</div>
+									<div class="clear"></div>
+									<div class="fl pb10 pt10 pl50">
+										<a href="javascript:void(0);" class="sr4" onclick="userInfo.hideDiv();">取消</a>
+									</div>
+									<div class="fl pb10 pt10">
+										<a id="aName" href="javascript:void(0);" class="sr3" onclick="userInfo.add();">确定</a>
+									</div>
+									<div class="clear"></div>
+								</div>
+							</div>
+							<div class="add-card-btn" onclick="userInfo.toAddBank();">
+								<span>+</span>添加
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 公共底部导 -->
+	#parse("/person/include/footernav.vm")
+</body>
+</html>

@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.lingcaibao.repository.UserLotteryDao">
+
+	<resultMap id="resultMap" type="com.lingcaibao.entity.UserLottery">
+        <result property="id" column="id"/>
+        <result property="userid" column="userid"/>
+        <result property="username" column="username"/>
+        <result property="lotteryid" column="lotteryid"/>
+        <result property="marketid" column="marketid"/>
+        <result property="drawid" column="drawid"/>
+        <result property="money" column="money"/>
+        <result property="gainPercent" column="gainPercent"/>
+        <result property="reqHead" column="reqHead"/>
+        <result property="referer" column="referer"/>
+        <result property="source" column="source"/>
+        <result property="author" column="author"/>
+        <result property="scanip" column="scanip"/>
+        <result property="createtime" column="createtime"/>
+        <result property="remark" column="remark"/>
+        <result property="isSend" column="isSend"/>
+        <result property="groupid" column="groupid"/>
+        <result property="cid" column="cid"/>
+        <result property="orderid" column="orderid"/>
+        <result property="serialno" column="serialno"/>
+        <result property="channelOrder" column="channelOrder"/>
+        <result property="notifyStatus" column="notify_status"/>
+        <result property="notifyTimes" column="notify_times"/>
+        <result property="notifyWinStatus" column="notify_win_status"/>
+        <result property="notifyWinTimes" column="notify_win_times"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+		id,userid,username,lotteryid,marketid,drawid,money,gainPercent,reqHead,referer,source,author,scanip,createtime,remark,isSend,groupid,cid,orderid,serialno,channelOrder,notify_status,notify_times,notify_win_status,notify_win_times
+	</sql>
+	
+	<!-- 获取用户: 输出直接映射到对象 -->
+	<select id="get" parameterType="Long" resultType="UserLottery">
+		SELECT <include refid="columns" />
+		FROM tab_user_lottery
+		WHERE id=#{id}
+	</select>
+	
+
+	<!-- 查询用户, 不分页 -->
+	<select id="search" parameterType="map" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		FROM tab_user_lottery
+		<where>
+	       <if test="userid != null and userid != ''">
+				AND userid = #{userid}
+		   </if>
+	       <if test="username != null and username != ''">
+				AND username = #{username}
+		   </if>
+	       <if test="lotteryid != null and lotteryid != ''">
+				AND lotteryid = #{lotteryid}
+		   </if>
+	       <if test="marketid != null and marketid != ''">
+				AND marketid = #{marketid}
+		   </if>
+	       <if test="drawid != null and drawid != ''">
+				AND drawid = #{drawid}
+		   </if>
+	       <if test="money != null and money != ''">
+				AND money = #{money}
+		   </if>
+	       <if test="gainPercent != null and gainPercent != ''">
+				AND gainPercent = #{gainPercent}
+		   </if>
+	       <if test="reqHead != null and reqHead != ''">
+				AND reqHead = #{reqHead}
+		   </if>
+	       <if test="referer != null and referer != ''">
+				AND referer = #{referer}
+		   </if>
+	       <if test="source != null and source != ''">
+				AND source = #{source}
+		   </if>
+	       <if test="author != null and author != ''">
+				AND author = #{author}
+		   </if>
+	       <if test="scanip != null and scanip != ''">
+				AND scanip = #{scanip}
+		   </if>
+	       <if test="createtime != null and createtime != ''">
+				AND createtime = #{createtime}
+		   </if>
+	       <if test="remark != null and remark != ''">
+				AND remark = #{remark}
+		   </if>
+	       <if test="isSend != null and isSend != ''">
+				AND isSend = #{isSend}
+		   </if>
+	       <if test="groupid != null and groupid != ''">
+				AND groupid = #{groupid}
+		   </if>
+	       <if test="cid != null and cid != ''">
+				AND cid = #{cid}
+		   </if>
+	       <if test="orderid != null and orderid != ''">
+				AND orderid = #{orderid}
+		   </if>
+	       <if test="serialno != null and serialno != ''">
+				AND serialno = #{serialno}
+		   </if>
+	       <if test="channelOrder != null and channelOrder != ''">
+				AND channelOrder = #{channelOrder}
+		   </if>
+	       <if test="notifyStatus != null and notifyStatus != ''">
+				AND notify_status = #{notifyStatus}
+		   </if>
+	       <if test="notifyTimes != null and notifyTimes != ''">
+				AND notify_times = #{notifyTimes}
+		   </if>
+	       <if test="notifyWinStatus != null and notifyWinStatus != ''">
+				AND notify_win_status = #{notifyWinStatus}
+		   </if>
+	       <if test="notifyWinTimes != null and notifyWinTimes != ''">
+				AND notify_win_times = #{notifyWinTimes}
+		   </if>
+		</where>
+	</select>
+	
+	<select id="searchAndDrawId" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		FROM tab_user_lottery
+		WHERE marketid = #{param1} AND drawid is null
+	</select>
+	
+	<select id="searchAndDrawIdPage" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		FROM tab_user_lottery
+		WHERE marketid = #{param1} AND drawid is null
+		limit 1000
+	</select>
+	
+	<select id="searchNoDrawId" resultType="Long">
+		SELECT marketid
+		FROM tab_user_lottery
+		WHERE drawid is null GROUP BY marketid
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="searchPage" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		FROM tab_user_lottery
+		<where>
+	       <if test="searchFields.userid != null and searchFields.userid != ''">
+				AND userid = #{searchFields.userid}
+			</if>
+	       <if test="searchFields.username != null and searchFields.username != ''">
+				AND username = #{searchFields.username}
+			</if>
+	       <if test="searchFields.lotteryid != null and searchFields.lotteryid != ''">
+				AND lotteryid = #{searchFields.lotteryid}
+			</if>
+	       <if test="searchFields.marketid != null and searchFields.marketid != ''">
+				AND marketid = #{searchFields.marketid}
+			</if>
+	       <if test="searchFields.drawid != null and searchFields.drawid != ''">
+				AND drawid = #{searchFields.drawid}
+			</if>
+	       <if test="searchFields.money != null and searchFields.money != ''">
+				AND money = #{searchFields.money}
+			</if>
+	       <if test="searchFields.gainPercent != null and searchFields.gainPercent != ''">
+				AND gainPercent = #{searchFields.gainPercent}
+			</if>
+	       <if test="searchFields.reqHead != null and searchFields.reqHead != ''">
+				AND reqHead = #{searchFields.reqHead}
+			</if>
+	       <if test="searchFields.referer != null and searchFields.referer != ''">
+				AND referer = #{searchFields.referer}
+			</if>
+	       <if test="searchFields.source != null and searchFields.source != ''">
+				AND source = #{searchFields.source}
+			</if>
+	       <if test="searchFields.author != null and searchFields.author != ''">
+				AND author = #{searchFields.author}
+			</if>
+	       <if test="searchFields.scanip != null and searchFields.scanip != ''">
+				AND scanip = #{searchFields.scanip}
+			</if>
+	       <if test="searchFields.createtime != null and searchFields.createtime != ''">
+				AND createtime = #{searchFields.createtime}
+			</if>
+	       <if test="searchFields.remark != null and searchFields.remark != ''">
+				AND remark = #{searchFields.remark}
+			</if>
+	       <if test="searchFields.isSend != null and searchFields.isSend != ''">
+				AND isSend = #{searchFields.isSend}
+			</if>
+	       <if test="searchFields.groupid != null and searchFields.groupid != ''">
+				AND groupid = #{searchFields.groupid}
+			</if>
+	       <if test="searchFields.cid != null and searchFields.cid != ''">
+				AND cid = #{searchFields.cid}
+			</if>
+	       <if test="searchFields.orderid != null and searchFields.orderid != ''">
+				AND orderid = #{searchFields.orderid}
+			</if>
+	       <if test="searchFields.serialno != null and searchFields.serialno != ''">
+				AND serialno = #{searchFields.serialno}
+			</if>
+	       <if test="searchFields.channelOrder != null and searchFields.channelOrder != ''">
+				AND channelOrder = #{searchFields.channelOrder}
+			</if>
+	       <if test="searchFields.notifyStatus != null and searchFields.notifyStatus != ''">
+				AND notify_status = #{searchFields.notifyStatus}
+			</if>
+	       <if test="searchFields.notifyTimes != null and searchFields.notifyTimes != ''">
+				AND notify_times = #{searchFields.notifyTimes}
+			</if>
+	       <if test="searchFields.notifyWinStatus != null and searchFields.notifyWinStatus != ''">
+				AND notify_win_status = #{searchFields.notifyWinStatus}
+			</if>
+	       <if test="searchFields.notifyWinTimes != null and searchFields.notifyWinTimes != ''">
+				AND notify_win_times = #{searchFields.notifyWinTimes}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="UserLottery" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tab_user_lottery (
+        	userid,
+        	username,
+        	lotteryid,
+        	marketid,
+        	drawid,
+        	money,
+        	gainPercent,
+        	reqHead,
+        	referer,
+        	source,
+        	author,
+        	scanip,
+        	createtime,
+        	remark,
+        	isSend,
+        	groupid,
+        	cid,
+        	orderid,
+        	serialno,
+        	channelOrder,
+        	notify_status,
+        	notify_times,
+        	notify_win_status,
+        	notify_win_times
+		) VALUES (
+        	#{userid},
+        	#{username},
+        	#{lotteryid},
+        	#{marketid},
+        	#{drawid},
+        	#{money},
+        	#{gainPercent},
+        	#{reqHead},
+        	#{referer},
+        	#{source},
+        	#{author},
+        	#{scanip},
+        	#{createtime},
+        	#{remark},
+        	#{isSend},
+        	#{groupid},
+        	#{cid},
+        	#{orderid},
+        	#{serialno},
+        	#{channelOrder},
+        	#{notifyStatus},
+        	#{notifyTimes},
+        	#{notifyWinStatus},
+        	#{notifyWinTimes}
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" >
+        UPDATE tab_user_lottery
+		<set>
+	        	<if test="userid != null and userid != ''">
+				userid = #{userid},
+		</if>
+	        	<if test="username != null and username != ''">
+				username = #{username},
+		</if>
+	        	<if test="lotteryid != null and lotteryid != ''">
+				lotteryid = #{lotteryid},
+		</if>
+	        	<if test="marketid != null and marketid != ''">
+				marketid = #{marketid},
+		</if>
+	        	<if test="drawid != null and drawid != ''">
+				drawid = #{drawid},
+		</if>
+	        	<if test="money != null and money != ''">
+				money = #{money},
+		</if>
+	        	<if test="gainPercent != null and gainPercent != ''">
+				gainPercent = #{gainPercent},
+		</if>
+	        	<if test="reqHead != null and reqHead != ''">
+				reqHead = #{reqHead},
+		</if>
+	        	<if test="referer != null and referer != ''">
+				referer = #{referer},
+		</if>
+	        	<if test="source != null and source != ''">
+				source = #{source},
+		</if>
+	        	<if test="author != null and author != ''">
+				author = #{author},
+		</if>
+	        	<if test="scanip != null and scanip != ''">
+				scanip = #{scanip},
+		</if>
+	        	<if test="createtime != null and createtime != ''">
+				createtime = #{createtime},
+		</if>
+	        	<if test="remark != null and remark != ''">
+				remark = #{remark},
+		</if>
+	        	<if test="isSend != null and isSend != ''">
+				isSend = #{isSend},
+		</if>
+	        	<if test="groupid != null and groupid != ''">
+				groupid = #{groupid},
+		</if>
+	        	<if test="cid != null and cid != ''">
+				cid = #{cid},
+		</if>
+	        	<if test="orderid != null and orderid != ''">
+				orderid = #{orderid},
+		</if>
+	        	<if test="serialno != null and serialno != ''">
+				serialno = #{serialno},
+		</if>
+	        	<if test="channelOrder != null and channelOrder != ''">
+				channelOrder = #{channelOrder},
+		</if>
+	        	<if test="notifyStatus != null and notifyStatus != ''">
+				notify_status = #{notifyStatus},
+		</if>
+	        	<if test="notifyTimes != null and notifyTimes != ''">
+				notify_times = #{notifyTimes},
+		</if>
+	        	<if test="notifyWinStatus != null and notifyWinStatus != ''">
+				notify_win_status = #{notifyWinStatus},
+		</if>
+	        	<if test="notifyWinTimes != null and notifyWinTimes != ''">
+				notify_win_times = #{notifyWinTimes}
+		</if>
+		</set>
+        WHERE 
+	        id = #{id}
+	</update>
+	
+	<!-- 更新 tab_user_lottery 的 chnnelOrder -->
+	<update id="updateDrawIdByChnnelOrder">
+		UPDATE tab_user_lottery set drawid = #{param2} where id = #{param3}
+	</update>
+	
+	<!-- 更新 tab_user_lottery 的 chnnelOrder -->
+	<update id="updateDrawIdByChnnelOrderUserId">
+		UPDATE tab_user_lottery set drawid = #{param2} where userid = #{param3} and channelOrder = #{param1}
+	</update>
+	
+	<!-- 删除用户 -->
+	<delete id="delete" parameterType="Long">
+	     DELETE FROM tab_user_lottery WHERE id=#{id}
+	</delete>
+	<!--  彩票福利-->
+	<select id="getMyLottery" resultType="Map">
+		SELECT
+			tm.marketName as name,
+			tm.starttime as stime,
+			tm.endtime as etime,
+			tul.createtime,
+			tul.money,
+			tul.drawid,
+			tl.gameid as code,
+			tul.id,
+			tl.orderid
+		FROM
+			tab_user_lottery tul
+		JOIN tab_marketplan tm ON tul.marketid = tm.id
+		JOIN  tab_lottery  tl on tl.id=tul.lotteryid
+		<where>
+			<if test="searchFields.whereConditions != null and searchFields.whereConditions != ''">
+	        		 (${searchFields.whereConditions})           
+	        </if>
+			<if test="searchFields.marketName != null and searchFields.marketName != ''">
+	                AND tm.marketName like  '%${searchFields.marketName}%'
+	        </if>
+	        <if test="searchFields.isPrize != null">
+	                AND isPrize = #{searchFields.isPrize}
+	        </if>
+	        
+	        <if test="searchFields.startTime != null and searchFields.startTime != ''">
+	                <![CDATA[
+						AND tul.createtime >=#{searchFields.startTime}
+					]]>	                
+	        </if>
+	        <if test="searchFields.endTime != null and searchFields.endTime != ''">
+	        		<![CDATA[
+						AND tul.createtime <= #{searchFields.endTime}
+					]]>		                
+	        </if>	        
+			and	tul.userid = #{searchFields.userId}
+		</where>			
+		ORDER BY
+			tul.createtime desc
+	</select>
+	
+	<!--  彩票福利-->
+	<select id="getH5MyLottery" resultType="Map">
+		SELECT
+			tul.id as id,
+			tm.marketName as marketName,
+			tm.starttime as startTime,
+			tm.endtime as endTime,
+			tl.gameid as prizecode,
+			tl.orderid as orderid,
+			tl.sucessFlag as sucessFlag,
+			tul.createtime as createTime,
+			tul.money as money,
+			tul.drawid as drawid,
+			tul.id as userlotterid,
+			tul.marketid as marketid,
+			tl.isprize as isprize,
+			tl.issueNo as issueNo,
+			cast(tl.prizetime AS datetime) AS prizetime
+		FROM
+			tab_user_lottery tul
+		JOIN tab_marketplan tm ON tul.marketid = tm.id
+		JOIN tab_lottery tl ON tl.id=tul.lotteryid
+		<where>
+			<if test="searchFields.marketName != null and searchFields.marketName != ''">
+	        	AND tm.marketName like '%${searchFields.marketName}%'
+	        </if>
+	        <if test="searchFields.isprize != null">
+	            AND isprize = #{searchFields.isprize}
+	        </if>
+	        <if test="searchFields.startTime != null and searchFields.startTime != ''">
+	        	<![CDATA[
+					AND tul.createtime >= #{searchFields.startTime}
+				]]>	                
+	        </if>
+	        <if test="searchFields.endTime != null and searchFields.endTime != ''">
+        		<![CDATA[
+					AND tul.createtime <= #{searchFields.endTime}
+				]]>		                
+	        </if>
+			AND	tul.userid = #{searchFields.userId}	
+		</where>		
+		ORDER BY
+			tul.createtime desc
+	</select>
+	
+	<select id="getLotteryContent" resultType="Map">
+		SELECT
+			tl.sucessFlag,
+			tl.orderid,
+			tl.prizetime,
+			tl.gametype,
+			tl.gameid,
+			tl.money,
+			tl.createtime,
+			tl.ball
+		FROM
+			tab_user_lottery tul
+		JOIN tab_lottery tl ON tl.id = tul.lotteryid
+		WHERE
+			tul.id = #{id};
+	</select>
+	<!-- 获取详细彩票详情 -->
+	<select id ="getMyLotteryDetail"  resultType = "map">
+		SELECT
+		tul.money,
+		tl.ball,
+		tl.issueNo,
+		tul.createtime,
+		tp.prizeball,
+		tl.isprize,
+		cast(tl.prizetime AS datetime) AS prizetime,
+		tul.orderid
+	FROM
+		tab_user_lottery tul
+		INNER JOIN tab_lottery tl ON tl.id = tul.lotteryid
+		LEFT JOIN tab_prize tp ON tp.orderid = tul.orderid
+	WHERE
+		tul.drawid = #{searchFields.drawid} 
+		and tul.userid = #{searchFields.userId}
+	</select> 
+	
+	<!-- 获取详细彩票详情 -->
+	<select id ="getH5MyLotteryDetail"  resultType = "map">
+		SELECT
+			tp.prizeball as prizeball,
+			tl.ball as ball,
+			tl.issueNo as issueNo,
+			tl.isprize as isprize,
+			tl.sucessFlag as sucessFlag,
+			cast(tl.prizetime AS datetime) AS prizetime,
+			tul.money as money,
+			tul.createtime as createtime,
+			tul.orderid as orderid,
+			tp.prizeMoney as prizeMoney,
+			tp.prizeMoneyAfterTax as prizeMoneyAfterTax
+		FROM
+			tab_user_lottery tul
+			INNER JOIN tab_lottery tl ON tl.id = tul.lotteryid
+			LEFT JOIN tab_prize tp ON tp.orderid = tl.orderid
+		WHERE
+			tul.id = #{searchFields.userLotteryId}
+	</select> 
+	
+	<!-- 获取当月的彩票资产 -->
+	<select id ="getUserLottertByMonth" parameterType="Long" resultType="BigDecimal">
+	    SELECT
+			
+			SUM(money) as lotterytotalmonth
+		FROM
+			tab_user_lottery
+		WHERE
+			userid = #{id}  and Month(createtime) = Month(now()) and YEAR(createtime) =year(now())
+	</select>
+	<select id = "getLotteryMoney" parameterType="Long" resultType="map">
+	    SELECT cast(SUM(money) as DECIMAL(10,      2) )as money FROM tab_user_lottery WHERE userid =#{id}
+	</select>
+	
+	<select id="getLotteryIdByDrawId" resultType="Long">
+		select lotteryid from tab_user_lottery tul where tul.drawid = #{param1} limit 1
+	</select>
+	
+	<!-- 统计互动次数 -->
+	<select id="countInteraction" resultType="int">
+		select count(1) from tab_user_lottery tul,tab_lottery tl
+		<where>
+			<if test="searchFields.issueNo != null and searchFields.issueNo != ''">
+				and tl.issueNo=#{searchFields.issueNo}
+			</if>
+			<if test="searchFields.marketid != null and searchFields.marketid != ''">
+				and tl.marketid=#{searchFields.marketid}
+			</if>
+			<if test="searchFields.userid != null and searchFields.userid != ''">
+				and tul.userid=#{searchFields.userid}
+			</if>
+			<if test="searchFields.username != null and searchFields.username != ''">
+				and tul.username=#{searchFields.username}
+			</if>
+			<if test="searchFields.starttime != null and searchFields.starttime != ''">
+				AND tul.createtime >= #{searchFields.starttime}
+			</if>
+			<if test="searchFields.endtime != null and searchFields.endtime != ''">
+                <![CDATA[and tul.createtime <= #{searchFields.endtime}]]>
+			</if>
+		</where>
+		and tul.lotteryid=tl.id
+	</select>
+	
+	<select id="getPrizeBallByIssueNo" parameterType="String" resultType="String">
+		select t.prizeball from tab_prize t where t.orderid = '' and t.issueNo = #{issueNo}
+	</select>
+	
+	<select id="getUserPrizeByUserLotteryId" parameterType="Long" resultType="Map">
+		select t.prizeMoney, t.prizeMoneyAfterTax from tab_user_prize t where t.userLotteryId = #{userLotteryId};
+	</select>
+	
+</mapper> 

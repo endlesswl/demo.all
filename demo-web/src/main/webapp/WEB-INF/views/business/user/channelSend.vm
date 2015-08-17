@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+##set( $lzzUrl = "http://localhost:80" )
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href='${lzzUrl}/prd/style/model#ver("/ver/style/model.css.ver").css' rel="stylesheet" type="text/css" />
+<link href='${lzzUrl}/prd/style/index#ver("/ver/style/index.css.ver").css' rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"/>
+<link href='${lzzUrl}/prd/style/plugin/artDialog/black#ver("/ver/style/plugin/artDialog/black.css.ver").css' rel="stylesheet" type="text/css" />
+<script	src='${lzzUrl}/prd/script/jquery-2.0.2.min#ver("/ver/script/jquery-2.0.2.min.js.ver").js'></script>
+<script src='${lzzUrl}/prd/script/json2#ver("/ver/script/json2.js.ver").js'></script>
+<script src='${lzzUrl}/prd/script/plugin/util/util#ver("/ver/script/plugin/util/util.js.ver").js'></script>
+<script src='${lzzUrl}/prd/script/plugin/lingcaitable/PageLc#ver("/ver/script/plugin/lingcaitable/PageLc.js.ver").js'></script>
+<script src='/plugin/artDialog/jquery.artDialog.min.js'></script>
+<!-- 富文本插件 -->
+<script charset="utf-8" src="/plugin/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/plugin/kindeditor/lang/zh_CN.js"></script>
+<!-- 日期插件 -->
+<script type="text/javascript" src="/plugin/My97DatePicker/WdatePicker.js"></script>
+<!-- my JS -->
+<script src='${lzzUrl}/prd/script/business/user/channelSend#ver("/ver/script/business/user/channelSend.js.ver").js'></script>
+<title>零彩宝商家后台-下发渠道</title>
+<script type="text/javascript">
+	$(function() {
+		ChannelSend.init('${ctx}/home/user/userGroup',
+				'${ctx}/home/message/sendMessage',
+				'${ctx}/dictionary/provinceList', '${ctx}/home/user/userList');
+	});
+	// 富文本插件
+	var editor;
+	KindEditor.ready(function(K) {
+		K.each({
+			'plug-align' : {
+				name : '对齐方式',
+				method : {
+					'justifyleft' : '左对齐',
+					'justifycenter' : '居中对齐',
+					'justifyright' : '右对齐'
+				}
+			},
+			'plug-order' : {
+				name : '编号',
+				method : {
+					'insertorderedlist' : '数字编号',
+					'insertunorderedlist' : '项目编号'
+				}
+			},
+			'plug-indent' : {
+				name : '缩进',
+				method : {
+					'indent' : '向右缩进',
+					'outdent' : '向左缩进'
+				}
+			}
+		}, function(pluginName, pluginData) {
+			var lang = {};
+			lang[pluginName] = pluginData.name;
+			KindEditor.lang(lang);
+			KindEditor.plugin(pluginName, function(K) {
+				var self = this;
+				self.clickToolbar(pluginName, function() {
+					var menu = self.createMenu({
+						name : pluginName,
+						width : pluginData.width || 100
+					});
+					K.each(pluginData.method, function(i, v) {
+						menu.addItem({
+							title : v,
+							checked : false,
+							iconClass : pluginName + '-' + i,
+							click : function() {
+								self.exec(i).hideMenu();
+							}
+						});
+					})
+				});
+			});
+		});
+		editor = K.create('#contentqq', {
+			themeType : 'qq',
+			items : [ 'bold', 'italic', 'underline', 'fontname', 'fontsize',
+					'forecolor', 'hilitecolor', 'plug-align', 'plug-order',
+					'plug-indent', 'link' ]
+		});
+	});
+</script>
+</head>
+<body>
+	<div class="container">
+		<!-- 公共顶导 -->
+		#parse("/include/header.vm")
+		<div class="content clearfix">
+			<!-- 左边导航 -->
+			#parse("/include/left.vm")
+			<!-- 右边导航 -->
+			<div class="merchants-main">
+				<div class="title">下发渠道</div>
+				<div class="white-box-a mh780">
+					<div class="order-statue  pt30 pb10">
+						<div class="order-item ">
+							<label>下发方式：</label>
+							<div class="f16 lh36">
+								<div class="order-right clearfix">
+									<input type="radio" name="chooseTypeName" onclick="ChannelSend.chooseType('0')" checked="checked"/>群组 
+									<input type="radio" name="chooseTypeName" onclick="ChannelSend.chooseType('1')" class="ml30"/>用户 
+								</div>
+							</div>
+						</div>
+						<div class="order-item ">
+							<label>下发对象：</label>
+							<div class="order-right clearfix">
+								<div>
+									<input type="text" class="sr-text w140" id="chooseName" onfocus="ChannelSend.showUser();" value="选择用户" style="display: none" readonly /> 
+									<select class="ui-select w160" id="userGroup">
+										<option value="">选择用户组</option>
+									</select>
+									<font class="f16 pl20 pr20" id="sexFont">性别</font> 
+									<select class="ui-select w100" id="sex">
+										<option value="">全部</option>
+										<option value="男">男</option>
+										<option value="女">女</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="order-item" id="areaItem">
+							<label>地区：</label> 
+							<select style="width: 140px;" class="select-button" id="province" onchange="ChannelSend.showCityData();">
+								<option selected value="">省</option>
+							</select>
+							<select style="width: 140px;" class="select-button" id="city" onchange="ChannelSend.showareaData();">
+								<option selected value="">市</option>
+							</select>
+							<select style="width: 140px;" class="select-button" id="area">
+								<option selected value="">区</option>
+							</select>
+						</div>
+						<div class="order-item clear">
+							<label>标题：</label>
+							<div class="order-right clearfix">
+								<div>
+									<input type="text" id="title" placeholder="标题" class="sr-text"/>
+								</div>
+							</div>
+						</div>
+						<div class="order-item clear">
+							<label>内容：</label>
+							<div class="order-right clearfix">
+								<div>
+									<textarea id="contentqq" name="content" style="width: 600px; height: 200px; visibility: hidden;"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="order-item ">
+							<label>发送至：</label>
+							<div class="order-right clearfix">
+								<div class="f16 lh36">
+									<input type="radio" name="sendTypeName" onclick="ChannelSend.setParamm('0','')" checked="checked"/>短信 
+									<input type="radio" name="sendTypeName" onclick="ChannelSend.setParamm('1','')" class="ml30"/>零彩宝平台
+								</div>
+							</div>
+						</div>
+						<div class="order-item ">
+							<label>发送类型：</label>
+							<div class="order-right clearfix">
+								<div class="f16 lh36">
+									<input type="radio" name="sendTimeName" onclick="ChannelSend.setParamm('','now()')" checked="checked"/>立刻发送 
+									<input type="radio" name="sendTimeName" onclick="ChannelSend.setParamm('','timer')" class="ml30"/>定时发送
+									<input type="text" class="sr-text date-text" id="sendTime" style="width: 160px; background-position: 154px -695px" onFocus="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})"/>
+								</div>
+							</div>
+						</div>
+						<div class="order-item">
+							<label></label>
+							<div class="order-right">
+								<input type="button" value="保存" onclick="ChannelSend.goSubmit()" class="ui-button-oranges2"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div id="userDiv" style="display: none">
+		<table id="dataList" width="760" border="0" cellspacing="0" cellpadding="0" class="tab6 mt0">
+			<tr>
+				<th class="coleft" width="50"></th>
+				<th width="70">序号</th>
+				<th>用户名称</th>
+				<th>活跃度</th>
+			</tr>
+		</table>
+		<!-- 分页 -->
+		<div class="lc_pagination" id="pageDiv"></div>
+	</div>
+	<!-- 底部文件 -->
+	#parse("/include/footer.vm")
+</body>
+</html>
+

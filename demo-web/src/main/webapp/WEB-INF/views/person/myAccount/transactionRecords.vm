@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+##set( $lzzUrl = "http://localhost" )
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>我的账户-交易记录</title>
+<link href='${ctx}/style/personal/index.css' rel="stylesheet" type="text/css" />
+<link href='${ctx}/style/personal/model.css' rel="stylesheet" type="text/css" />
+<!-- <script src='${ctx}/script/jquery-2.0.2.min.js'></script> -->
+    <script src='${ctx}/script/jquery-1.11.1.min.js'></script>
+<script src='${ctx}/script/plugin/lingcaitable/table.js'></script>
+<script src='${ctx}/script/plugin/lingcaitable/PageLc.js'></script>
+<script src='${ctx}/script/json2.js'></script>
+<script src='${ctx}/script/plugin/util/util.js'></script>
+<script src='${ctx}/script/plugin/util/date.js'></script>
+<script type="text/javascript" src="${ctx}/plugin/My97DatePicker/WdatePicker.js"></script>
+<link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"></link>
+<!-- my JS -->
+<script src='${ctx}/script/business/dealRecord/dealRecord.js'></script>
+<script src='${ctx}/script/people/header.js'></script>
+<script type="text/javascript">
+$(function() {
+	//按钮效果
+	$(".tit-list2").find('li').click(function() {
+		$(this).parent().children("li").each(function() {
+			$(this).attr("class", "");
+		});
+		$(this).attr("class", "current");
+	});
+
+	//tab页效果
+	$(".deals-records-tit.clearfix").children().children("li").click(function() {
+		$($(this).parent()).children().each(function() {
+			$(this).removeClass('current');
+		});
+		if($(this).attr("class")=='mr0'){
+			$(this).attr("class", "current mr0");
+		}else{
+			$(this).attr("class", "current");
+		}
+	});
+
+	//init bill
+	DealRecord.init('${ctx}/home/bill/billList');
+});
+</script>
+
+</head>
+<!-- 公共顶导 -->
+#parse("/person/include/topnav.vm")
+<div class="container">
+	<div class="content pb0">
+		<div class="item-title">个人中心</div>
+       		<div class="user-center"> 
+            	<!-- 公共用户信息 -->
+				#parse("/person/include/frafirst.vm")
+                <div class="mt15 clearfix">
+                	<div class="leftit">
+                    	<ul>
+                        	<a href="${ctx}/home/user/info2"><li class="l2">基本信息</li></a>
+                            <a href="${ctx}/location/user?path=person/myAccount/MyAccount"><li class="lon1">我的账户</li></a>
+                        </ul>
+                    </div>
+                  <div class="right-box">
+                    	<div class="account-tit  clearfix">
+                        	<ul>
+                            	<a href="${ctx}/location/user?path=person/myAccount/MyAccount"><li class="ac1"><span>账户统计</span></li></a>
+                                <a href="${ctx}/location/user?path=person/myAccount/transactionRecords"><li class="acon2"><span>提现记录</span></li></a>
+                                <a href="${ctx}/location/user?path=person/myAccount/transactionRecords2"><li class="ac3"><span>福利记录</span></li></a>
+                            </ul>
+                        </div>
+                 <!-- <div class="deals-records-tit clearfix">
+                 	<ul>
+	                 	0(充值),1(直接支付),2(回滚),3(结算),4(系统操作),5(兑奖),6(提现),7(零彩券),8(账户余额)',
+	            		<li onclick="DealRecord.changeTab('')" class="current">交易记录</li>
+	            		<li onclick="DealRecord.changeTab('5')" class="current">中奖记录</li>
+	            		<li onclick="DealRecord.changeTab('0')">充值记录</li>
+	            		<li onclick="DealRecord.changeTab('1')">支付记录</li>
+	            		<li onclick="DealRecord.changeTab('6')">提现记录</li>
+	            		<li onclick="DealRecord.changeTab('3')" style="margin-right:0px" class="mr0">退款记录</li>
+	                 </ul>
+                 </div> -->
+                 <div class="order-statue itembd pt20 pb10">
+	            <div class="order-item">
+	                	<label>起始日期：</label>
+	                	<div class="order-right clearfix">
+	                		<div class="order-date fl mr20">
+	                    		<input  type="text" onchange="DealRecord.setQuery()" class="sr-text date-text inputData" id="sBillTime" onFocus="WdatePicker({startDate:'%y-%M-01',dateFmt:'yyyy-MM-dd',alwaysUseStartDate:true})"/>
+	                    		至
+								<input  type="text" onchange="DealRecord.setQuery()" class="sr-text date-text inputData" id="eBillTime" onFocus="WdatePicker({startDate:'%y-%M-01',dateFmt:'yyyy-MM-dd',alwaysUseStartDate:true})"/>
+	                    	</div>
+	                    	<!-- <div class="order-date fl mr20"><img src="${ctx}/images/test2.png"></div> -->
+	                		<ul class="tit-list2 clearfix fl ">
+	                            	<li class=""><a onclick="DealRecord.setQuery('today','')">今天</a></li>
+		                			<li><a onclick="DealRecord.setQuery('oneMonth','')">最近1个月</a></li>
+		                			<li><a onclick="DealRecord.setQuery('threeMonth','')">3个月</a></li>
+		                            <li><a onclick="DealRecord.setQuery('oneYear','')">1年</a></li>
+	                        </ul>
+	                	</div>
+	                </div>
+                <div class="order-item">
+                	<label>支付状态：</label>
+                	<div class="order-right">
+                		<ul class="tit-list2 clearfix fl ">
+                                <li class="current"><a onclick="DealRecord.setQuery('','-1')">全部</a></li>
+	                			<li><a onclick="DealRecord.setQuery('','1')">成功</a></li>
+	                			<li><a onclick="DealRecord.setQuery('','2')">失败</a></li>
+	                			<li><a onclick="DealRecord.setQuery('','0')">未处理</a></li>
+                            </ul>
+                	</div>
+                </div>
+                </div>
+                  <table id="dataList" width="825" border="0" cellspacing="0" cellpadding="0" class="tab9 mt0">
+                  	<tr>    
+	 					<th width="5%">序号</th>
+	                    <th width="25%">创建时间</th>
+	                    <th width="15%">交易类别</th>
+	                    <th width="10%">收入（元）</th> 
+	                    <th width="10%">支出（元）</th>
+	                    <th width="10%">状态</th>  
+	                    <th width="25%">备注</th>
+	                   <!--  <th width="10%">操作</th> -->
+	                </tr>                  	
+				  </table>
+                 <!-- 分页 -->
+            	<div class="lc_pagination" id="pageDiv">
+                    </div>
+                </div>		
+   			</div>
+        </div>
+</div>
+<!-- 公共底部导 -->
+#parse("/person/include/footernav.vm")
+</body>
+

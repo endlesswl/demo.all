@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/context    
+          http://www.springframework.org/schema/context/spring-context.xsd    
+          http://www.springframework.org/schema/data/mongo    
+          http://www.springframework.org/schema/data/mongo/spring-mongo-1.7.xsd    
+          http://www.springframework.org/schema/beans    
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+          
+     <!-- 通过工厂Bean创建mongo连接实例,没有密码就把username和password属性删除了-->
+    <mongo:db-factory host="${db.host}" port="${db.port}" dbname="${db.database}"
+            username="${db.username}" password="${db.password}"   />
+
+
+    <!-- mongo模板操作对象 -->
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+    </bean>
+
+    <!-- MongoDB GridFS Template 支持，操作mongodb存放的文件 -->
+    <mongo:mapping-converter id="converter" db-factory-ref="mongoDbFactory"/>
+    <bean id="gridFsTemplate" class="org.springframework.data.mongodb.gridfs.GridFsTemplate">
+      <constructor-arg ref="mongoDbFactory"/>
+      <constructor-arg ref="converter"/>
+    </bean>
+
+<!-- 	<mongo:mongo id="mongo" host="127.0.0.1" port="27017"> -->
+<!-- 		<mongo:options connections-per-host="200" -->
+<!-- 			threads-allowed-to-block-for-connection-multiplier="100" -->
+<!-- 			connect-timeout="1000"  -->
+<!-- 			max-wait-time="1500"  -->
+<!-- 			auto-connect-retry="true" -->
+<!-- 			socket-keep-alive="true"  -->
+<!-- 			socket-timeout="1500"  -->
+<!-- 			slave-ok="true" -->
+<!-- 			write-number="1"  -->
+<!-- 			write-timeout="0"  -->
+<!-- 			write-fsync="true" /> -->
+<!-- 	</mongo:mongo> -->
+
+	<!-- 	    username="***" password="****"  默认无权限访问限制-->
+<!-- 	<mongo:db-factory id="mFactory" dbname="test"  -->
+<!-- 	    mongo-ref="mongo" /> -->
+	
+<!-- 	<mongo:db-factory id=""/> -->
+	
+<!-- 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate"> -->
+<!-- 	    <constructor-arg name="mongo" ref="mongo"/> -->
+<!-- 	    <constructor-arg name="databaseName" value="forum"/> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate"> -->
+<!-- 	     <constructor-arg name="mongo" ref="mongo" /> -->
+<!--         <constructor-arg name="databaseName" value="test" /> -->
+<!-- 		<constructor-arg name="mongoDbFactory" ref="mFactory" /> -->
+<!-- 	</bean> -->
+
+<!-- 	<BEAN ID="ABSTRACTMONGODB" CLASS="COM.***.ABSTRACTMONGODB" -->
+<!-- 		ABSTRACT="TRUE"> -->
+<!-- 		<PROPERTY NAME="MONGOTEMPLATE"> -->
+<!-- 			<REF BEAN="MONGOTEMPLATE" /> -->
+<!-- 		</PROPERTY> -->
+<!-- 	</BEAN> -->
+
+</beans>

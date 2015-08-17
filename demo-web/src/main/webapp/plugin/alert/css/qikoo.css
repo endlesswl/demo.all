@@ -1,0 +1,205 @@
+body {
+	background-color: #ededed;
+	color: #666;
+	font: 12px "微软雅黑", Verdana, SimHei, "Microsoft JhengHei", Tahoma;
+	overflow-x: hidden;
+	position: relative;
+}
+body, ul, dl, dd, h1, h2, h3, h4, h5, h6, p, form, ol {
+	margin: 0;
+}
+ul, ol {
+	padding: 0;
+}
+table, td, th {
+	border-collapse: collapse;
+}
+ol, ul, li {
+	list-style: none;
+}
+img{
+	border: 0;
+	vertical-align: middle;
+}
+a {
+	color: #666;
+	outline: none;
+}
+a, a.noline {
+	text-decoration: none;
+}
+* html .clearFix, *:first-child+html .clearFix {
+	zoom: 1;
+}
+.mod-dialog-bg {
+	background: #000;
+	opacity: .5;
+	filter: alpha(opacity=50);
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+}
+.mod-dialog {
+	background-color: #fff;
+	border: solid 1px #2a3542;
+	border-radius:5px;
+	border-top: none;
+	min-width: 300px;
+ *padding-top: 27px;
+	position: absolute;
+	z-index: 1001;
+}
+.mod-pop {
+	background: #fff;
+	border: solid 1px #a1a1a1;
+	-webkit-box-shadow: 0 0 5px #a1a1a1;
+	-moz-box-shadow: 0 0 5px #a1a1a1;
+	box-shadow: 0 0 5px #a1a1a1;
+	font-size: 14px;
+	height: 142px;
+	position: absolute;
+	width: 276px;
+	z-index: 1000;
+}
+.clearfix_new:after {
+	clear: both;
+	content: '\20';
+	display: block;
+	height: 0;
+}
+.mod-dialog .dialog-nav {
+	background: #2a3542;
+	border-radius:3px 3px 0px 0px;
+	color: #fff;
+	font-weight: 700;
+	font-size: 12px;
+	font-family: "\5b8b\4f53";
+	height: 27px;
+ *left: 0;
+	line-height: 27px;
+ *position: absolute;
+ *top: -27px;
+ *width: 100%;
+}
+.mod-dialog .dialog-title {
+	padding-left: 10px;
+}
+.mod-dialog .dialog-close {
+	background: url(../images/alertBtn.png) no-repeat -60px 3px;
+	height: 26px;
+	position: absolute;
+	right: 4px;
+	top: 0;
+	width: 24px;
+}
+.mod-dialog .dialog-main {
+	font-size: 14px;
+	padding: 20px;
+	text-align: center;
+}
+.mod-dialog .dialog-content {
+	font-size: 14px;
+	line-height: 24px;
+}
+.mod-dialog .content-title {
+	background: url(../images/warning.png) 30px 20px no-repeat;
+	font-size: 18px;
+	line-height: 24px;
+	padding: 40px 0 40px 155px;
+}
+.mod-dialog .dialog-console {
+	padding-top: 20px;
+}
+.mod-pop .pop-nav {
+	background: #f3f3f3;
+	color: #666;
+	font-weight: 700;
+	line-height: 31px;
+	padding: 0 10px;
+}
+.mod-pop .pop-close {
+	background: url(../images/alertBtn.png) no-repeat -109px 0;
+	height: 22px;
+	position: absolute;
+	right: 6px;
+	top: 6px;
+	width: 22px;
+}
+.mod-pop .pop-main {
+	line-height: 24px;
+	padding: 15px 10px 10px;
+	text-align: center;
+}
+.mod-pop .pop-console {
+	font-size: 16px;
+	line-height: 38px;
+	margin-top: 20px;
+	text-align: center;
+}
+.mod-pop .pop-btn-green {
+	background: url(../images/alertBtn.png) no-repeat 0 -24px;
+	color: #fff;
+	display: block;
+	float: left;
+	height: 36px;
+	margin-right: 16px;
+	width: 120px;
+}
+.mod-pop .pop-btn-gray {
+	background: url(../images/alertBtn.png) no-repeat 0 -62px;
+	color: #999;
+	display: block;
+	float: left;
+	height: 36px;
+	width: 120px;
+}
+.mod-fixed-console.console-fixed {
+	box-shadow: 0 0 5px 2px rgba(0,0,0,0.3);
+	position: fixed;
+	top: 10px;
+	z-index: 999;
+}
+.mod-fixed-console .console-btn {
+	background: #82c92f;
+	border-bottom: 3px solid #73af2c;
+	border-radius: 4px;
+	color: #fff;
+	display: block;
+	font-size: 18px;
+	height: 42px;
+	line-height: 42px;
+	margin: 0 auto;
+	position: relative;
+	text-align: center;
+	width: 210px;
+}
+.mod-dialog .dialog-console a {
+	background: url(../images/alertBtn.png) no-repeat 0px 0px;
+	display: inline-block;
+	font-size: 16px;
+	height: 36px;
+	line-height: 34px;
+	text-align: center;
+	width: 120px;
+}
+.mod-dialog .dialog-console .console-btn-confirm {
+	background-position: 0 -180px;
+	color: #fff;
+}
+.mod-dialog .dialog-console .console-btn-cancel {
+	background-position: 0 -62px;
+	color: #999;
+	margin-left: 12px;
+}
+.mod-pop .pop-close:hover {
+	background-position: -86px 0;
+}
+.mod-pop .pop-btn-green:hover {
+	background-position: 0 -100px;
+}
+.mod-pop .pop-btn-gray:hover {
+	background-position: 0 -138px;
+}

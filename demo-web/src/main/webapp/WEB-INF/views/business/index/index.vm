@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	##set( $lzzUrl = "http://localhost" )
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>零彩宝商家后台-首页</title>
+    <link href='${lzzUrl}/prd/style/model#ver("/ver/style/model.css.ver").css' rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"></link>
+    <link href='${lzzUrl}/prd/style/HomePage/liu_index#ver("/ver/style/HomePage/liu_index.css.ver").css' rel="stylesheet" type="text/css"/>
+    <script src='${lzzUrl}/prd/script/jquery-2.0.2.min#ver("/ver/script/jquery-2.0.2.min.js.ver").js'></script>
+     <!-- my js -->
+    <script src='${lzzUrl}/prd/script/business/HomePage/index_shuffling#ver("/ver/script/business/HomePage/index_shuffling.js.ver").js'></script>
+ 
+    <script type="text/javascript">
+        $(function(){
+            Zoompic=new Zoompic("box_shuffling");
+           // $(".nav_wrap li span").hide();
+            $(".nav_wrap li a").click(function(){
+                var curent_class=$(this).parent().attr('class');//当前点击的class
+                var index_class=$('#box_shuffling').find('li:eq(6)').attr('class');//高亮的class
+                var index2=0;//
+                $('#box_shuffling').find('ul').find('li').each(function(index){
+                    if($(this).attr('class')==curent_class)
+                        index2=index;
+                })
+                if($(this).attr('class')==index_class){
+                    return;
+                }else{
+                    if(6-index2>0){
+                        for (var i=0;i<6-index2;i++)
+                            Zoompic.doNext();
+                    }else{
+                        for (var i=0;i<index2-6;i++)
+                            Zoompic.doPre();
+                    }
+                }
+                 $(".nav_wrap li a").each(function(){
+                    $(this).parent().find("a").removeClass("ui-btn-on").next().hide();
+                });
+                $(this).attr('class','ui-btn-on').next();
+                //调换位置
+             	/*  var this_content=$(this).html();//点击的文字
+                var this_class=$(this).parent().attr('class');//点击的对象的li的class
+                var middle_content= $('.nav_wrap').find('li:eq(5)').find('a').html();//中间的文字
+                var middle_class= $('.nav_wrap').find('li:eq(5)').attr('class');//中间的class
+                //替换
+                $('.nav_wrap').find('li:eq(5)').find('a').html(this_content);
+                $('.nav_wrap').find('li:eq(5)').attr('class',this_class);
+                $('.nav_wrap').find('li:eq(5)').find('a').attr('class','ui-btn-on');
+                $(this).html(middle_content);
+                $(this).parent().attr('class',middle_class)
+                //span展示
+                $(this).next().hide();
+                $('.nav_wrap').find('li:eq(5)').find('span').show();
+                */
+            });
+        });
+    </script>
+    <title></title>
+</head>
+<body>
+<div class="index_head">
+    <div class="head_left">
+        <a href="${ctx}/location/business?path=platformHome/personIndex"><img class="logo" src="${ctx}/images/index_logo.png" title="零彩宝"/><span class="line">|</span></a>
+        <p class="top_dec">商家管理平台</p>
+    </div>
+    <div class="head_right">
+        <div class="messageWrap">
+            <a class="message" href="#" onclick="window.location.href='/location/business?path=business/account/message'"></a>
+        </div>
+        <div class="moreWrap">
+            <a class="more" href="#"></a>
+			<div class="morewraplist">
+		<ul>
+		 <li class="on"><a href="${ctx}/location/business?path=business/marketRecord/customRecord">定制记录</a></li>
+		 <li><a href="${ctx}/location/business?path=business/account/accountDetail">账户中心</a></li>
+		 <li><a href="/login/logout">退出</a></li>
+		</ul>
+	</div>
+        </div>
+		
+    </div>
+	
+</div>
+<div class="top_nav">
+    <p class="active_dec">活动配置中心</p>
+    <ul class="nav_wrap" id="nav_wrap" >
+        <li class="index_getStop"><a  href="#">送不停 </a><span style="display:none"></span></li>
+        <li class="index_new"><a href="#">新品分布 </a><span style="display:none"></span></li>
+        <li class="index_blessing"><a href="#">送祝福 </a><span style="display:none"></span></li>
+        <li class="index_work"><a  href="#">上班考勤 </a><span style="display:none"></span></li>
+        <li class="index_activity"><a  href="#">公益活动 </a><span style="display:none"></span></li>
+        <li class="index_prize"><a class="ui-btn-on" href="#">抽奖 </a><span style="display:none"></span></li>
+        <li class="index_powder"><a  href="#">加粉  </a><span style="display:none"></span></li>
+        <li class="index_research"><a  href="#">调研 </a><span style="display:none"></span></li>
+        <li class="index_integral"><a  href="#">积分 </a><span style="display:none"></span></li>
+        <li class="index_task"><a  href="#">任务激励 </a><span style="display:none"></span></li>
+        <li class="index_Sales"><a href="#">打折促销 </a><span style="display:none"></span></li>
+        <li class="index_about"><a href="#">约吗 </a><span style="display:none"></span></li>
+    </ul>
+</div>
+<!--liu_index中心内容-->
+
+<div class="content_middle" >
+    <div id="box_shuffling">
+        <pre class="prev">prev</pre>
+        <pre class="next">next</pre>
+        <ul>
+            <li class="index_activity">
+            	<a onclick="alert('即将上线，敬请期待')"><img id="img" src="${ctx}/images/index_activity.png" alt=""/></a>
+                <div>
+       				<p>提升曝光量，品牌形象，转移大众视线，对冲负面影响。</p>
+                </div>
+            </li><li class="index_research">
+                <a href="${ctx}/location/business?path=business/marketingPlan/research/researchList&menu=12"><img  src="${ctx}/images/index_research.png" alt=""/></a>
+          		 <div>
+       				<p>客研，客调，客服，售后，有激励的调研，才能量化，才有价值。</p>
+                </div>
+            </li>
+            <li class="index_powder"><a onclick="alert('即将上线，敬请期待')"><img  src="${ctx}/images/index_powder.png" alt=""/></a>
+               <div>
+       				<p>争取观众，提升权重，塑造话语权，营造知名度。</p>
+                </div>
+            </li>
+            <li class="index_integral">
+                <a  onclick="alert('即将上线，敬请期待')"><img  src="${ctx}/images/index_integral.png" alt=""/></a>
+                <div>
+       				<p>发行虚拟货币挂钩品牌，提升品牌知名度，刺激消费。</p>
+                </div>
+            </li>
+            <li class="index_getStop"><a onclick="alert('即将上线，敬请期待')"><img  src="${ctx}/images/index_getStop.png" alt=""/></a>
+                <div>
+       				<p>满赠活动，吸引消费者购买其产品，以达到扩大销售量的目的。</p>
+                </div>
+            </li>
+            <li class="index_blessing"><a  href="${ctx}/location/business?path=business/marketingPlan/sendWishes&menu=15"><img  src="${ctx}/images/index_blessing.png" alt=""/></a>
+                <div>
+       				<p>维护用户关系，提升用户体验。加大用户粘性。</p>
+                </div>
+            </li>
+            <li class="index_prize">
+                <a href="${ctx}/location/business?path=business/marketingPlan/luckyDraw/luckyDrawList&menu=11"><img src="${ctx}/images/index_prize.png" alt=""/></a>
+                <div>
+       				<p>多重介质，多种平台，多种形式，实现拉新，激活，转化等营销推广目的。</p>
+                </div>
+            </li>
+            <li class="index_new"><a  href="${ctx}/location/business?path=business/marketingPlan/newProduct/productList&menu=14"><img  src="${ctx}/images/index_new.png" alt=""/></a>
+               <div>
+       				<p>通过激励方式退出新产品，达到新品扩散效果。</p>
+                </div>
+            </li>
+            <li class="index_Sales"><a onclick="alert('即将上线，敬请期待')"><img  src="${ctx}/images/index_Sales.png" alt=""/></a>
+               <div>
+       				<p>库存减压，单品强推，厂家直销，业绩达标，加速资金周转，提高同质竞争力。</p>
+                </div>
+            </li>
+            <li class="index_task">
+                <a  href="${ctx}/location/business?path=business/marketingPlan/taskReward/taskList&menu=13"><img  src="${ctx}/images/index_task.png" alt=""/></a>
+                <div>
+       				<p>下载客户端，签到，注册，消除用户行为惰性，引导用户使用习惯，实现用户资源有效利用。</p>
+                </div>
+            </li>
+            <li class="index_work"><a  href="${ctx}/location/business?path=business/marketingPlan/workAttendance&menu=16"><img  src="${ctx}/images/index_work.png" alt=""/></a>
+                <div>
+       				<p>提升员工关系，以激励方式保证出勤率。</p>
+                </div>
+            </li>
+            <li class="index_about"><a onclick="alert('即将上线，敬请期待')"><img  src="${ctx}/images/index_about.png" alt=""/></a>
+                <div>
+       				<p>找技术、找经验、找资源等等，提需求的平台。</p>
+                </div>
+            </li>
+            <div class="middleText" id="middleText"></div>
+        </ul>
+    </div>
+</div>
+<!--liu_index底部-->
+<!--
+<div class="footer">
+    <div class="footer_in">
+        <p class="text_yellow">请注意：单次订制活动总金额不能低于200元</p>
+        <p>中国的消费者权益保护法包括 “三包” 规定，赋予了消费者自购买之日起 1 年的产品质量问题保修服务。在此基础之上，大多数 Apple 产品也附带 90 天的免费电话技术支持，以及来自 Apple 的 1 年有限保修服务。</p>
+        <p class="text_blue">欲知详情：<a href="#">请点击这里</a></p>
+    </div>
+</div>
+-->
+<!-- 底部文件 -->
+#parse("/include/footer.vm")
+</body>
+</html>

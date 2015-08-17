@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+##set( $lzzUrl = "http://localhost" )
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>个人中心-个人信息</title>
+<link href='${ctx}/style/personal/index.css' rel="stylesheet" type="text/css" />
+<link href='${ctx}/style/personal/model.css' rel="stylesheet" type="text/css" />
+<script	src='${ctx}/script/jquery-2.0.2.min.js'></script>
+<script src='${ctx}/script/json2.js'></script>
+
+<script type="text/javascript" src="${ctx}/plugin/My97DatePicker/WdatePicker.js"></script>
+<script src='${ctx}/script/plugin/util/util.js'></script>
+<script src='${ctx}/script/plugin/util/date.js'></script>
+<link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"></link>
+<!-- my JS -->
+<script src='${ctx}/script/people/user/personalUserInfo.js'></script>
+<script src='${ctx}/script/people/header.js'></script>
+<script type="text/javascript">
+$(function() {
+	userInfo.init(
+				'${ctx}/home/user/updateUser',//基本信息保存
+				'${ctx}/home/user/info',//用户基本信息	
+				'${ctx}/dictionary/provinceList',//省份列表
+				'${ctx}'
+				);
+});
+</script>
+
+</head>
+<body>
+<!-- 公共顶导 -->
+#parse("/person/include/topnav.vm")
+<div class="container">
+	<div class="content pb0">
+		<div class="item-title">个人中心</div>
+       		<div class="user-center"> 
+            	<!-- 公共用户信息 -->
+				#parse("/person/include/frafirst.vm")
+                <div class="mt15 clearfix">
+                	<div class="leftit">
+                    	<ul>
+                        	<a href="${ctx}/location/user?path=person/basicmessage/PersonalUserInfo"><li class="lon1">基本信息</li></a>
+                            <a href="${ctx}/location/user?path=person/myAccount/MyAccount"><li class="l2">我的账户</li></a>
+                        </ul>
+                    </div>
+                  <div class="right-box">
+                    	<div class="rightit clearfix">
+                        	<ul>
+                            	<a href="${ctx}/location/user?path=person/basicmessage/PersonalUserInfo"><li class="qbon1"><span>个人信息</span></li></a>
+                            	<!-- 
+								<a href="${ctx}/location/user?path=person/basicmessage/PeopleSecurityCenter"><li class="qb2"><span>安全中心</span></li></a>
+                            	 -->
+                            </ul>
+                        </div>
+                        <div class="user-item">
+                        	<p class="red f14 pt20 tc">为了能给您提供更好的服务，请完善个人资料</p>
+                            <div class="order-statue pt20 pb10">
+                				<div class="order-item">
+                					<label>邮箱：</label>
+                					<div class="order-right clearfix">
+                						<input id="email" name="email" type="text" placeholder="" class="sr-text"/>
+                					</div>
+                				</div>
+                                <div class="order-item">
+                					<label>性别：</label>
+                					<div class="order-right clearfix">
+                						<div class="lh34 f14"><input name="sex" type="radio" value="2">&nbsp;女<input name="sex"  type="radio" class="ml20"  value="1" checked>&nbsp;男<input type="radio" name="sex"   class="ml20"  value="0">&nbsp;保密</div>
+                					</div>
+                				</div>
+                            	<div class="order-item">
+                					<label>出生日期：</label>
+                					<div class="order-right clearfix">
+                						<input id="birthday" name="birthday" type="text" placeholder="" class="sr-text" onFocus="WdatePicker({startDate:'%y-%M-01',dateFmt:'yyyy-MM-dd',alwaysUseStartDate:true})">
+                					</div>
+                				</div>
+                                <div class="order-item">
+                					<label>QQ号：</label>
+                					<div class="order-right clearfix">
+                						<input id="qqNumber" name="qqNumber" type="text" placeholder="" class="sr-text">
+                					</div>
+                				</div>
+                                <div class="order-item">
+                					<label>所在地：</label>
+                					<div class="order-right clearfix">
+                						<select class="select-button" id="province" onchange="userInfo.showCityData();"><option>省</option></select>
+                                        <select class="select-button" id="city" onchange="userInfo.showareaData();"><option>市</option></select>
+                                        <select class="select-button" id="area"><option>区</option></select>
+                					</div>
+                				</div>
+                                <div class="order-item">
+                					<label>地址：</label>
+                					<div class="order-right clearfix">
+                						<input id="address" name="address" type="text" placeholder="详细街道地址" class="sr-text">
+                					</div>
+                				</div>
+                                <div class="order-item">
+                					<label>邮编：</label>
+                					<div class="order-right clearfix">
+                						<input id="zipcode" name="zipcode" type="text" placeholder="" class="sr-text">
+                					</div>
+                				</div>
+                                <!-- <div class="order-item">
+                					<label>真实姓名：</label>
+                					<div class="order-right clearfix">
+                						<div  class="f14 lh34" id="realname"><font class="blue f14 pl30"></font></div>
+                					</div>
+                				</div> -->
+                				<div class="order-item">
+                					<label>昵称：</label>
+                					<div class="order-right clearfix">
+                						<input id="nickname" name="nickname" type="text" placeholder="" class="sr-text">
+                					</div>
+                				</div>
+                                <div class="order-item">
+                					<label>手机号码：</label>
+                					<div class="order-right clearfix">
+                						<div class="f14 lh34" id="mobile"><a class="blue f14 pl30"></a></div>
+                					</div>
+                				</div>
+                                <div class="order-item">
+                					<label>电话号码：</label>
+                					<div class="order-right clearfix">
+                						<input id="phonenumber" name="phonenumber" type="text" placeholder="" class="sr-text">
+                					</div>
+                				</div>
+                                <div class="order-item">
+                					<label>传真：</label>
+                					<div class="order-right clearfix">
+                						<input id="fax" name="fax" type="text" placeholder="" class="sr-text">
+                					</div>
+                				</div>
+                                <div class="order-item">
+                					<label></label>
+                					<div class="order-right clearfix">
+                						<input type="button"  value="确定"class="ui-button-green" onclick="userInfo.updateUserInfo();">
+                					</div>
+                				</div>
+                			</div>
+                        </div>
+                    </div>
+                </div>		
+   			</div>
+        </div>
+</div>
+<!-- 公共底部导 -->
+#parse("/person/include/footernav.vm")
+</body>
+
+</html>
+

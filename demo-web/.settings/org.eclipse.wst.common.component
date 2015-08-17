@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="market-web">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources.env/local"/>
+        <dependent-module archiveName="marketpc-service-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/demo-service/demo-service">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="marketpc-common-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/demo-common/demo-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="lingcai.upload-0.0.4-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/lingcai_upload/lingcai_upload">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="palm.common-9.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/palm.common/palm.common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/market-web/target/classes"/>
+        <property name="context-root" value="marketpc-web"/>
+    </wb-module>
+</project-modules>

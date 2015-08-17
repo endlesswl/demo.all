@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.lingcaibao.repository.UserPrizeDao">
+
+	<resultMap id="resultMap" type="com.lingcaibao.entity.UserPrize">
+        <result property="id" column="id"/>
+        <result property="userid" column="userid"/>
+        <result property="prizeid" column="prizeid"/>
+        <result property="lotteryid" column="lotteryid"/>
+        <result property="gameid" column="gameid"/>
+        <result property="gametype" column="gametype"/>
+        <result property="issueNo" column="issueNo"/>
+        <result property="prizeMoney" column="prizeMoney"/>
+        <result property="prizeMoneyAfterTax" column="prizeMoneyAfterTax"/>
+        <result property="tax" column="tax"/>
+        <result property="isfixed" column="isfixed"/>
+        <result property="createtime" column="createtime"/>
+        <result property="remark" column="remark"/>
+        <result property="userLotteryId" column="userLotteryId"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+		id,userid,prizeid,lotteryid,gameid,gametype,issueNo,prizeMoney,prizeMoneyAfterTax,tax,isfixed,createtime,remark,userLotteryId
+	</sql>
+	
+	<!-- 获取用户: 输出直接映射到对象 -->
+	<select id="get" parameterType="Long" resultType="UserPrize">
+		SELECT <include refid="columns" />
+		FROM tab_user_prize
+		WHERE id=#{id}
+	</select>
+	
+	<select id="getUserPrizeById" parameterType="Long" resultType="map">
+	SELECT
+		tul.money,
+		tl.ball,
+		tl.issueNo,
+    	DATE_FORMAT(tul.createtime, '%Y-%m-%d %H:%i:%S') createtime,
+		tp.prizeball,
+		DATE_FORMAT(tp.prizetime , '%Y-%m-%d %H:%i:%S') prizetime,
+    	tp.orderid
+	FROM
+		tab_user_lottery tul
+	INNER JOIN tab_lottery tl ON tl.id = tul.lotteryid
+	INNER JOIN tab_prize  tp on tp.orderid = tul.orderid
+	WHERE
+		tul.id = #{id}
+	AND tl.isprize = 1 
+	</select>
+	
+
+
+	<!-- 查询用户, 不分页 -->
+	<select id="search" parameterType="map" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		FROM tab_user_prize
+		<where>
+	       <if test="userid != null and userid != ''">
+				AND userid = #{userid}
+		   </if>
+	       <if test="prizeid != null and prizeid != ''">
+				AND prizeid = #{prizeid}
+		   </if>
+	       <if test="lotteryid != null and lotteryid != ''">
+				AND lotteryid = #{lotteryid}
+		   </if>
+	       <if test="gameid != null and gameid != ''">
+				AND gameid = #{gameid}
+		   </if>
+	       <if test="gametype != null and gametype != ''">
+				AND gametype = #{gametype}
+		   </if>
+	       <if test="issueNo != null and issueNo != ''">
+				AND issueNo = #{issueNo}
+		   </if>
+	       <if test="prizeMoney != null and prizeMoney != ''">
+				AND prizeMoney = #{prizeMoney}
+		   </if>
+	       <if test="prizeMoneyAfterTax != null and prizeMoneyAfterTax != ''">
+				AND prizeMoneyAfterTax = #{prizeMoneyAfterTax}
+		   </if>
+	       <if test="tax != null and tax != ''">
+				AND tax = #{tax}
+		   </if>
+	       <if test="isfixed != null and isfixed != ''">
+				AND isfixed = #{isfixed}
+		   </if>
+	       <if test="createtime != null and createtime != ''">
+				AND createtime = #{createtime}
+		   </if>
+	       <if test="remark != null and remark != ''">
+				AND remark = #{remark}
+		   </if>
+	       <if test="userLotteryId != null and userLotteryId != ''">
+				AND userLotteryId = #{userLotteryId}
+		   </if>
+		</where>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="searchPage" resultMap="resultMap">
+		SELECT <include refid="columns" />
+		FROM tab_user_prize
+		<where>
+	       <if test="searchFields.userid != null and searchFields.userid != ''">
+				AND userid = #{searchFields.userid}
+			</if>
+	       <if test="searchFields.prizeid != null and searchFields.prizeid != ''">
+				AND prizeid = #{searchFields.prizeid}
+			</if>
+	       <if test="searchFields.lotteryid != null and searchFields.lotteryid != ''">
+				AND lotteryid = #{searchFields.lotteryid}
+			</if>
+	       <if test="searchFields.gameid != null and searchFields.gameid != ''">
+				AND gameid = #{searchFields.gameid}
+			</if>
+	       <if test="searchFields.gametype != null and searchFields.gametype != ''">
+				AND gametype = #{searchFields.gametype}
+			</if>
+	       <if test="searchFields.issueNo != null and searchFields.issueNo != ''">
+				AND issueNo = #{searchFields.issueNo}
+			</if>
+	       <if test="searchFields.prizeMoney != null and searchFields.prizeMoney != ''">
+				AND prizeMoney = #{searchFields.prizeMoney}
+			</if>
+	       <if test="searchFields.prizeMoneyAfterTax != null and searchFields.prizeMoneyAfterTax != ''">
+				AND prizeMoneyAfterTax = #{searchFields.prizeMoneyAfterTax}
+			</if>
+	       <if test="searchFields.tax != null and searchFields.tax != ''">
+				AND tax = #{searchFields.tax}
+			</if>
+	       <if test="searchFields.isfixed != null and searchFields.isfixed != ''">
+				AND isfixed = #{searchFields.isfixed}
+			</if>
+	       <if test="searchFields.createtime != null and searchFields.createtime != ''">
+				AND createtime = #{searchFields.createtime}
+			</if>
+	       <if test="searchFields.remark != null and searchFields.remark != ''">
+				AND remark = #{searchFields.remark}
+			</if>
+	       <if test="searchFields.userLotteryId != null and searchFields.userLotteryId != ''">
+				AND userLotteryId = #{searchFields.userLotteryId}
+			</if>
+			<if test="searchFields.startTime != null and searchFields.startTime != ''">
+				<![CDATA[ AND createtime >= #{searchFields.startTime} ]]>
+			</if>
+			<if test="searchFields.endTime != null and searchFields.endTime != ''">
+				<![CDATA[ AND createtime <= #{searchFields.endTime} ]]>
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="UserPrize" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tab_user_prize (
+        	userid,
+        	prizeid,
+        	lotteryid,
+        	gameid,
+        	gametype,
+        	issueNo,
+        	prizeMoney,
+        	prizeMoneyAfterTax,
+        	tax,
+        	isfixed,
+        	createtime,
+        	remark,
+        	userLotteryId
+		) VALUES (
+        	#{userid},
+        	#{prizeid},
+        	#{lotteryid},
+        	#{gameid},
+        	#{gametype},
+        	#{issueNo},
+        	#{prizeMoney},
+        	#{prizeMoneyAfterTax},
+        	#{tax},
+        	#{isfixed},
+        	#{createtime},
+        	#{remark},
+        	#{userLotteryId}
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" >
+        UPDATE tab_user_prize
+		<set>
+	        	<if test="userid != null and userid != ''">
+				userid = #{userid},
+		</if>
+	        	<if test="prizeid != null and prizeid != ''">
+				prizeid = #{prizeid},
+		</if>
+	        	<if test="lotteryid != null and lotteryid != ''">
+				lotteryid = #{lotteryid},
+		</if>
+	        	<if test="gameid != null and gameid != ''">
+				gameid = #{gameid},
+		</if>
+	        	<if test="gametype != null and gametype != ''">
+				gametype = #{gametype},
+		</if>
+	        	<if test="issueNo != null and issueNo != ''">
+				issueNo = #{issueNo},
+		</if>
+	        	<if test="prizeMoney != null and prizeMoney != ''">
+				prizeMoney = #{prizeMoney},
+		</if>
+	        	<if test="prizeMoneyAfterTax != null and prizeMoneyAfterTax != ''">
+				prizeMoneyAfterTax = #{prizeMoneyAfterTax},
+		</if>
+	        	<if test="tax != null and tax != ''">
+				tax = #{tax},
+		</if>
+	        	<if test="isfixed != null and isfixed != ''">
+				isfixed = #{isfixed},
+		</if>
+	        	<if test="createtime != null and createtime != ''">
+				createtime = #{createtime},
+		</if>
+	        	<if test="remark != null and remark != ''">
+				remark = #{remark},
+		</if>
+	        	<if test="userLotteryId != null and userLotteryId != ''">
+				userLotteryId = #{userLotteryId}
+		</if>
+		</set>
+        WHERE 
+	        id = #{id}
+	</update>
+	
+	<!-- 删除用户 -->
+	<delete id="delete" parameterType="Long">
+	     DELETE FROM tab_user_prize WHERE id=#{id}
+	</delete>
+	<!-- 福利详情页获取中奖信息 -->
+	<select id="getPrizeContent" resultType="Map">
+		SELECT
+			tp.prizeStatus,
+			tup.gameid,
+			tup.issueNo,
+			tp.prizeball,
+			tl.ball
+		FROM
+			tab_user_prize tup
+		JOIN tab_prize tp ON tup.prizeid = tp.id
+		INNER JOIN tab_lottery tl ON tl.orderid = tp.orderid
+		WHERE
+			tup.userLotteryId =  #{userLotteryId}
+	</select>
+	<!-- 用户零彩总额 -->
+	<select id="getUserPrizeMoney" parameterType="Long" resultType="BigDecimal">
+		SELECT
+			sum(prizeMoneyAfterTax) as money
+		FROM
+			tab_user_prize
+		WHERE
+			userid = #{id}
+	</select>
+	<!-- 按月统计  -->
+	<select id="getUserPrizeByMonth" resultType="Map">
+		SELECT
+			DATE_FORMAT(createtime, '%Y-%m') times,
+			SUM(prizeMoneyAfterTax) as money
+		FROM
+			tab_user_prize
+		WHERE
+			userid = #{searchParas.id}
+		GROUP BY
+			times
+		HAVING <![CDATA[ times < #{searchParas.startTime} ]]> and <![CDATA[ times > #{searchParas.endTime} ]]>
+	</select>
+	<!-- 按年统计  -->
+	<select id="getUserPrizeByYear"  resultType="Map">
+		SELECT
+			DATE_FORMAT(createtime, '%Y') times,
+			SUM(prizeMoneyAfterTax) as money
+		FROM
+			tab_user_prize
+		WHERE
+			userid = #{searchParas.id}
+		GROUP BY
+			times
+		HAVING <![CDATA[ times < #{searchParas.startTime} ]]> and <![CDATA[ times > #{searchParas.endTime} ]]>
+	</select>	
+</mapper> 

@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.lingcaibao.repository.WithdrawDao">
+
+	<resultMap id="resultMap" type="com.lingcaibao.entity.Withdraw">
+		<result property="id" column="id" />
+		<result property="userid" column="userid" />
+		<result property="bankid" column="bankid" />
+		<result property="orderid" column="orderid" />
+		<result property="amount" column="amount" />
+		<result property="createtime" column="createtime" />
+		<result property="audittime" column="audittime" />
+		<result property="operator" column="operator" />
+		<result property="status" column="status" />
+		<result property="processtime" column="processtime" />
+		<result property="wxserverid" column="wxserverid" />
+		<result property="remark" column="remark" />
+		<result property="deleteFlag" column="deleteFlag" />
+		<result property="source" column="source" />
+		<result property="serialNo" column="serialNo" />
+		<result property="tradeNo" column="tradeNo" />
+		<result property="prebalance" column="prebalance" />
+		<result property="afterbalance" column="afterbalance" />
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+		id,userid,bankid,orderid,amount,createtime,audittime,operator,status,processtime,wxserverid,remark,deleteFlag,source,serialNo,tradeNo,prebalance,afterbalance
+	</sql>
+
+	<!-- 获取用户: 输出直接映射到对象 -->
+	<select id="get" parameterType="Long" resultType="Withdraw">
+		SELECT
+		<include refid="columns" />
+		FROM tab_withdraw
+		WHERE id=#{id}
+	</select>
+
+
+	<!-- 查询用户, 不分页 -->
+	<select id="search" parameterType="map" resultType="map">
+		select w.id,w.userid,w.bankid,w.orderid,w.amount,w.createtime,
+		w.audittime,w.operator,w.status,w.processtime,w.wxserverid,w.remark,
+		w.deleteFlag,w.source,w.serialNo,w.tradeNo,w.prebalance,w.afterbalance,b.bankname,b.abbreviation,b.accountname,b.cardno,b.cardtype
+		FROM tab_withdraw w left join tab_bank b on b.id= w.bankid
+		<where>
+			<if test="userid != null and userid != ''">
+				AND w.userid = #{userid}
+			</if>
+			<if test="bankid != null and bankid != ''">
+				AND w.bankid = #{bankid}
+			</if>
+			<if test="orderid != null and orderid != ''">
+				AND w.orderid = #{orderid}
+			</if>
+			<if test="amount != null and amount != ''">
+				AND w.amount = #{amount}
+			</if>
+			<if test="createtime != null and createtime != ''">
+				AND w.createtime = #{createtime}
+			</if>
+			<if test="audittime != null and audittime != ''">
+				AND w.audittime = #{audittime}
+			</if>
+			<if test="operator != null and operator != ''">
+				AND w.operator = #{operator}
+			</if>
+			<if test="status != null and status != ''">
+				AND w.status = #{status}
+			</if>
+			<if test="processtime != null and processtime != ''">
+				AND w.processtime = #{processtime}
+			</if>
+			<if test="wxserverid != null and wxserverid != ''">
+				AND w.wxserverid = #{wxserverid}
+			</if>
+			<if test="remark != null and remark != ''">
+				AND w.remark = #{remark}
+			</if>
+			<if test="deleteFlag != null and deleteFlag != ''">
+				AND w.deleteFlag = #{deleteFlag}
+			</if>
+			<if test="source != null and source != ''">
+				AND w.source = #{source}
+			</if>
+			<if test="serialNo != null and serialNo != ''">
+				AND w.serialNo = #{serialNo}
+			</if>
+			<if test="tradeNo != null and tradeNo != ''">
+				AND w.tradeNo = #{tradeNo}
+			</if>
+			<if test="prebalance != null and prebalance != ''">
+				AND w.prebalance = #{prebalance}
+			</if>
+			<if test="afterbalance != null and afterbalance != ''">
+				AND w.afterbalance = #{afterbalance}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 获取待处理提现申请列表 -->
+	<select id="getUntreatedList" parameterType="map" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM tab_withdraw
+		<where>
+		    (status = 0 OR status = 1 OR status = 2)
+			<if test="userid != null and userid != ''">
+				AND userid = #{userid}
+			</if>
+			<if test="bankid != null and bankid != ''">
+				AND bankid = #{bankid}
+			</if>
+		</where>
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="searchPage" parameterType="map" resultType="map">
+		select w.id,w.userid,w.bankid,w.orderid,w.amount,w.createtime,
+		w.audittime,w.operator,w.status,w.processtime,w.wxserverid,w.remark,
+		w.deleteFlag,w.source,w.serialNo,w.tradeNo,w.prebalance,w.afterbalance,b.bankname,b.abbreviation,b.accountname,b.cardno,b.cardtype
+		FROM tab_withdraw w left join tab_bank b on b.id= w.bankid
+		<where>
+			<if test="searchFields.userid != null and searchFields.userid != ''">
+				AND w.userid = #{searchFields.userid}
+			</if>
+			<if test="searchFields.bankid != null and searchFields.bankid != ''">
+				AND w.bankid = #{searchFields.bankid}
+			</if>
+			<if test="searchFields.orderid != null and searchFields.orderid != ''">
+				AND w.orderid = #{searchFields.orderid}
+			</if>
+			<if test="searchFields.amount != null and searchFields.amount != ''">
+				AND w.amount = #{searchFields.amount}
+			</if>
+			<if
+				test="searchFields.createtime != null and searchFields.createtime != ''">
+				AND w.createtime = #{searchFields.createtime}
+			</if>
+			<if test="searchFields.audittime != null and searchFields.audittime != ''">
+				AND w.audittime = #{searchFields.audittime}
+			</if>
+			<if test="searchFields.operator != null and searchFields.operator != ''">
+				AND w.operator = #{searchFields.operator}
+			</if>
+			<if test="searchFields.status != null and searchFields.status != ''">
+				AND w.status = #{searchFields.status}
+			</if>
+			<if
+				test="searchFields.processtime != null and searchFields.processtime != ''">
+				AND w.processtime = #{searchFields.processtime}
+			</if>
+			<if
+				test="searchFields.wxserverid != null and searchFields.wxserverid != ''">
+				AND w.wxserverid = #{searchFields.wxserverid}
+			</if>
+			<if test="searchFields.remark != null and searchFields.remark != ''">
+				AND w.remark = #{searchFields.remark}
+			</if>
+			<if
+				test="searchFields.deleteFlag != null and searchFields.deleteFlag != ''">
+				AND w.deleteFlag = #{searchFields.deleteFlag}
+			</if>
+			<if test="searchFields.source != null and searchFields.source != ''">
+				AND w.source = #{searchFields.source}
+			</if>
+			<if test="searchFields.serialNo != null and searchFields.serialNo != ''">
+				AND w.serialNo = #{searchFields.serialNo}
+			</if>
+			<if test="searchFields.tradeNo != null and searchFields.tradeNo != ''">
+				AND w.tradeNo = #{searchFields.tradeNo}
+			</if>
+			<if
+				test="searchFields.prebalance != null and searchFields.prebalance != ''">
+				AND w.prebalance = #{searchFields.prebalance}
+			</if>
+			<if
+				test="searchFields.afterbalance != null and searchFields.afterbalance != ''">
+				AND w.afterbalance = #{searchFields.afterbalance}
+			</if>
+			<if
+				test="searchFields.sWithdrawTime != null and searchFields.sWithdrawTime != ''">
+	       		<![CDATA[ AND w.createtime >= #{searchFields.sWithdrawTime}]]>
+			</if>
+			<if
+				test="searchFields.eWithdrawTime != null and searchFields.eWithdrawTime != ''">
+				<![CDATA[ AND w.createtime  <= #{searchFields.eWithdrawTime}]]>
+			</if>
+		</where>
+		order by createtime DESC
+	</select>
+
+	<!-- 新增 -->
+	<insert id="insert" parameterType="Withdraw" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO tab_withdraw (
+			userid,
+			bankid,
+			orderid,
+			amount,
+			createtime,
+			audittime,
+			operator,
+			status,
+			processtime,
+			wxserverid,
+			remark,
+			deleteFlag,
+			source,
+			serialNo,
+			tradeNo,
+			prebalance,
+			afterbalance
+		) VALUES (
+			#{userid},
+			#{bankid},
+			#{orderid},
+			#{amount},
+			#{createtime},
+			#{audittime},
+			#{operator},
+			#{status},
+			#{processtime},
+			#{wxserverid},
+			#{remark},
+			#{deleteFlag},
+			#{source},
+			#{serialNo},
+			#{tradeNo},
+			#{prebalance},
+			#{afterbalance}
+		)
+	</insert>
+
+	<!-- 更新 -->
+	<update id="update">
+		UPDATE tab_withdraw
+		<set>
+			<if test="userid != null and userid != ''">
+				userid = #{userid},
+			</if>
+			<if test="bankid != null and bankid != ''">
+				bankid = #{bankid},
+			</if>
+			<if test="orderid != null and orderid != ''">
+				orderid = #{orderid},
+			</if>
+			<if test="amount != null and amount != ''">
+				amount = #{amount},
+			</if>
+			<if test="createtime != null and createtime != ''">
+				createtime = #{createtime},
+			</if>
+			<if test="audittime != null and audittime != ''">
+				audittime = #{audittime},
+			</if>
+			<if test="operator != null and operator != ''">
+				operator = #{operator},
+			</if>
+			<if test="status != null and status != ''">
+				status = #{status},
+			</if>
+			<if test="processtime != null and processtime != ''">
+				processtime = #{processtime},
+			</if>
+			<if test="wxserverid != null and wxserverid != ''">
+				wxserverid = #{wxserverid},
+			</if>
+			<if test="remark != null and remark != ''">
+				remark = #{remark},
+			</if>
+			<if test="deleteFlag != null and deleteFlag != ''">
+				deleteFlag = #{deleteFlag},
+			</if>
+			<if test="source != null and source != ''">
+				source = #{source},
+			</if>
+			<if test="serialNo != null and serialNo != ''">
+				serialNo = #{serialNo},
+			</if>
+			<if test="tradeNo != null and tradeNo != ''">
+				tradeNo = #{tradeNo}
+			</if>
+			<if test="prebalance != null and prebalance != ''">
+				prebalance = #{prebalance}
+			</if>
+			<if test="afterbalance != null and afterbalance != ''">
+				afterbalance = #{afterbalance}
+			</if>
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+
+	<!-- 删除用户 -->
+	<delete id="delete" parameterType="Long">
+		DELETE FROM tab_withdraw WHERE id=#{id}
+	</delete>
+
+	<select id="withdrawDetail" parameterType="Long" resultType="map">
+
+		select w.id,w.userid,w.bankid,w.orderid,w.amount,w.createtime,
+		w.audittime,w.operator,w.status,w.processtime,w.wxserverid,w.remark,
+		w.deleteFlag,w.source,w.serialNo,w.tradeNo,w.prebalance,w.afterbalance,b.bankname,b.abbreviation,b.accountname,b.cardno,b.cardtype
+		FROM tab_withdraw w left join tab_bank b on b.id= w.bankid where
+		w.id=#{id}
+	</select>
+</mapper> 

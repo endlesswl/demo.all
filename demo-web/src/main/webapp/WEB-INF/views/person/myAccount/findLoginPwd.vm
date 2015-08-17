@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<!-- test -->
+<!-- test end-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>零彩宝商家后台-修改密码</title>
+    <link href='${lzzUrl}/prd/style/model#ver("/ver/style/model.css.ver").css' rel="stylesheet" type="text/css"/>
+    <link href='${lzzUrl}/prd/style/index#ver("/ver/style/index.css.ver").css' rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"></link>
+    <script src='${lzzUrl}/prd/script/jquery-2.0.2.min#ver("/ver/script/jquery-2.0.2.min.js.ver").js'></script>
+	<script src='${lzzUrl}/prd/script/plugin/util/util#ver("/ver/script/plugin/util/util.js.ver").js'></script>
+	
+	<!-- my JS -->
+	<script src='${lzzUrl}/prd/script/people/myAccount/findLoginPwd#ver("/ver/script/people/myAccount/findLoginPwd.js.ver").js'></script>
+
+<script type="text/javascript">
+	$(function() {
+		FindLoginPwd.init('${ctx}', 'FIND_PWD');
+	});
+</script>
+
+</head>
+<body>
+<div class="container">
+	<div class="content clearfix">
+     <div class="merchants-main">
+        	<div class="title">找回登陆密码</div>
+             <div class="white-box-a">
+            <div class="order-statue dj-infor pt50 pb10">
+                <div class="order-item">
+                	<label>用户名：</label>
+                	<div class="order-right clearfix">
+                		<input id="username" type="text" placeholder="输入用户名" class="sr-text">
+                	</div>
+                </div>
+                <div class="order-item">
+                	<label>短信校验码：</label>
+                	<div class="order-right clearfix">
+                		<div class="fl"><input type="text" id="verifyCode" placeholder="验证码" class="sr-text w120"></div>
+                        <div class="fl"> <input id="btn" onclick="FindLoginPwd.sendEmail(this)" type="button" value="获取短信校验码" class="gdcode"></div>
+                	</div>
+                </div>
+                <div class="order-item">
+                	<label></label>
+                	<div class="order-right">
+                		<input type="button" onclick="FindLoginPwd.findLoginPwd()" value="确认" class="ui-button-oranges2">
+                	</div>
+                </div>
+             </div>
+            
+      </div>
+    </div>
+    </div>
+    
+    <!-- 底部文件 -->
+	#parse("/include/footer.vm")
+</div>
+</body>
+</html>
+
+
+

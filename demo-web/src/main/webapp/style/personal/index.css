@@ -1,0 +1,294 @@
+/* [export] */
+/*中间主体部分样式*/
+body{ color:#313131}
+.lh30{ line-height:30px}
+.container{ color:#313131}
+.item-title{ height:40px; border-bottom:1px solid #d2d2d2; background:url(http://image.lingcaibao.com/image/2015/3/2015_3_c42c2c34-4465-4a07-ad93-f6b9a55b3019.png) no-repeat 10px 0; color:#eb6100; padding:0 0 0 30px; line-height:23px; font-size:24px;}
+.orange-line{ width:7px; height:24px; background:#eb6100}
+table.tab1{  border:1px solid #e8ebf4; background:#fff;border-radius:6px;}
+table.tab1 th{ text-align:center;line-height:50px; font-size:14px; color:#000; height:50px; border-bottom:1px solid #e8ebf4; color:#eb6100; background:#f8f9fc}
+table.tab1 td{ padding:14px 0; border-bottom:1px solid #e8ebf4; text-align:center; font-size:14px;}
+.blue,table.tab1 td.blue{ color:#0068c1}
+.red,table.tab1 td.red,a.red{ color:#e60012}
+.orange,table.tab1 td.orange{ color:#eb6100}
+.fra{ padding:0 14px}
+input{ background:none; border:none;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px; box-shadow:0 1px 1px #c6c6c6 inset; cursor:pointer}
+.sr-text{   font-size: 14px;padding: 0px 10px 0 10px;vertical-align: middle; height:32px; line-height:32px;border:1px solid #c3c4c8;background:#fff; font-size:16px; color:#a0a0a0; width:320px; margin-right:6px;}
+sr-text2{   font-size: 14px;padding: 0px 10px 0 10px;vertical-align: middle; height:32px; line-height:32px;border:1px solid #c3c4c8;background:#fff; font-size:16px; color:#a0a0a0; width:220px; margin-right:6px;}
+.coleft{ border-top-left-radius:6px;}
+.coright{ border-top-right-radius:6px;}
+.tit-list{ height:32px; line-height:32px; border:1px solid #d9d9d9;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;}
+.tit-list li{ float:left; border-right:1px solid #d9d9d9; font-size:14px}
+.tit-list li a{padding:0 12px; color:#313131}
+.tit-list li.bornone,.bornone{ border:none}
+.tit-list li.current{ background:#eeeeee; box-shadow:0 3px 3px #c6c6c6 inset;webkit-box-shadow:0 3px 3px #c6c6c6 inset;moz-box-shadow:0 3px 3px #c6c6c6 inset;}
+.ui-search{ height:32px; line-height:30px; border-radius:4px; display:block; padding:0 15px 0 33px; vertical-align:middle; font-size:16px; color:#fff; background:url(http://image.lingcaibao.com/image/2015/3/2015_3_c42c2c34-4465-4a07-ad93-f6b9a55b3019.png) no-repeat 13px -50px;background-color:#eb6100; cursor:pointer}
+table.tab2{ padding-top:50px}
+table.tab2 td{ line-height:46px; font-size:16px; vertical-align:top; text-align:left}
+.green{ color:#127000}
+/*彩票订单详情*/
+table.tab3{ height:49px; background:#f3f3f3; line-height:49px; font-size:14px; padding:0 0 0 40px; margin:20px 0 0 0px}
+.zx_con{ text-align:center; width:980px;}
+.zx_tb1{ margin:30px 0 0px 0}
+table.tab4 td{ line-height:60px; text-align:left; font-size:14px;}
+.srq{ padding:0 0 40px 310px}
+.my_tz{ width:940px; height:114px; background:#f3f3f3; margin:35px 0 0 12px}
+.my_tx_right{ float:left; padding:0 40px 0 20px; width:770px;}
+.ball_fra{ width:400px; padding:0 0 30px 0}
+.ml300{ margin-left:300px}
+.ball_fra li{background:url(/images/personal/ball-icon.png) no-repeat; width:40px; height:40px; overflow:hidden; line-height:40px; font-size:20px; color:#fff; text-align:center; float:left}
+.ball_fra li.lq{background:url(/images/personal/ball-icon.png) no-repeat 1px -59px; width:40px; height:40px;overflow:hidden; line-height:40px; font-size:20px; color:#fff; text-align:center}
+.ui-input-red{  background:#ff4743; padding:6px 54px; text-align:center; font-size:24px; color:#fff;-moz-border-radius: 4px; -webkit-border-radius: 4px;border-radius:4px;cursor:pointer}
+.ui-input-yellow{  background:#f39800; padding:6px 54px; text-align:center; font-size:24px; color:#fff;-moz-border-radius: 4px; -webkit-border-radius: 4px;border-radius:4px;cursor:pointer}
+table.tab5{ margin-bottom:50px}
+table.tab5 td{ font-size:14px; }
+.ball_fra_s28 li{ float:left;background:url(/images/personal/ball-icon.png) no-repeat -1px -106px; width:28px; height:28px; overflow:hidden; line-height:28px; font-size:14px; color:#e60012; text-align:center; margin-right:2px}
+.ball_fra_s28 li.lq{ float:left;background:url(/images/personal/ball-icon.png) no-repeat 0px -136px; width:28px; height:28px;overflow:hidden; line-height:28px; font-size:14px; color:#2f73fe; text-align:center}
+.ball_fra_s28 li.hqon{ float:left; background:url(/images/personal/ball-icon.png) no-repeat 0px -167px; width:28px; height:28px; overflow:hidden; line-height:28px; font-size:14px; color:#fff; text-align:center; margin-right:2px}
+.ball_fra_s28 li.lqon{ float:left; background:url(/images/personal/ball-icon.png) no-repeat 0px -199px; width:28px; height:28px;overflow:hidden; line-height:28px; font-size:14px; color:#fff; text-align:center}
+/*閿熸枻鎷烽敓鏂ゆ嫹*/
+.share-fra{ width:980px; background:#faf1a9; margin-top:10px; }
+table.tab6{ width:680px; padding:30px 0 40px 0; margin-left:220px}
+table.tab6 td{line-height:52px; font-size:16px; color:#000}
+table.tab6 td .ui-sr{ width:444px; height:60px; background:#b71c0a; color:#fff; font-size:16px; padding:10px;margin-top:20px}
+.ui-textarea{ width:480px; height:80px;}
+.ui-add{ padding:0px 40px; font-style: italic; line-height:44px;color:#fff; font-size:24px; font-weight:bold; background:#ff6527;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px; box-shadow:0 1px 1px #c6c6c6 inset; cursor:pointer}
+.ball_fra_s32 li{ float:left;background:url(/images/personal/ball-icon.png) no-repeat 0px -234px; width:32px; height:32px; overflow:hidden; line-height:32px; font-size:16px; color:#e60012; text-align:center; margin-right:5px}
+.ball_fra_s32 li.lq{ float:left;background:url(/images/personal/ball-icon.png) no-repeat 0px -301px; width:32px; height:32px;overflow:hidden; line-height:32px; font-size:16px; color:#2f73fe; text-align:center; margin-right:5px}
+.ball_fra_s32 li.hqon{ float:left; background:url(/images/personal/ball-icon.png) no-repeat 0px -269px; width:32px; height:32px; overflow:hidden; line-height:32px; font-size:16px; color:#fff; text-align:center; }
+.ball_fra_s32 li.lqon{ float:left; background:url(/images/personal/ball-icon.png) no-repeat 0px -336px; width:32px; height:32px;overflow:hidden; line-height:32px; font-size:16px; color:#fff; text-align:center;margin-right:5px}
+.share-ball{ width:640px; height:140px; background:#fcf7d0; margin:20px 0 0 170px; padding-top:30px; text-align:center}
+.ball_fra_s50{ margin:30px 0 0 90px}
+.ball_fra_s50 li{ float:left;background:url(/images/personal/ball-icon.png) no-repeat 0px -369px; width:50px; height:50px; overflow:hidden; line-height:50px; font-size:26px; color:#fff; text-align:center; margin-right:20px}
+.ball_fra_s50 li.lq{ float:left;background:url(/images/personal/ball-icon.png) no-repeat -1px -429px; width:50px; height:50px;overflow:hidden; line-height:50px; font-size:26px; color:#fff; text-align:center; margin-right:20px}
+/*閿熺瓔鍔�/
+.event-fra{ width:980px; margin:0 auto}
+.event-list li{ float:left; width:226px; margin:25px 25px 0 0 }
+.event-list li.mr0{ margin-right:0px}
+.event-list li span img{ display:block}
+.wz-box{ width:221px; border:1px solid #d2d2d2; border-top:none; height:145px; overflow:hidden;  background:#fff; margin-bottom:16px}
+.wz-box h1{ color:#eb6100; font-size:14px; line-height:24px; margin:5px 0 8px 20px;}
+.wz-box em{  background:url(http://image.lingcaibao.com/image/2015/3/2015_3_c42c2c34-4465-4a07-ad93-f6b9a55b3019.png) no-repeat 0 -93px; color:#0068c1; margin-left:20px; font-size:12px; padding-left:10px; float:left}
+.wz-box p{ text-align:right; color:#959595; padding-right:8px}
+.wz-nr{ overflow:hidden; border-top:1px solid #f2f2f2; width:195px; padding:5px 14px 0; background:#fafafa; margin-top:12px; height:72px; color:#313131; overflow:hidden; font-size:14px}
+.ui-input-gray{  background:#d9d9d9; padding:6px 80px; text-align:center; font-size:16px; color:#313131;-moz-border-radius: 20px; -webkit-border-radius: 20px;border-radius:20px;cursor:pointer;}
+.tit-list2{ height:32px; line-height:32px; border:1px solid #d9d9d9;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px; background:#fff}
+.tit-list2 li{ float:left; border-right:1px solid #d9d9d9; font-size:14px}
+.tit-list2 li a{padding:0 18px; color:#313131}
+.tit-list2 li.bornone{ border:none}
+.tit-list2 li.current{ background:#eeeeee; box-shadow:0 3px 3px #c6c6c6 inset;webkit-box-shadow:0 3px 3px #c6c6c6 inset;moz-box-shadow:0 3px 3px #c6c6c6 inset;}
+.tit2-box{ height:40px; margin:10px 0; width:980px}
+.tit-list2 li.more{ background:url(http://image.lingcaibao.com/image/2015/3/2015_3_c42c2c34-4465-4a07-ad93-f6b9a55b3019.png) no-repeat 52px -109px; padding-right:10px}
+.hd-search{ float:right; width:250px; background:#fff; height:32px; border:1px solid #c3c4c8;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;}
+.hd1{ border:none; background:#fff; border-top-left-radius:4px;border-bottom-left-radius:4px;border-top-right-radius:0px;border-bottom-right-radius:0px;box-shadow:0 0px 0px #c6c6c6 inset; width:180px; height:30px; line-height:30px; font-size:14px}
+.hd2{ background:url(http://image.lingcaibao.com/image/2015/3/2015_3_c42c2c34-4465-4a07-ad93-f6b9a55b3019.png) no-repeat 8px -151px; font-size:16px; width:70px; height:32px;border-top-left-radius:0px; border-bottom-left-radius:0px;background-color:#d2d2d2; color:#313131; padding-left:20px}
+.mr105{ margin-right:105px}
+
+.pic-list{border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px; height:600px; background:#fff; width:978px; border:1px solid #d2d2d2; box-shadow:0 3px 3px #c6c6c6 inset;webkit-box-shadow:0 3px 3px #c6c6c6 inset;moz-box-shadow:0 3px 3px #c6c6c6 inset; top:15px; position:relative}
+.pic-list li{  height:104px; position:absolute;}
+
+#pc1{ top:60px;left:5px}
+#pc2{ top:60px; left:240px;z-index:1}
+#pc3{ top:5px; left:440px}
+#pc4{ top:10px; left:730px}
+#pc5{ top:160px; left:90px; z-index:2}
+#pc6{ top:230px; left:30px}
+#pc7{ top:210px; left:133px;z-index:1}
+#pc8{ top:250px; left:155px}
+#pc9{ top:304px; left:104px; }
+#pc10{ top:165px; left:186px;z-index:1}
+#pc11{ top:110px; left:257px; }
+#pc12{ top:210px; left:267px; }
+#pc13{ top:277px; left:289px;z-index:1}
+#pc14{ top:316px; left:311px; }
+#pc15{ left:322px; top:265px; }
+#pc16{ top:330px; left:212px; }
+#pc17{ top:374px; left:256px; }
+#pc18{ top:216px; left:366px;z-index:1 }
+#pc19{ top:224px; left:455px; }
+#pc20{ top:286px; left:415px;z-index:1 }
+#pc21{ top:323px; left:413px; }
+#pc22{ top:296px; left:376px; }
+#pc23{ top:348px; left:346px; }
+#pc24{ top:372px; left:412px;z-index:1 }
+#pc25{ top:404px; left:413px; }
+#pc26{ top:130px; left:467px; }
+#pc27{ top:90px; left:632px; }
+.pctit{ position:absolute; width:120px;  left:120px; color:#eb6100; font-size:14px; top:-4px; display:none}
+.pic-list li.current .pctit{ display:block}
+.pic-list li.current img{ width:172px}
+/*閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹*/
+.bd-wz{ width:734px; height:330px; float:left; margin:0px 10px 0 0 }
+.user-infro{ float:right; height:315px; background:#f3f3f3; width:194px; padding:15px 10px 0; font-size:14px }
+.leftit{ float:left; background:url(http://image.lingcaibao.com/image/2015/3/2015_3_5a253026-b3d8-40e9-8f7a-5755b8909825.png) repeat-x; min-height:950px; width:118px}
+.right-box{ float:left; width:840px;}
+.rightit,.account-tit{ height:186px; background:#f3f3f3; width:816px; overflow:hidden; padding-left:24px}
+.rightit li{ float:left; font-size:16px; width:110px; margin:19px 50px 0 0;background:url(http://image.lingcaibao.com/image/2015/3/2015_3_50c440b4-dc8c-4e37-8914-62f914e6c466.png) no-repeat; height:160px}
+.rightit li.qb1{ background-position:1px 1px}
+.rightit li.qb2{ background-position:-160px 0px}
+.rightit li.qbon1{ background-position:1px -181px}
+.rightit li.qbon2{ background-position:-160px -182px}
+.rightit a,.account-tit a{ color:#000}
+.account-tit li{ float:left; font-size:16px; width:263px; margin:19px 0px 0 0; border-right:1px solid #e6e6e6;background:url(http://image.lingcaibao.com/image/2015/3/2015_3_50c440b4-dc8c-4e37-8914-62f914e6c466.png) no-repeat; height:140px}
+.account-tit li.ac1{ background-position:-757px 1px}
+.account-tit li.ac2{ background-position:-1032px 1px}
+.account-tit li.ac3{ background-position:-1318px 1px}
+.account-tit li.acon1{ background-position:-757px -190px}
+.account-tit li.acon2{ background-position:-1032px -190px}
+.account-tit li.acon3{ background-position:-1309px -190px}
+.account-tit span{ width:263px; text-align:center; margin-top:126px; display:block}
+.rightit span{ width:110px; text-align:center; margin-top:126px; display:block}
+.user-center{ padding:0 10px}
+.tp-lp{ text-align:center}
+.tp-lp img{ border-radius:50px;-webkit-border-radius:50px;-moz-border-radius:50px;}
+.yh-name{ font-size:16px; color:#eb6100; width:196px; height:30px; line-height:30px; display:block; background:#dcdcdc;border-radius:15px;-webkit-border-radius:15px;-moz-border-radius:15px; text-align:center; margin-top:9px;}
+.pb0{ padding-bottom:0px}
+.btn-green{ padding:5px 15px; background:#8fc31f; font-size:14px;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;}
+.leftit li{ margin:42px 0 0 30px; height:18px; padding-top:58px; font-size:16px; background:url(http://image.lingcaibao.com/image/2015/3/2015_3_120ba95c-bc3b-4546-b13e-3c9e5f952984.png) no-repeat; color:#006e0f; }
+.leftit li.l1{ background-position:1px -85px}
+.leftit li.l2{ background-position:1px -265px}
+.leftit li.lon1{ background-position:1px 0px; color:#fff}
+.leftit li.lon2{ background-position:1px -176px;color:#fff}
+.order-statue{ padding-left:20px; width:800px; color:#313131}
+.order-item{ min-height:30px; margin-bottom:0px; }
+.order-item:after{overflow:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
+.order-item label{ float:left; width:150px; font-size:16px; margin-top:5px; height:40px; margin-right:10px; text-align:right}
+.order-right{ float:left}
+.lh34{ line-height:34px}
+.ui-button-green{  background:#308547; padding:6px 80px; text-align:center; font-size:24px; color:#fff;-moz-border-radius: 6px; -webkit-border-radius: 6px;border-radius:6px;cursor:pointer;}
+/*閿熸枻鎷峰叏閿熸枻鎷烽敓鏂ゆ嫹*/
+.user-safe{ width:720px; margin-top:6px; padding:18px 0 0 18px;height:160px;}
+.user-tx{ float:left; margin-right:23px; }
+.user-tx img{border-radius:62px;-webkit-border-radius:62px;-moz-border-radius:62px;}
+.user-dj{ float:left; margin-top:8px}
+.user-safedj{ line-height:40px; vertical-align:middle; font-size:16px;}
+.user-dj h2{ height:30px; font-size:16px; color:#313131}
+.user-safedj img{ vertical-align:middle}
+.safe-level{ background:url(http://image.lingcaibao.com/image/2015/3/2015_3_c3bc8830-1bf5-483d-b696-7e1ca51b6224.png) no-repeat; height:60px; overflow:hidden; width:360px; float:left; line-height:20px; margin-left:10px; display:inline; margin-top:0px; *margin-top:-40px;}
+.middle-level{ background-position:0 27px; padding-left:180px; width:180px}
+.low-level{ background-position:0 -47px; padding-left:40px; width:320px}
+.hight-level{ background-position:0 -104px; padding-left:300px; width:60px}
+table.tab7{ margin:30px 0 0 50px}
+table.tab7 td{ line-height:60px; color:#7d7d7d; height:60px; font-size:16px}
+table.tab7 td.black{ color:#000}
+.sub-title{ border-bottom:3px solid #008532  ; height:47px; color:#008532  ; font-size:24px; padding-left:20px; margin:20px 0 0 10px}
+.ui-button-gray{ border:1px solid #c3c4c8;  padding:4px 20px; font-size:16px; color:#0080c9;border-radius:15px;-webkit-border-radius:15px;-moz-border-radius:15px;box-shadow:0 1px 1px #c6c6c6 inset; cursor:pointer }
+/*充值页面*/
+.recharge-fs{width:530px; height:250px;}
+.blank-list{  border:1px solid #00a8df; border-top:none; width:530px; padding-bottom:20px}
+.recharge-tit{ border-bottom:1px solid #00a8df; height:35px; width:530px;}
+.recharge-tit li{ float:left; width:110px; height:36px; text-align:center; font-size:14px; line-height:34px; margin:0 10px 0 0; font-weight:bold; color:#313131;}
+.recharge-tit li.current{ background:url(http://image.lingcaibao.com/image/2015/3/2015_3_0d219748-bb96-4964-a21e-c2d69c083774.png) no-repeat; width:106px; height:36px;}
+.blank-list li{ float:left; margin:10px 0 0 10px ; display:inline}
+.card-bd2{height:32px; overflow:hidden; border:1px solid #313131; width:130px; float:left}
+.blank-list label{ float:left; margin:0px 10px 0 0; width:20px; line-height:32px}
+.ui-button-oranges{ padding:4px 100px; font-size:20px; color:#fff; background:#eb6100;border-radius:6px; webkit-border-radius:6px;-moz-border-radius:6px; cursor:pointer}
+.ui-button-oranges2{ padding:2px 20px; font-size:20px; color:#fff; background:#eb6100;border-radius:6px; webkit-border-radius:6px;-moz-border-radius:6px; cursor:pointer; vertical-align:bottom}
+/*提现*/
+.withdrawal-blank{ border:3px solid #c3c4c8; height:40px; width:400px; margin:0px 0 10px 0;}
+.card-bd{height:30px; overflow:hidden; margin:0px 0 0 7px; padding-left:120px; font-size:12px; color:#828282; line-height:34px}
+.withdrawal-blank.on{ border:3px solid #0fade1; background:url(http://image.lingcaibao.com/image/2015/3/2015_3_26e3b384-acab-43fc-982c-54d845d6e185.png) no-repeat right bottom }
+.add-small{ width:58px; height:58px; border:2px dashed #6d6565; border-radius:4px;  text-align:center; font-size:14px; color:#a0a0a0; background:#fff;}
+.add-small span{ display:block; font-size:24px; font-weight:bold; line-height:28px}
+.add-small-on,.add-card-btn:hover{ border:2px dashed #eb6100; color:#eb6100}
+.account_fra{ width:820px; height:126px; background:#f3f3f3; margin:23px 0 0 20px}
+.account_item{ line-height:40px;float:left; width:120px; padding-left:20px; border-right:1px dashed #d3d3d3; height:110px; margin-top:9px;}
+.account_item p{ line-height:40px; margin-top:13px; font-size:14px; color:#000}
+.right_tit2{ font-size:18px; border-bottom:1px solid #e8e8e8; height:30px;}
+table.tab8{ margin:10px 120px 0 20px}
+table.tab8 td{ background:#f3f3f3; height:40px; font-size:14px;  line-height:40px;border-bottom:4px solid #fff}
+table.tab8 td.fd1{ padding-left:20px}
+table.tab8 td.fd1 img{ vertical-align:middle}
+.account_mn{ width:300px; text-align:left; font-size:14px; margin-left:0px; padding-top:10px; color:#000}
+.account_mn img{ vertical-align:middle; margin-left:15px}
+.input_btn{ padding:4px 30px;-moz-border-radius: 4px; -webkit-border-radius: 4px;border-radius:4px;height:27px; line-height:25px; background:#f4f4f4;text-align:center; font-size:14px;cursor:pointer; border:1px solid #c1c1c1}
+.bgreen{ background:#8fc31f; border:1px solid #8fc31f}
+.bornone{ border:none}
+.right_tit2{ font-size:18px; border-bottom:1px solid #e8e8e8; height:30px; text-align:left; margin:40px 0 0 20px}
+.cp-icon{ margin:14px 0 0 20px}
+/*交易记录*/
+.deals-records-tit{ height:55px; width:825px; margin:20px 0 0 14px }
+.deals-records-tit li{ float:left; width:161px; height:55px; background:#dcdcdc; margin-right:5px; text-align:center; color:#464c59; font-size:18px; line-height:55px;border-top-left-radius:4px; webkit-border-top-left-radius:4px;-moz-border-top-left-radius:4px;border-top-right-radius:4px; webkit-border-top-right-radius:4px;-moz-border-top-right-radius:4px; cursor:pointer}
+.deals-records-tit li.mr0{ margin-right:0px}
+.deals-records-tit li.current{ background:#7ab639; color:#fff}
+.tab9 td.red{ color:#ff0000}
+.tab9 td.green{ color:#009944}
+.tab9 td.f14,.tab7 td.f14{ font-size:14px}
+.tab9 td.orange{ color:#eb6100}
+
+.tab9{border:1px solid #e8ebf4; background:#fff;border-radius:6px; margin:10px 0 0 14px}
+.tab9 td{ padding:11px 0; border-bottom:1px solid #e8ebf4; text-align:center; color:#464c59;  color:#313131; font-size:14px; }
+.tab9 td.order-name{ padding-right:20px; text-align:right;}
+.tab9 td.state-top{ vertical-align:top}
+.tab9 td.lh60{ line-height:60px}
+.tab9 th{ text-align:center;line-height:50px; font-size:14px; color:#000; height:50px; border-bottom:1px solid #e8ebf4; color:#eb6100; background:#f8f9fc}
+.tab9 td.tleft{ text-align:left; padding-left:14px}
+.itembd label{ width:100px; font-size:16px}
+.tit-list2{ height:32px; line-height:32px; border:1px solid #d9d9d9;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px; background:#fff}
+.tit-list2 li{ float:left; border-right:1px solid #d9d9d9; font-size:14px}
+.tit-list2 li a{padding:0 18px; color:#313131}
+.tit-list2 li.bornone{ border:none}
+.tit-list2 li.current{ background:#eeeeee; box-shadow:0 3px 3px #c6c6c6 inset;webkit-box-shadow:0 3px 3px #c6c6c6 inset;moz-box-shadow:0 3px 3px #c6c6c6 inset;}
+.select-button {font-size: 16px;height: 37px;width: 112px;}
+
+.lc_pagination:after,.lc_pagination:before{  content: "";display: table; height: 0;}
+.lc_pagination{ background:#fff; padding:5px 0;   height: 40px;margin: 20px 0 5px; position: relative;text-align: center;}
+.pagination{display: inline-block;height: 25px; margin-top: 10px;}
+.pagination_page,.pagination_count,.pagination_form{ color: #999; float: left;line-height: 36px;}
+.page_wrap{ float:left;  display: inline-block;position: relative;}
+.up_page{width: auto;}
+.page-prev{   border: 1px solid #ededed;display: block; height: 34px; width: 67px;  padding: 0 3px 0 0; color:#ccc}
+.page_wrap{  border: 1px solid #ededed; font-weight:bold;color: #3e3e3e;font-family: Arial,SimSun;font-size: 14px;height: 36px;line-height: 36px;position: relative;width: 36px;z-index: 1; color:#3c3c3c}
+.page_wrap a{ color:#3e3e3e}
+.page-split { float: left; padding: 0 13px;}
+.pagination_count{ margin: 0 15px 0 10px; font-size:12px}
+.pagination_form { margin: 7px 0; position: relative; line-height: 20px;}
+.page_num {border: 1px solid #dedede;color: #3e3e3e;float: left;font-size: 14px;height: 23px;line-height: 23px; outline: 0 none;position: relative;text-align: center;width: 35px;z-index: 2;}
+.pagination_form label { float: left; margin-right: 5px; font-size:12px; color:#3e3e3e;}
+.pagination span{color:#3e3e3e}
+.btn3 input {background: #7e95b1;border: medium none;border-radius: 2px;color: #fff;cursor: pointer; font-size:12px; padding:2px 0;width: 42px;}
+.btn3 {float: left}
+.page_cur { background:#7e95b1;color: #fff;}
+input.inputData{width:134px;margin-left:0px;background:url(http://image.lingcaibao.com/image/2015/3/2015_3_239a30ae-3aec-4f71-84bc-0da7168f81db.png) no-repeat 126px -695px;}
+/*闂嗚泛鍍电�婵堢拨鐎规矮淇婇幁顖炪�闂堛垺鏌婃晶鐐寸壉瀵拷/
+.my_card{ float:left; background:#fff;width:364px; height:135px; border-radius:5px; border:1px solid #e6e7ec; margin:0px 0 30px 20px; display:inline}
+.card_lx{ height:30px; overflow:hidden; margin:12px 0 0 27px;}
+.add-card-tit{ font-size:18px; color:#eb6100; height:40px; display:block; margin-left:20px}
+.card-num{ color:#313131; font-size:24px; padding:10px 0 0 34px; display:block}
+.my-card-edit{ height:40px; background:#000; width:104px;border-bottom-left-radius:5px;border-bottom-right-radius:5px; margin-top:7px;filter:alpha(opacity=30); -moz-opacity:0.3;opacity:0.3; padding-left:260px;}
+.edit-icon{ background:url(../images/tb-icon2.png) no-repeat; float:left; width:42px; height:42px; overflow:hidden; margin-right:10px; cursor:pointer}
+.edit-a{ background-position:10px -303px}
+.edit-b{ background-position:10px -349px}
+.edit-a-on{ background-position:10px -400px}
+.edit-b-on{ background-position:10px -453px}
+.add-card-btn{ width:98px; height:98px; border:2px dashed #6d6565; border-radius:4px; margin-left:20px; text-align:center; font-size:18px; color:#a0a0a0; background:#fff;}
+.add-card-btn span{ display:block; font-size:40px; font-weight:bold}
+.add-card-on,.add-card-btn:hover{ border:2px dashed #eb6100; color:#eb6100}
+
+.share-ball{ width:640px; height:140px; background:#fcf7d0; margin:20px 0 0 106px; padding-top:30px; text-align:center}
+.ball_fra_s50{ margin:30px 0 0 90px}
+.ball_fra_s50 li{ float:left;background:url(../images/ball-icon.png) no-repeat 0px -369px; width:50px; height:50px; overflow:hidden; line-height:50px; font-size:26px; color:#fff; text-align:center; margin-right:20px}
+.ball_fra_s50 li.lq{ float:left;background:url(../images/ball-icon.png) no-repeat -1px -429px; width:50px; height:50px;overflow:hidden; line-height:50px; font-size:26px; color:#fff; text-align:center; margin-right:20px}
+.f34{ font-size:34px;}
+a.sr1{  background: #eb6100;border-radius: 6px;color: #fff;cursor: pointer;font-size: 20px;padding: 4px 100px; margin:0 0 0px 20px;}
+a.sr2{  background: #fff;border-radius: 6px;color: #eb6100; border:1px solid #999;cursor: pointer;font-size: 20px;padding: 4px 100px; margin:0 0 0px 20px;}
+a.sr3{  background: #eb6100;border-radius: 6px;color: #fff;cursor: pointer;font-size: 20px;padding: 4px 50px; margin:0 0 0px 20px;}
+a.sr4{  background: #fff;border-radius: 6px;color: #eb6100; border:1px solid #999;cursor: pointer;font-size: 20px;padding: 4px 50px; margin:0 0 0px 20px;}
+.yhtc{ position:absolute; border:1px solid #000; background:#fff;}
+.sec_card{ padding-right:20px}
+.sec_card li{ font-size:16px; padding:0 20px; line-height:50px; height:50px; border-bottom:1px solid #000}
+.sec_card li span{ padding-right:20px}
+/*閸掑棔闊�/
+.share-fra{ width:980px; background:#faf1a9; margin-top:10px; }
+table.tab6{ width:680px; padding:30px 0 40px 0; margin-left:220px}
+table.tab6 td{line-height:52px; font-size:16px; color:#000}
+table.tab6 td .ui-sr{ width:444px; height:60px; background:#b71c0a; color:#fff; font-size:16px; padding:10px;margin-top:20px}
+.ui-textarea{ width:480px; height:80px;}
+.ui-add{ padding:0px 40px; font-style: italic; line-height:44px;color:#fff; font-size:24px; font-weight:bold; background:#ff6527;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px; box-shadow:0 1px 1px #c6c6c6 inset; cursor:pointer}
+.share-ball{ width:640px; height:140px; background:#fcf7d0; margin:20px 0 0 170px; padding-top:30px; text-align:center}
+.ball_fra_s50{ margin:30px 0 0 90px}
+.ball_fra_s50 li{ float:left;background:url(../images/ball-icon.png) no-repeat 0px -369px; width:50px; height:50px; overflow:hidden; line-height:50px; font-size:26px; color:#fff; text-align:center; margin-right:20px}
+.ball_fra_s50 li.lq{ float:left;background:url(../images/ball-icon.png) no-repeat -1px -429px; width:50px; height:50px;overflow:hidden; line-height:50px; font-size:26px; color:#fff; text-align:center; margin-right:20px}
+.ball_fra2_s50{ margin-top:30px}
+.ball_fra2_s50 li{ float:left; width:50px; height:50px; overflow:hidden; line-height:50px; font-size:26px; color:#7d7979; text-align:center; margin-right:20px}
+.ball_fra2_s50 li.lq{ float:left;width:50px; height:50px;overflow:hidden; line-height:50px; font-size:26px; color:#558CF6; text-align:center; margin-right:20px}

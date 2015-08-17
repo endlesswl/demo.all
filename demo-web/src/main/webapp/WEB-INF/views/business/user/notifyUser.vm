@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+##set( $lzzUrl = "http://localhost" )
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>零彩宝商家后台-客户维护提醒</title>
+<link href='${lzzUrl}/prd/style/model#ver("/ver/style/model.css.ver").css' rel="stylesheet" type="text/css" />
+<link href='${lzzUrl}/prd/style/index#ver("/ver/style/index.css.ver").css' rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"/>
+<script	src='${lzzUrl}/prd/script/jquery-2.0.2.min#ver("/ver/script/jquery-2.0.2.min.js.ver").js'></script>
+<script src='${lzzUrl}/prd/script/json2#ver("/ver/script/json2.js.ver").js'></script>
+<script src='${lzzUrl}/prd/script/plugin/util/util#ver("/ver/script/plugin/util/util.js.ver").js'></script>
+<!-- my JS -->
+<script src='${lzzUrl}/prd/script/business/user/notifyUser#ver("/ver/script/business/user/notifyUser.js.ver").js'></script>
+
+<script type="text/javascript">
+	$(function() {
+		//业务JS
+		UserNotify.init('${ctx}/home/userLuckdraw/searchCustomer','${ctx}/admin/sms/sendMobileMessage');
+
+		//按钮效果
+		$(".ui-button").click(function() {
+			$($(this).parent().parent()).children("li").each(function() {
+				$(this).children().attr("class", "ui-button");
+			});
+			$(this).attr("class", "ui-button ui-button-on");
+		});
+
+		//分页按钮效果
+		$(".page_wrap").click(function() {
+			$($(this).parent()).children().each(function() {
+				$(this).attr("class", "page_wrap");
+			});
+			$(this).attr("class", "page_wrap page_cur");
+		});
+
+		//全选效果
+		$("#ckboxAll").click(function() {
+			$("input[name='ckbox']").prop("checked", this.checked);
+		});
+	});
+</script>
+
+</head>
+<body>
+<div class="container">
+<!-- 公共顶导 -->
+	#parse("/include/header.vm")
+	<div class="content clearfix">
+<!-- 左边导航 -->
+    	#parse("/include/left.vm")
+<!-- 右边导航 -->
+       <div class="merchants-main">
+       
+        	<div class="title">客户维护提醒</div>
+            <div class="order-statue mb20">
+            <div class="order-item">
+               	<div class="order-right clearfix">   	
+               		<ul class="button-box clearfix fl">
+               			<li><a class="ui-button ui-button-on" onclick="UserNotify.setQuery(1,'')">1个月未联的用户</a></li>
+               			<li><a class="ui-button" onclick="UserNotify.setQuery(2,'')">2个月未联的用户</a></li>
+               			<li><a class="ui-button" onclick="UserNotify.setQuery(3,'')">3个月未联的用户</a></li>
+               		</ul>
+               	</div>
+        	</div>
+            </div>
+            <div class="fl  mt20 mb10 pl20 f14"><input name="ckboxAll" id="ckboxAll" type="checkbox">&nbsp;&nbsp;全选</div>
+            <div class="fr mt10 mb10"><input type="button" value="发送信息" onclick="UserNotify.sendMessage()" class="ui-button-oranges-small"></div>
+            <table id="dataList" width="800" border="0" cellspacing="0" cellpadding="0" class="tab1">
+				<tr>
+                	<th class="coleft" width="50"></th>
+ 					<th width="50">序号</th>
+                    <th>电话</th>
+                    <th>区域</th>
+                    <th width="400">备注</th>
+                </tr>
+            </table>
+            
+            <!-- 分页 -->
+            <div class="lc_pagination" id="pageDiv">
+            	<!-- 以下JS动态加载
+	      		<div class="pagination">
+		        	<div class="pagination_page">
+		                <div class="page_wrap marR5">&lt;</div>
+		            	<div class="page_wrap page_cur">1</div>
+		                <div class="page_wrap"><a href="#">2</a></div>
+		                <div class="page_wrap"><a href="#">3</a></div>
+		                <div class="page_wrap"><a href="#">4</a></div>
+		                <div class="page_wrap"><a href="#">5</a></div>
+		                <span class="page-split">...</span>
+		                <div class="page_wrap">&gt;</div>
+		            </div>
+	            	<div class="pagination_count"><span>共</span><span class="b">100</span><span>页，</span></div>
+	            	<div class="pagination_form"><label>去第</label>&nbsp;<input type="text" name="page" value="2" class="page_num"><label>&nbsp;页</label><div class="btn3"><input type="button" value="确定"></div></div>
+	      		</div>
+            	 -->
+     		</div>
+     		
+        </div>
+    </div>
+    <!-- 底部文件 -->
+	#parse("/include/footer.vm")
+</div>
+</body>
+</html>
+
